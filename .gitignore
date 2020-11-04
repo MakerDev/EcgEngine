@@ -3,7 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-.out/
+out/
+proj.android/
+proj.ios_mac/
+proj.linux/
 
 # User-specific files
 *.rsuser
