@@ -1,0 +1,2 @@
+C:\Dev\EcgEngine\proj.win32\Debug.win32\libSpine.pdb
+C:\Dev\EcgEngine\cocos2d\cocos\editor-support\spine\proj.win32\Debug.win32\libSpine.pdb
