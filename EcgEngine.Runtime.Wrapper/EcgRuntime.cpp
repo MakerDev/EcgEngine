@@ -24,6 +24,7 @@ namespace EcgRuntime
 	{
 		_runtimeNative->Initilaize(parent);
 	}
+
 	void EcgRuntime::SwitchScene()
 	{
 		_runtimeNative->SwitchScene();
