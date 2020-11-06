@@ -3,10 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+proj.win32/Debug.win32/**/*
 out/
 proj.android/
 proj.ios_mac/
 proj.linux/
+
 
 # User-specific files
 *.rsuser
@@ -343,3 +345,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+!cocos2d/external/**/*
