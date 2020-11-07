@@ -1,3 +1,0 @@
-C:\Dev\EcgEngine\proj.win32\Debug.win32\EcgEngine.Runtime.lib
-C:\Dev\EcgEngine\proj.win32\Debug.win32\EcgEngine.Runtime.pdb
-C:\Dev\EcgEngine\Debug.win32\EcgEngine.Runtime.pdb
