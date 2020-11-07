@@ -23,7 +23,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         private void OpenPlaywindow()
         {
-            var mainWindow = new MainWindow();
+            var mainWindow = new PlayWindow();
             mainWindow.ShowDialog();
         }
     }

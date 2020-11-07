@@ -17,16 +17,21 @@ namespace EcgRuntime
 
 	void EcgRuntime::Destroy()
 	{
-		_runtimeNative->Destroy();
+		_runtimeNative->destroy();
+	}
+
+	void EcgRuntime::CreateNewScene()
+	{
+		_runtimeNative->createScene();
 	}
 
 	void EcgRuntime::Initialize(int parent)
 	{
-		_runtimeNative->Initilaize(parent);
+		_runtimeNative->initialize(parent);
 	}
 
 	void EcgRuntime::SwitchScene()
 	{
-		_runtimeNative->SwitchScene();
+		_runtimeNative->switchScene();
 	}
 }

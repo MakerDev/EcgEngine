@@ -17,6 +17,7 @@ namespace EcgRuntime
 		void Initialize(int parent);
 		void SwitchScene();
 		void Destroy();
+		void CreateNewScene();
 	};
 }
 
