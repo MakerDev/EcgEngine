@@ -11,6 +11,7 @@ proj.linux/
 cocos2d/
 Debug.win32/
 *.lib
+*.obj
 
 # User-specific files
 *.rsuser
