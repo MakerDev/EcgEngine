@@ -8,7 +8,9 @@ out/
 proj.android/
 proj.ios_mac/
 proj.linux/
-
+cocos2d
+cocos2d/*
+cocos2d/**/*
 
 # User-specific files
 *.rsuser
