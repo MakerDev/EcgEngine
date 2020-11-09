@@ -26,6 +26,7 @@ bool DefaultLayer::init()
 	this->schedule(CC_SCHEDULE_SELECTOR(DefaultLayer::updateScene));
 
 	auto listener = EventListenerKeyboard::create();
+
 	listener->onKeyPressed = CC_CALLBACK_2(DefaultLayer::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(DefaultLayer::onKeyReleased, this);
 
@@ -36,7 +37,7 @@ bool DefaultLayer::init()
 
 void DefaultLayer::setInitialPositions()
 {
-	for (auto i = gameObjects.begin(); i < gameObjects.end(); i++)
+	for (auto i = gameObjects.begin(); i != gameObjects.end(); i++)
 	{
 		auto gameobject = *i;
 
@@ -45,24 +46,23 @@ void DefaultLayer::setInitialPositions()
 			//TODO: enable the case where _level doesn't have to be set.
 			assert(_level != nullptr);
 
+			//TODO Choose whether to use World Position or just to use TileCoordination Position.
 			gameobject->sprite->setPosition(
 				_level->positionForTileCoordinate(gameobject->size, gameobject->position));
 		}
 	}
 }
 
-void DefaultLayer::updateScene(float interval)
+void DefaultLayer::updateScene(float timeDelta)
 {
 	for (auto gameObject = gameObjects.begin(); gameObject < gameObjects.end(); gameObject++)
 	{
-		(*gameObject)->onUpdate(_heldKeys);
+		(*gameObject)->onUpdate(timeDelta, _heldKeys);
 	}
 }
 
-
 void DefaultLayer::addGameObject(GameObject* gameObject)
 {
-	gameObject->retain();
 	this->gameObjects.push_back(gameObject);
 
 	if (gameObject->sprite == nullptr)
@@ -74,16 +74,17 @@ void DefaultLayer::addGameObject(GameObject* gameObject)
 		this->addChild(gameObject->sprite);
 	}
 
+	gameObject->retain();
 }
 
-void DefaultLayer::LoadLevel(string filename)
+void DefaultLayer::loadLevel(string filename, float scaleFactor)
 {
 	_level = new Level();
 	_level->loadMap("level1.tmx");
 	_level->retain();
 
-	//TODO : Change 2.0F to SCALE_FACTOR
-	_level->getMap()->setScale(2.0F);
+	_level->getMap()->setScale(scaleFactor);
+
 	this->addChild(_level->getMap());
 }
 
@@ -91,6 +92,7 @@ void DefaultLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	if (std::find(_heldKeys.begin(), _heldKeys.end(), keyCode) == _heldKeys.end()) {
 		_heldKeys.push_back(keyCode);
+		printf("key pressed\n");
 	}
 }
 

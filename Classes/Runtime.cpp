@@ -45,31 +45,13 @@ void Runtime::destroy()
 	director->end();
 }
 
-#define SCALE_FACTOR 2.0
-
-GameObject* parseGameObject(std::string filename)
-{
-	GameObject* player = new GameObject();
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
-	AnimationCache::getInstance()->addAnimationsWithFile("solbrain-animations.plist");
-
-	//TODO: Encapsulate them
-	player->sprite = Sprite::createWithSpriteFrameName("idle");
-	player->sprite->setScale(SCALE_FACTOR);
-	player->sprite->setFlippedX(true);
-
-	player->position = Point(10, 2);
-	player->size = player->sprite->getContentSize();
-
-	return player;
-}
-
 void Runtime::createScene()
 {
 	//TODO : Enable to make custom sized Scene;
 	Scene* newScene = Scene::createWithSize(Size(640, 640));
 
-	auto player = parseGameObject("player.json");
+	//auto player = parseGameObject("player.json");
+	auto player = GameObject::createFromJson("player.json");
 
 	if (player == nullptr)
 	{
@@ -79,7 +61,7 @@ void Runtime::createScene()
 
 	//Add level background
 	auto gameObjectsLayer = DefaultLayer::createDefaultLayer();
-	gameObjectsLayer->LoadLevel("level1.tmx");
+	gameObjectsLayer->loadLevel("level1.tmx", 2.0F);
 	gameObjectsLayer->addGameObject(player);
 
 	//TODO : Consider how to skip this verbose step.

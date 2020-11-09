@@ -19,14 +19,13 @@ public:
     virtual bool init() override;
     void setInitialPositions();
 
-
     //To trigger and execute proper callbacks
     vector<GameObject*> gameObjects;
     void updateScene(float interval);
 
     void addGameObject(GameObject* gameObject);
     //TODO: consider changing name to LoadTmxMap
-    void LoadLevel(string filename);
+    void loadLevel(string filename, float scaleFactor);
 
 protected:
     virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;

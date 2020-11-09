@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "cocos2d.h"
+#include "RuntimeAction.h"
 
 using namespace std;
 using namespace cocos2d;
@@ -9,17 +10,25 @@ using namespace cocos2d;
 class GameObject : public Node
 {
 public:
+	static GameObject* createFromJson(string filename);
 	Point position;
 	Size size;
 
 	//TODO: Encapsulate all sprite and animation related fields to seperate component ex) Visual
 	Sprite* sprite;
 
-	//TODO : Take held key infos
-	virtual void onUpdate();
-	virtual void onUpdate(vector<EventKeyboard::KeyCode>& heldKeys);
+	float getScaleFactor();
+	void setScaleFactor(float scaleFactor);
+
+	virtual void onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys);
 
 private:
+	//TODO: 적절한 key를 선택하고 map으로 구조를 바꿔효율 높이기
+	//TODO : change to smart pointers
+	std::vector<RuntimeAction*> _keyboardTriggeredActions;
 
+	void addAction(string name, void* param);
+
+	float _scaleFactor = 1.0F;
 };
 
