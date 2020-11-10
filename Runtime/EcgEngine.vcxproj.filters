@@ -36,23 +36,8 @@
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Runtime.cpp">
-      <Filter>Runtime</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameObject.cpp">
-      <Filter>Runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\DefaultLayer.cpp">
-      <Filter>Runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Level.cpp">
-      <Filter>Runtime</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RuntimeActionTemplates.cpp">
-      <Filter>Runtime\VisualScript</Filter>
     </ClCompile>
     <ClCompile Include="RuntimeAction.cpp">
       <Filter>Runtime\VisualScript</Filter>
@@ -63,7 +48,22 @@
     <ClCompile Include="Trigger.cpp">
       <Filter>Runtime\VisualScript\Triggers</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EventContext.cpp">
+    <ClCompile Include="DefaultLayer.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime.cpp">
+      <Filter>Runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeActionTemplates.cpp">
+      <Filter>Runtime\VisualScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EventContext.cpp">
       <Filter>Runtime\VisualScript\Triggers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -73,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Runtime.h">
-      <Filter>Runtime</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>Classes</Filter>
@@ -89,38 +86,41 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameObject.h">
+    <ClInclude Include="DefaultLayer.h">
       <Filter>Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\DefaultLayer.h">
+    <ClInclude Include="GameObject.h">
       <Filter>Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\runtime-core.h">
+    <ClInclude Include="Level.h">
       <Filter>Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Level.h">
+    <ClInclude Include="Runtime.h">
       <Filter>Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RuntimeActionTemplates.h">
+    <ClInclude Include="runtime-core.h">
+      <Filter>Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeActionTemplates.h">
       <Filter>Runtime\VisualScript</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RuntimeAction.h">
+    <ClInclude Include="RuntimeAction.h">
       <Filter>Runtime\VisualScript</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\KeyEventTrigger.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Trigger.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EventContext.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TriggerTypes.h">
+    <ClInclude Include="TriggerTypes.h">
       <Filter>Runtime\VisualScript\Types</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\KeyEventTypes.h">
+    <ClInclude Include="KeyEventTypes.h">
       <Filter>Runtime\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Runtime\VisualScript\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventTrigger.h">
+      <Filter>Runtime\VisualScript\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="EventContext.h">
+      <Filter>Runtime\VisualScript\Triggers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
