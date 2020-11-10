@@ -14,24 +14,25 @@ using namespace cocos2d;
 class DefaultLayer : public cocos2d::Layer
 {
 public:
-    static DefaultLayer* createDefaultLayer();
+	static DefaultLayer* CreateDefaultLayer();
 
-    virtual bool init() override;
-    void setInitialPositions();
+	bool init() override;
+	void SetInitialPositions();
 
-    //To trigger and execute proper callbacks
-    vector<GameObject*> gameObjects;
-    void updateScene(float interval);
+	//To trigger and execute proper callbacks
+	void UpdateScene(float interval);
 
-    void addGameObject(GameObject* gameObject);
-    //TODO: consider changing name to LoadTmxMap
-    void loadLevel(string filename, float scaleFactor);
+	void AddGameObject(shared_ptr<GameObject> gameObject);
+	//TODO: consider changing name to LoadTmxMap
+	void LoadLevel(string filename, float scaleFactor);
+	const vector<shared_ptr<GameObject>>& GetGameObjects() const;
 
 protected:
-    virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
-    virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
+	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;
 
-    Level* _level;
-    vector<EventKeyboard::KeyCode> _heldKeys;
+	shared_ptr<Level> _level;
+	vector<shared_ptr<GameObject>> _gameObjects;
+	vector<EventKeyboard::KeyCode> _heldKeys;
 };
 

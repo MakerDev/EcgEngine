@@ -6,6 +6,6 @@
 class Trigger
 {
 public:
-	virtual bool isMatched(const EventContext& context) = 0;
+	virtual bool IsMatched(const EventContext& context) const = 0;
 };
 

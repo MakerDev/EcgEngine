@@ -1,14 +1,6 @@
 #include "EventContext.h"
 
-
-EventContext* EventContext::CreateKeyboardContext(
-	::KeyEventType keyEventype, cocos2d::EventKeyboard::KeyCode keyCode)
+EventContext::EventContext(::KeyEventType keyEventype, cocos2d::EventKeyboard::KeyCode keyCode)
+	:TriggerType(TriggerType::KeyboardEvent), KeyEventType(keyEventype), KeyCode(keyCode)
 {
-	auto context = new EventContext();
-
-	context->TriggerType = TriggerType::KeyboardEvent;
-	context->KeyEventType = keyEventype;
-	context->KeyCode = keyCode;
-
-	return context;
 }

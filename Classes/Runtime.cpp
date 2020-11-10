@@ -60,12 +60,12 @@ void Runtime::createScene()
 	}
 
 	//Add level background
-	auto gameObjectsLayer = DefaultLayer::createDefaultLayer();
-	gameObjectsLayer->loadLevel("level1.tmx", 2.0F);
-	gameObjectsLayer->addGameObject(player);
+	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayer();
+	gameObjectsLayer->LoadLevel("level1.tmx", 2.0F);
+	gameObjectsLayer->AddGameObject(player);
 
 	//TODO : Consider how to skip this verbose step.
-	gameObjectsLayer->setInitialPositions();
+	gameObjectsLayer->SetInitialPositions();
 
 	newScene->addChild(gameObjectsLayer);
 

@@ -4,18 +4,19 @@
 
 #include "Trigger.h"
 
+using namespace std;
+
 class RuntimeAction
 {
 public:
-	RuntimeAction(Trigger* trigger);
-	virtual ~RuntimeAction();
+	RuntimeAction(shared_ptr<Trigger> trigger) noexcept;
 
 	void execute();
 	void pushFunction(std::function<void(void)> function);
-	Trigger* GetTrigger() const;
+	const shared_ptr<Trigger> GetTrigger() const noexcept;
 
 private:
-	Trigger* _trigger;
+	shared_ptr<Trigger> _trigger;
 	std::vector<std::function<void(void)>> _functions;
 };
 

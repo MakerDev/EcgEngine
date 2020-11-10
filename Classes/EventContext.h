@@ -9,8 +9,7 @@
 class EventContext
 {
 public:
-	static EventContext* CreateKeyboardContext(
-		::KeyEventType keyEventype,
+	EventContext(::KeyEventType keyEventype,
 		cocos2d::EventKeyboard::KeyCode keyCode);
 
 public:
@@ -20,6 +19,6 @@ public:
 	KeyEventType KeyEventType;
 	cocos2d::EventKeyboard::KeyCode KeyCode;
 
-	float timeDelta = 0.33F;
+	float TimeDelta = 0.33F;
 };
 

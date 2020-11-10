@@ -1,11 +1,11 @@
 #include "KeyEventTrigger.h"
 
-KeyEventTrigger::KeyEventTrigger(KeyEventType keyEventType, EventKeyboard::KeyCode keycode)
+KeyEventTrigger::KeyEventTrigger(KeyEventType keyEventType, EventKeyboard::KeyCode keycode) noexcept
 	: _type(keyEventType), _keyCode(keycode)
 {
 }
 
-bool KeyEventTrigger::isMatched(const EventContext& context)
+bool KeyEventTrigger::IsMatched(const EventContext& context) const
 {
 	if (context.TriggerType != TriggerType::KeyboardEvent)
 	{

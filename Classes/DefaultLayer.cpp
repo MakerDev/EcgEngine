@@ -1,7 +1,7 @@
 #include "DefaultLayer.h"
 #include "Level.h"
 
-DefaultLayer* DefaultLayer::createDefaultLayer()
+DefaultLayer* DefaultLayer::CreateDefaultLayer()
 {
 	DefaultLayer* ret = new (std::nothrow) DefaultLayer();
 	if (ret && ret->init())
@@ -23,7 +23,7 @@ bool DefaultLayer::init()
 		return false;
 	}
 
-	this->schedule(CC_SCHEDULE_SELECTOR(DefaultLayer::updateScene));
+	this->schedule(CC_SCHEDULE_SELECTOR(DefaultLayer::UpdateScene));
 
 	auto listener = EventListenerKeyboard::create();
 
@@ -35,11 +35,11 @@ bool DefaultLayer::init()
 	return true;
 }
 
-void DefaultLayer::setInitialPositions()
+void DefaultLayer::SetInitialPositions()
 {
-	for (auto i = gameObjects.begin(); i != gameObjects.end(); i++)
+	for (auto i = _gameObjects.begin(); i != _gameObjects.end(); i++)
 	{
-		auto gameobject = *i;
+		shared_ptr<GameObject> gameobject = *i;
 
 		if (gameobject->sprite != nullptr)
 		{
@@ -53,21 +53,21 @@ void DefaultLayer::setInitialPositions()
 	}
 }
 
-void DefaultLayer::updateScene(float timeDelta)
+void DefaultLayer::UpdateScene(float timeDelta)
 {
-	for (auto gameObject = gameObjects.begin(); gameObject < gameObjects.end(); gameObject++)
+	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
 		(*gameObject)->onUpdate(timeDelta, _heldKeys);
 	}
 }
 
-void DefaultLayer::addGameObject(GameObject* gameObject)
+void DefaultLayer::AddGameObject(shared_ptr<GameObject> gameObject)
 {
-	this->gameObjects.push_back(gameObject);
+	this->_gameObjects.push_back(gameObject);
 
 	if (gameObject->sprite == nullptr)
 	{
-		this->addChild(gameObject);
+		this->addChild(gameObject.get());
 	}
 	else
 	{
@@ -77,9 +77,9 @@ void DefaultLayer::addGameObject(GameObject* gameObject)
 	gameObject->retain();
 }
 
-void DefaultLayer::loadLevel(string filename, float scaleFactor)
+void DefaultLayer::LoadLevel(string filename, float scaleFactor)
 {
-	_level = new Level();
+	_level = make_shared<Level>();
 	_level->loadMap("level1.tmx");
 	_level->retain();
 
@@ -87,12 +87,15 @@ void DefaultLayer::loadLevel(string filename, float scaleFactor)
 
 	this->addChild(_level->getMap());
 }
+const vector<shared_ptr<GameObject>>& DefaultLayer::GetGameObjects() const
+{
+	return _gameObjects;
+}
 
 void DefaultLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	if (std::find(_heldKeys.begin(), _heldKeys.end(), keyCode) == _heldKeys.end()) {
 		_heldKeys.push_back(keyCode);
-		printf("key pressed\n");
 	}
 }
 

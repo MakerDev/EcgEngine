@@ -1,13 +1,8 @@
 #include "RuntimeAction.h"
 
-RuntimeAction::RuntimeAction(Trigger* trigger) 
+RuntimeAction::RuntimeAction(shared_ptr<Trigger> trigger) noexcept
 	: _trigger(trigger)
 {
-}
-
-RuntimeAction::~RuntimeAction()
-{
-	delete _trigger;
 }
 
 void RuntimeAction::execute()
@@ -24,7 +19,7 @@ void RuntimeAction::pushFunction(std::function<void(void)> function)
 	_functions.push_back(function);
 }
 
-Trigger* RuntimeAction::GetTrigger() const
+const shared_ptr<Trigger> RuntimeAction::GetTrigger() const noexcept
 {
 	return _trigger;
 }
