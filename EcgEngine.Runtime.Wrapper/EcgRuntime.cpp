@@ -22,7 +22,12 @@ namespace EcgRuntime
 
 	void EcgRuntime::CreateNewScene()
 	{
-		_runtimeNative->createScene();
+		_runtimeNative->CreateScene();
+	}
+	
+	void EcgRuntime::CreateNewScene(int speed)
+	{
+		_runtimeNative->CreateScene(speed);
 	}
 
 	void EcgRuntime::Initialize(int parent)

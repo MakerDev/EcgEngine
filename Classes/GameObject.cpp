@@ -5,7 +5,7 @@
 #include "KeyEventTypes.h"
 #include "RuntimeActionTemplates.h"
 
-shared_ptr<GameObject> GameObject::createFromJson(string filename)
+shared_ptr<GameObject> GameObject::CreateFromJson(string filename, int speed)
 {
 	auto gameObject = make_shared<GameObject>();
 
@@ -24,7 +24,7 @@ shared_ptr<GameObject> GameObject::createFromJson(string filename)
 
 	//TODO: replace with smart pointer
 	auto moveDelta = make_unique<float>();
-	*moveDelta = 4.0F;
+	*moveDelta = speed;
 	gameObject->addAction("MoveX", moveDelta.get());
 
 	return gameObject;

@@ -23,7 +23,8 @@ namespace EcgEngine.Editor.WPF
     /// </summary>
     public partial class PlayWindow : Window
     {
-        private EcgRuntime.EcgRuntime _ecgRuntime = new EcgRuntime.EcgRuntime();
+        private readonly EcgRuntime.EcgRuntime _ecgRuntime = new EcgRuntime.EcgRuntime();
+        private int _currentSpeed = 4;
 
         public PlayWindow()
         {
@@ -32,14 +33,6 @@ namespace EcgEngine.Editor.WPF
             var task = Task.Delay(100).ContinueWith((task) => Dispatcher.Invoke(StartGame));
 
         }
-
-        //private void StartGame(object sender, RoutedEventArgs e)
-        //{
-        //    var button = sender as Button;
-        //    button.IsEnabled = false;
-        //    var handle = ((HwndSource)HwndSource.FromVisual(_stackPanel)).Handle.ToInt32();
-        //    _ecgRuntime.Initialize(handle);
-        //}
 
         private void StartGame()
         {
@@ -54,7 +47,7 @@ namespace EcgEngine.Editor.WPF
 
         private void CreateScene(object sender, RoutedEventArgs e)
         {
-            _ecgRuntime.CreateNewScene();
+            _ecgRuntime.CreateNewScene(_currentSpeed);
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -63,11 +56,13 @@ namespace EcgEngine.Editor.WPF
             _ecgRuntime.Destroy();
         }
 
-        private void MovePlayerBy(object sender, RoutedEventArgs e)
+        private void IncreaseSpeed(object sender, RoutedEventArgs e)
         {
             var button = sender as System.Windows.Controls.Button;
             int delta = int.Parse(button.Tag.ToString());
-            //TODO
+            _currentSpeed += delta;
+
+            _ecgRuntime.CreateNewScene(_currentSpeed);
         }
     }
 }

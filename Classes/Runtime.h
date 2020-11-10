@@ -9,7 +9,8 @@ public:
 	void initialize(int parent);
 	void switchScene();
 	void destroy();
-	void createScene();
+	void CreateScene();
+	void CreateScene(int speed);
 
 private:
 	int _currentScene = 0;

@@ -45,13 +45,42 @@ void Runtime::destroy()
 	director->end();
 }
 
-void Runtime::createScene()
+void Runtime::CreateScene()
 {
 	//TODO : Enable to make custom sized Scene;
 	Scene* newScene = Scene::createWithSize(Size(640, 640));
 
 	//auto player = parseGameObject("player.json");
-	auto player = GameObject::createFromJson("player.json");
+	auto player = GameObject::CreateFromJson("player.json");
+
+	if (player == nullptr)
+	{
+		//TODO : Make proper error
+		assert(false && "Failed to create gameobject from player.json");
+	}
+
+	//Add level background
+	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayer();
+	gameObjectsLayer->LoadLevel("level1.tmx", 2.0F);
+	gameObjectsLayer->AddGameObject(player);
+
+	//TODO : Consider how to skip this verbose step.
+	gameObjectsLayer->SetInitialPositions();
+
+	newScene->addChild(gameObjectsLayer);
+
+	auto director = Director::getInstance();
+
+	director->replaceScene(newScene);
+}
+
+void Runtime::CreateScene(int speed)
+{
+	//TODO : Enable to make custom sized Scene;
+	Scene* newScene = Scene::createWithSize(Size(640, 640));
+
+	//auto player = parseGameObject("player.json");
+	auto player = GameObject::CreateFromJson("player.json", speed);
 
 	if (player == nullptr)
 	{

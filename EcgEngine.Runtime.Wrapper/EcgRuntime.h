@@ -18,6 +18,7 @@ namespace EcgRuntime
 		void SwitchScene();
 		void Destroy();
 		void CreateNewScene();
+		void CreateNewScene(int speed);
 	};
 }
 
