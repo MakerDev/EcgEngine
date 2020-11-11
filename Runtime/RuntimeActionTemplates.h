@@ -9,4 +9,3 @@ public:
 	static void FlipSpriteXFalse(GameObject* target);
 	static void FlipSpriteX(GameObject* target);
 };
-
