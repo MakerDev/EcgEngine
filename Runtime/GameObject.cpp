@@ -5,9 +5,9 @@
 #include "KeyEventTypes.h"
 #include "RuntimeActionTemplates.h"
 
-shared_ptr<GameObject> GameObject::CreateFromJson(string filename, int speed)
+unique_ptr<GameObject> GameObject::CreateFromJson(string filename, int speed)
 {
-	auto gameObject = make_shared<GameObject>();
+	auto gameObject = make_unique<GameObject>();
 
 	//TODO: Extract these infomation from json file.
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
@@ -22,12 +22,10 @@ shared_ptr<GameObject> GameObject::CreateFromJson(string filename, int speed)
 	gameObject->position = Point(10, 2);
 	gameObject->size = gameObject->sprite->getContentSize();
 
-	//TODO: replace with smart pointer
-	auto moveDelta = make_unique<float>();
-	*moveDelta = speed;
-	gameObject->addAction("MoveX", moveDelta.get());
+	float moveDelta = speed;
+	gameObject->addAction("MoveX", &moveDelta);
 
-	return gameObject;
+	return std::move(gameObject);
 }
 
 float GameObject::getScaleFactor() const noexcept

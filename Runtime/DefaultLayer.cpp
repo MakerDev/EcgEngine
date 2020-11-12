@@ -39,16 +39,16 @@ void DefaultLayer::SetInitialPositions()
 {
 	for (auto i = _gameObjects.begin(); i != _gameObjects.end(); i++)
 	{
-		shared_ptr<GameObject> gameobject = *i;
+		GameObject& gameobject = *(i->get());
 
-		if (gameobject->sprite != nullptr)
+		if (gameobject.sprite != nullptr)
 		{
 			//TODO: enable the case where _level doesn't have to be set.
 			assert(_level != nullptr);
 
 			//TODO Choose whether to use World Position or just to use TileCoordination Position.
-			gameobject->sprite->setPosition(
-				_level->positionForTileCoordinate(gameobject->size, gameobject->position));
+			gameobject.sprite->setPosition(
+				_level->positionForTileCoordinate(gameobject.size, gameobject.position));
 		}
 	}
 }
@@ -61,10 +61,8 @@ void DefaultLayer::UpdateScene(float timeDelta)
 	}
 }
 
-void DefaultLayer::AddGameObject(shared_ptr<GameObject> gameObject)
+void DefaultLayer::AddGameObject(unique_ptr<GameObject> gameObject)
 {
-	this->_gameObjects.push_back(gameObject);
-
 	if (gameObject->sprite == nullptr)
 	{
 		this->addChild(gameObject.get());
@@ -75,11 +73,13 @@ void DefaultLayer::AddGameObject(shared_ptr<GameObject> gameObject)
 	}
 
 	gameObject->retain();
+
+	this->_gameObjects.push_back(std::move(gameObject));
 }
 
 void DefaultLayer::LoadLevel(string filename, float scaleFactor)
 {
-	_level = make_shared<Level>();
+	_level = make_unique<Level>();
 	_level->loadMap("level1.tmx");
 	_level->retain();
 
@@ -87,7 +87,7 @@ void DefaultLayer::LoadLevel(string filename, float scaleFactor)
 
 	this->addChild(_level->getMap());
 }
-const vector<shared_ptr<GameObject>>& DefaultLayer::GetGameObjects() const
+const vector<unique_ptr<GameObject>>& DefaultLayer::GetGameObjects() const
 {
 	return _gameObjects;
 }

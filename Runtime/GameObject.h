@@ -10,7 +10,7 @@ using namespace cocos2d;
 class GameObject : public Node
 {
 public:
-	static shared_ptr<GameObject> CreateFromJson(string filename, int speed=4);
+	static unique_ptr<GameObject> CreateFromJson(string filename, int speed=4);
 	Point position;
 	Size size;
 

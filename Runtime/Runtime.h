@@ -15,4 +15,3 @@ public:
 private:
 	int _currentScene = 0;
 };
-

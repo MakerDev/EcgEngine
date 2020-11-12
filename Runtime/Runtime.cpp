@@ -47,31 +47,7 @@ void Runtime::destroy()
 
 void Runtime::CreateScene()
 {
-	//TODO : Enable to make custom sized Scene;
-	Scene* newScene = Scene::createWithSize(Size(640, 640));
-
-	//auto player = parseGameObject("player.json");
-	auto player = GameObject::CreateFromJson("player.json");
-
-	if (player == nullptr)
-	{
-		//TODO : Make proper error
-		assert(false && "Failed to create gameobject from player.json");
-	}
-
-	//Add level background
-	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayer();
-	gameObjectsLayer->LoadLevel("level1.tmx", 2.0F);
-	gameObjectsLayer->AddGameObject(player);
-
-	//TODO : Consider how to skip this verbose step.
-	gameObjectsLayer->SetInitialPositions();
-
-	newScene->addChild(gameObjectsLayer);
-
-	auto director = Director::getInstance();
-
-	director->replaceScene(newScene);
+	this->CreateScene(2.0F);
 }
 
 void Runtime::CreateScene(int speed)
@@ -79,19 +55,20 @@ void Runtime::CreateScene(int speed)
 	//TODO : Enable to make custom sized Scene;
 	Scene* newScene = Scene::createWithSize(Size(640, 640));
 
-	//auto player = parseGameObject("player.json");
+	assert(newScene != nullptr && "Failed to create new scene");
+
 	auto player = GameObject::CreateFromJson("player.json", speed);
 
-	if (player == nullptr)
-	{
-		//TODO : Make proper error
-		assert(false && "Failed to create gameobject from player.json");
-	}
+	//TODO : Make proper error
+	assert(player != nullptr && "Failed to create gameobject from player.json");
 
 	//Add level background
 	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayer();
+
+	assert(gameObjectsLayer != nullptr && "Failed to create default layer");
+
 	gameObjectsLayer->LoadLevel("level1.tmx", 2.0F);
-	gameObjectsLayer->AddGameObject(player);
+	gameObjectsLayer->AddGameObject(std::move(player));
 
 	//TODO : Consider how to skip this verbose step.
 	gameObjectsLayer->SetInitialPositions();
@@ -99,7 +76,6 @@ void Runtime::CreateScene(int speed)
 	newScene->addChild(gameObjectsLayer);
 
 	auto director = Director::getInstance();
-
 	director->replaceScene(newScene);
 }
 

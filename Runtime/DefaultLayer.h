@@ -22,17 +22,17 @@ public:
 	//To trigger and execute proper callbacks
 	void UpdateScene(float interval);
 
-	void AddGameObject(shared_ptr<GameObject> gameObject);
+	void AddGameObject(unique_ptr<GameObject> gameObject);
 	//TODO: consider changing name to LoadTmxMap
 	void LoadLevel(string filename, float scaleFactor);
-	const vector<shared_ptr<GameObject>>& GetGameObjects() const;
+	const vector<unique_ptr<GameObject>>& GetGameObjects() const;
 
 protected:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;
 
-	shared_ptr<Level> _level;
-	vector<shared_ptr<GameObject>> _gameObjects;
+	unique_ptr<Level> _level;
+	vector<unique_ptr<GameObject>> _gameObjects;
 	vector<EventKeyboard::KeyCode> _heldKeys;
 };
 
