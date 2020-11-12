@@ -50,7 +50,7 @@ void GameObject::onUpdate(float delta, const vector<EventKeyboard::KeyCode>& hel
 		{
 			const auto context = EventContext(KeyEventType::Down, *j);
 
-			if ((*i)->GetTrigger()->IsMatched(context))
+			if ((*i)->GetTrigger().IsMatched(context))
 			{
 				(*i)->execute();
 			}
@@ -70,18 +70,18 @@ void GameObject::addAction(string name, void* param)
 		std::function<void(void)> flipFalse = std::bind(RuntimeActionTemplates::FlipSpriteXFalse, this);
 
 		//TODO : replace these with smart-pointers
-		auto trigger = make_shared<KeyEventTrigger>(KeyEventType::Down, EventKeyboard::KeyCode::KEY_LEFT_ARROW);
-		auto runtimeAction = make_shared<RuntimeAction>(trigger);
+		auto trigger = make_unique<KeyEventTrigger>(KeyEventType::Down, EventKeyboard::KeyCode::KEY_LEFT_ARROW);
+		auto runtimeAction = make_shared<RuntimeAction>(std::move(trigger));
 		runtimeAction->pushFunction(func);
 		runtimeAction->pushFunction(flipFalse);
 
 		this->_keyboardTriggeredActions.push_back(runtimeAction);
 
-		trigger = make_shared<KeyEventTrigger>(KeyEventType::Down, EventKeyboard::KeyCode::KEY_RIGHT_ARROW);
+		trigger = make_unique<KeyEventTrigger>(KeyEventType::Down, EventKeyboard::KeyCode::KEY_RIGHT_ARROW);
 		std::function<void(void)> func_right = std::bind(RuntimeActionTemplates::MoveX, this, delta);
 		std::function<void(void)> flipTrue = std::bind(RuntimeActionTemplates::FlipSpriteXTrue, this);
 
-		runtimeAction = make_shared<RuntimeAction>(trigger);
+		runtimeAction = make_shared<RuntimeAction>(std::move(trigger));
 		runtimeAction->pushFunction(func_right);
 		runtimeAction->pushFunction(flipTrue);
 
