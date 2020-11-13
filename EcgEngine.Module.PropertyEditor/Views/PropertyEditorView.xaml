@@ -22,7 +22,9 @@
                     FontSize="28"
                     Text="이름 :" />
                 <TextBox Width="200" Height="35"
-                         Text="{Binding GameObject.Name}"
+                         Text="{Binding Name, 
+                                UpdateSourceTrigger=PropertyChanged}"
+                         
                          />
             </StackPanel>
 
@@ -30,7 +32,7 @@
                 <TextBlock 
                     HorizontalAlignment="Center"                    
                     FontSize="25"
-                    Text="Sprite" Height="35" />
+                    Text="Sprite" Height="30" />
                 <TextBlock />
             </StackPanel>
             

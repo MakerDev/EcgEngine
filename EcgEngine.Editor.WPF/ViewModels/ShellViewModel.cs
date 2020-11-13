@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using EcgEngine.Services;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace EcgEngine.Editor.WPF.ViewModels
     public class ShellViewModel : BindableBase
     {
         private DelegateCommand _playCommand;
+        private readonly GameManager _gameManager;
+
         public DelegateCommand PlayCommand
         {
             get { return _playCommand; }
@@ -19,9 +22,17 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public bool SaveFileLoaded { get; set; } = false;
 
 
-        public ShellViewModel()
+        public DelegateCommand SelectSavefilePathCommand { get; set; }
+
+        public ShellViewModel(GameManager gameManager)
         {
             PlayCommand = new DelegateCommand(OpenPlaywindow);
+            SelectSavefilePathCommand = new DelegateCommand(SelectSavefilePath);
+            _gameManager = gameManager;
+        }
+
+        private void SelectSavefilePath()
+        {
         }
 
         private void OpenPlaywindow()

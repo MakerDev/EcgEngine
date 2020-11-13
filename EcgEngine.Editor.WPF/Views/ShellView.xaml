@@ -18,9 +18,9 @@
                 x:Name="_menubar" DockPanel.Dock="Top"
                 Orientation="Horizontal" Height="30">
             <Button 
-                Content="Load Savefile" />
+                Content="Save" />
             <Button 
-                Content="Load Savefile" />
+                Content="Load" />
             <Button 
                 Content="Edit Scene" Margin="10 0"/>
             <Button 

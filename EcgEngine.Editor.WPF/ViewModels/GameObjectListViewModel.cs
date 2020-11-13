@@ -14,17 +14,10 @@ using System.Linq;
 namespace EcgEngine.Editor.WPF.ViewModels
 {
 
-    public class GameObjectListViewModel : BindableBase 
+    public class GameObjectListViewModel : BindableBase
     {
         private readonly GameManager _gameManager;
         private readonly IRegionManager _regionManager;
-
-        //public List<GameObject> GameObjects
-        //{
-        //    get { 
-        //        return _gameManager.GameObjects; 
-        //    }
-        //}
 
         private ObservableCollection<GameObject> _gameObjects = new ObservableCollection<GameObject>();
         public ObservableCollection<GameObject> GameObjects
@@ -40,27 +33,21 @@ namespace EcgEngine.Editor.WPF.ViewModels
             set { SetProperty(ref _selectedObject, value); }
         }
 
+        private int _selectedObjectIndex;
+        public int SelectedObjectIndex
+        {
+            get { return _selectedObjectIndex; }
+            set { SetProperty(ref _selectedObjectIndex, value); }
+        }
+
         public DelegateCommand<GameObject> ObjectSelectedCommand { get; set; }
         public DelegateCommand AddNewObjectCommand { get; set; }
-        public GameObjectListViewModel(GameManager gameManager, IRegionManager regionManager, IEventAggregator eventAggregator)
+        public GameObjectListViewModel(GameManager gameManager, IRegionManager regionManager)
         {
             _gameManager = gameManager;
             _regionManager = regionManager;
 
             GameObjects.AddRange(gameManager.GameObjects);
-
-            eventAggregator.GetEvent<GameObjectModifiedEvent>().Subscribe((modifiedObject) =>
-            {
-                for (int i = 0; i < GameObjects.Count; i++)
-                {
-                    if (GameObjects[i].Id == modifiedObject.Id)
-                    {
-                        GameObjects[i] = modifiedObject;
-
-                        return;
-                    }
-                }
-            });
 
             ObjectSelectedCommand = new DelegateCommand<GameObject>(OnObjectSelected);
             AddNewObjectCommand = new DelegateCommand(AddNewObject);
@@ -70,6 +57,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
         {
             var newObject = _gameManager.CreateGameObject();
             GameObjects.Add(newObject);
+            RaisePropertyChanged(nameof(GameObjects));
         }
 
         private void OnObjectSelected(GameObject selectedObject)
