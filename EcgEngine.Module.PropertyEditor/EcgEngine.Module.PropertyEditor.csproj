@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>EcgEngine.Module.PropertyEditor</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
+    <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+    <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
+  </ItemGroup>
+</Project>

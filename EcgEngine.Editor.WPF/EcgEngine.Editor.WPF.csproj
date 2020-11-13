@@ -26,8 +26,13 @@
   <ItemGroup>
     <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+    <ProjectReference Include="..\EcgEngine.Module.PropertyEditor\EcgEngine.Module.PropertyEditor.csproj" />
     <ProjectReference Include="..\EcgEngine.Runtime.Wrapper\EcgEngine.Runtime.Wrapper.vcxproj" />
     <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
     <ProjectReference Include="..\proj.win32\EcgEngine.vcxproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Styles\" />
   </ItemGroup>
 </Project>

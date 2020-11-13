@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="EcgEngine.Editor.WPF.Views.GameObjectListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:viewmodels="clr-namespace:EcgEngine.Editor.WPF.ViewModels" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GameObjectListViewModel}"             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel>
+        <ListBox
+            x:Name="_gameObjectListBox"
+            ItemsSource="{Binding GameObjects}"
+            Width="200" Height="600">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <prism:InvokeCommandAction 
+                        Command="{Binding ObjectSelectedCommand}"
+                        CommandParameter="{Binding SelectedItem, ElementName= _gameObjectListBox}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock 
+                            Width="150"
+                            Height="35"
+                            Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button 
+            Command="{Binding AddNewObjectCommand}"
+            Content="Add Object" Width="200" Height="35" />
+    </StackPanel>
+</UserControl>

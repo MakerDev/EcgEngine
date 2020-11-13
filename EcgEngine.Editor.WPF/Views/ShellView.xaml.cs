@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using EcgEngine.Core;
+using EcgEngine.Services;
+using Prism.Regions;
+using System.Windows;
 
 namespace EcgEngine.Editor.WPF.Views
 {
@@ -7,9 +10,13 @@ namespace EcgEngine.Editor.WPF.Views
     /// </summary>
     public partial class ShellView : Window
     {
-        public ShellView()
+
+
+        public ShellView(IRegionManager regionManager, GameManager gameManager)
         {
             InitializeComponent();
+
+            regionManager.RegisterViewWithRegion(RegionNames.GAMEOBJECT_LIST_REGION, typeof(GameObjectListView));
         }
     }
 }

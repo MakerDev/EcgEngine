@@ -9,12 +9,15 @@ namespace EcgEngine.Editor.WPF.ViewModels
 {
     public class ShellViewModel : BindableBase
     {
-        private ICommand _playCommand;
-        public ICommand PlayCommand
+        private DelegateCommand _playCommand;
+        public DelegateCommand PlayCommand
         {
             get { return _playCommand; }
             set { SetProperty(ref _playCommand, value); }
         }
+
+        public bool SaveFileLoaded { get; set; } = false;
+
 
         public ShellViewModel()
         {

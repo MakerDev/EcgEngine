@@ -31,7 +31,6 @@ namespace EcgEngine.Editor.WPF
             InitializeComponent();
 
             var task = Task.Delay(100).ContinueWith((task) => Dispatcher.Invoke(StartGame));
-
         }
 
         private void StartGame()

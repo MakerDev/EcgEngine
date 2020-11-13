@@ -16,10 +16,15 @@
 
         <StackPanel 
                 x:Name="_menubar" DockPanel.Dock="Top"
-                Orientation="Horizontal" Height="35">
-            <TextBlock
-                FontSize="25"
-                Text="이곳은 메뉴바입니다." />
+                Orientation="Horizontal" Height="30">
+            <Button 
+                Content="Load Savefile" />
+            <Button 
+                Content="Load Savefile" />
+            <Button 
+                Content="Edit Scene" Margin="10 0"/>
+            <Button 
+                Content="Edit GameObjects " />
         </StackPanel>
 
         <StackPanel 
@@ -36,21 +41,16 @@
             Width="200"
             LastChildFill="False"
             >
-            <ListView 
+            <ContentControl 
+                prism:RegionManager.RegionName
+                    ="{x:Static core:RegionNames.GAMEOBJECT_LIST_REGION}"
                 HorizontalAlignment="Center"
                 HorizontalContentAlignment="Center"
-                DockPanel.Dock="Top"
-                >
-                
-            </ListView>
-
-            <Button 
-                DockPanel.Dock="Bottom"
-                Content="Add" Width="200" Height="30"/>
-
+                DockPanel.Dock="Top">
+            </ContentControl>
         </DockPanel>
 
-        <ContentControl 
+        <ContentControl
                 DockPanel.Dock="Right"
                 Width="1000"
                 prism:RegionManager.RegionName

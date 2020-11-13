@@ -5,4 +5,9 @@
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
+    <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+  </ItemGroup>
+
 </Project>
