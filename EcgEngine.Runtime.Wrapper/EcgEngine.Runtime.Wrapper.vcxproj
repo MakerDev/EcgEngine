@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>EcgEngine.Runtime.lib;$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END);%(AdditionalDependencies);libcocos2d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$ (_ COCOS_LIB_PATH_WIN32_BEGIN);$ (_ COCOS_LIB_PATH_WIN32_END);C:\Dev\EcgEngine\proj.win32\Debug.win32;C:\Dev\EcgEngine\Debug.win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$ (_ COCOS_LIB_PATH_WIN32_BEGIN);$ (_ COCOS_LIB_PATH_WIN32_END);$(ProjectDir)..\Debug.win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
