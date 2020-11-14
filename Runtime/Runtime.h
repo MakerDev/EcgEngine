@@ -11,7 +11,7 @@ public:
 	void destroy();
 	void CreateScene();
 	void CreateScene(int speed);
-
+	void Run();
 private:
 	int _currentScene = 0;
 };

@@ -53,7 +53,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GameObject = navigationContext.Parameters["GameObject"] as GameObject;
-
         }
     }
 }

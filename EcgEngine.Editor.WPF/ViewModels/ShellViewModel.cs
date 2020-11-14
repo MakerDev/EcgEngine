@@ -1,10 +1,7 @@
 ﻿using EcgEngine.Services;
 using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
+using Prism.Services.Dialogs;
 
 namespace EcgEngine.Editor.WPF.ViewModels
 {
@@ -12,6 +9,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
     {
         private DelegateCommand _playCommand;
         private readonly GameManager _gameManager;
+        private readonly IDialogService _dialogService;
 
         public DelegateCommand PlayCommand
         {
@@ -24,11 +22,12 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public DelegateCommand SelectSavefilePathCommand { get; set; }
 
-        public ShellViewModel(GameManager gameManager)
+        public ShellViewModel(GameManager gameManager, IDialogService dialogService)
         {
             PlayCommand = new DelegateCommand(OpenPlaywindow);
             SelectSavefilePathCommand = new DelegateCommand(SelectSavefilePath);
             _gameManager = gameManager;
+            _dialogService = dialogService;
         }
 
         private void SelectSavefilePath()
@@ -37,8 +36,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         private void OpenPlaywindow()
         {
-            var mainWindow = new PlayWindow();
-            mainWindow.ShowDialog();
+            _dialogService.Show("SceneEditorWindow", null, (result) => { });
         }
     }
 }

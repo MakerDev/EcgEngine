@@ -30,6 +30,11 @@ namespace EcgRuntime
 		_runtimeNative->CreateScene(speed);
 	}
 
+	void EcgRuntime::Run()
+	{
+		_runtimeNative->Run();
+	}
+
 	void EcgRuntime::Initialize(int parent)
 	{
 		_runtimeNative->initialize(parent);

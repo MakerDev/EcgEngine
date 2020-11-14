@@ -11,8 +11,8 @@
             prism:ViewModelLocator.AutoWireViewModel="True"
             Width="1200" Height="815">
     <DockPanel 
-            LastChildFill="True"
-            Height="780">
+        LastChildFill="True"
+        Height="780">
 
         <StackPanel 
                 x:Name="_menubar" DockPanel.Dock="Top"
@@ -32,8 +32,8 @@
                 DockPanel.Dock="Bottom"
                 Height="50" Width="1200">
             <Button 
-                    Command="{Binding PlayCommand}"
-                    Width="150" Height="50" Content="Play" />
+                Command="{Binding PlayCommand}"
+                Width="150" Height="50" Content="Play" />
         </StackPanel>
 
         <DockPanel            

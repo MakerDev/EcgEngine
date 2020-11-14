@@ -1,5 +1,3 @@
-#include <rapidjson/document.h>
-
 #include "AppDelegate.h"
 #include "Runtime.h"
 #include "HelloWorldScene.h"
@@ -17,7 +15,6 @@ void Runtime::initialize(int parent)
 	cocos2d::GLViewImpl::SetParent((HWND)parent);
 
 	AppDelegate app;
-
 	cocos2d::Application::getInstance()->run();
 }
 
@@ -50,6 +47,7 @@ void Runtime::CreateScene()
 	this->CreateScene(2.0F);
 }
 
+//TODO : Create시에는 director pause하고, Run 누르면 resume하기
 void Runtime::CreateScene(int speed)
 {
 	//TODO : Enable to make custom sized Scene;
@@ -77,6 +75,16 @@ void Runtime::CreateScene(int speed)
 
 	auto director = Director::getInstance();
 	director->replaceScene(newScene);
+	director->pause();
+}
+
+void Runtime::Run()
+{
+	auto director = Director::getInstance();
+	if (director->isPaused())
+	{
+		director->resume();
+	}
 }
 
 

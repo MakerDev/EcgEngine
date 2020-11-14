@@ -10,9 +10,7 @@ namespace EcgEngine.Editor.WPF.Views
     /// </summary>
     public partial class ShellView : Window
     {
-
-
-        public ShellView(IRegionManager regionManager, GameManager gameManager)
+        public ShellView(IRegionManager regionManager)
         {
             InitializeComponent();
 
