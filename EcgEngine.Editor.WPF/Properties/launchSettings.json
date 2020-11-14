@@ -2,7 +2,7 @@
   "profiles": {
     "EcgEngine.Editor.WPF": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Dev\\EcgEngine\\Debug.win32",
+      "workingDirectory": "..\\Debug.win32",
       "nativeDebugging": true
     }
   }

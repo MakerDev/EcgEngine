@@ -29,7 +29,7 @@
     <ProjectReference Include="..\EcgEngine.Module.PropertyEditor\EcgEngine.Module.PropertyEditor.csproj" />
     <ProjectReference Include="..\EcgEngine.Runtime.Wrapper\EcgEngine.Runtime.Wrapper.vcxproj" />
     <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
-    <ProjectReference Include="..\proj.win32\EcgEngine.vcxproj" />
+    <ProjectReference Include="..\Runtime\EcgEngine.vcxproj" />
   </ItemGroup>
 
   <ItemGroup>

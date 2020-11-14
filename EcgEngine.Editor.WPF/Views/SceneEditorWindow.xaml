@@ -8,42 +8,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel>
-        <StackPanel 
-            Width="976" Height="690"
-            HorizontalAlignment="Center">
-            <StackPanel               
-                HorizontalAlignment="Center" 
-                x:Name="_stackPanel" />
+    <StackPanel Width="1200">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel
+                Width="960" Height="690"
+                HorizontalAlignment="Center">
+                <StackPanel               
+                    HorizontalAlignment="Center" 
+                    x:Name="_stackPanel" />
+            </StackPanel>
+            <Grid                
+                x:Name="_sceneEditorPanel" 
+                Width="240"
+                />
         </StackPanel>
+
 
         <StackPanel Orientation="Horizontal"
                     Focusable="False"
+                    Margin="0 0 0 15"
                     HorizontalAlignment="Center">
             <Button Width="80" Height="30" 
                     Content="Next Scene" Focusable="False"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    Margin="10 10">
             <Button Content="Speed + 5" Margin="10 0"
                     Width="80" Height="30"
                     Focusable="False" Tag="5"/>
             <Button Content="Speed -5" 
                     Width="80" Height="30"
                     Focusable="False" Tag="-5"/>
-        </StackPanel>
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-
             <Button Margin="10 0"  
                     Visibility="Visible"
                     Width="80" Height="30" 
-                    Content="Create Scene" Focusable="False"/>
-            <Button Margin="10 0"  
-                    Visibility="Visible"
+                    Content="Create Scene" 
+                    Command="{Binding CreateSceneCommand}"
+                    Focusable="False"/>
+            <Button Visibility="Visible"
                     Width="80" Height="30" 
+                    Command="{Binding RunGameCommand}"
                     Content="Play" Focusable="False"/>
         </StackPanel>
     </StackPanel>

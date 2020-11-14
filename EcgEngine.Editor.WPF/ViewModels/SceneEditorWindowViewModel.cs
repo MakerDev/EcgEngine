@@ -15,6 +15,9 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public event Action<IDialogResult> RequestClose;
 
+        public DelegateCommand RunGameCommand { get; set; }
+        public DelegateCommand CreateSceneCommand { get; set; }
+
         public bool CanCloseDialog()
         {
             return true;
@@ -27,12 +30,22 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            
+
         }
 
         public SceneEditorWindowViewModel(EcgRuntime.EcgRuntime ecgRuntime)
         {
             _ecgRuntime = ecgRuntime;
+
+            RunGameCommand = new DelegateCommand(() =>
+            {
+                _ecgRuntime.Run();
+            });
+
+            CreateSceneCommand = new DelegateCommand(() =>
+            {
+                _ecgRuntime.CreateNewScene();
+            });
         }
     }
 }
