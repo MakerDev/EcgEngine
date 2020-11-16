@@ -1,9 +1,11 @@
+#include <iostream>
+#include <direct.h>
+
 #include "AppDelegate.h"
 #include "Runtime.h"
 #include "HelloWorldScene.h"
 #include "GameScene.h"
 #include "Level.h"
-
 #include "GameObject.h"
 #include "DefaultLayer.h"
 
@@ -13,6 +15,11 @@ using namespace cocos2d;
 void Runtime::initialize(int parent)
 {
 	cocos2d::GLViewImpl::SetParent((HWND)parent);
+	char strBuffer[_MAX_PATH] = { 0, };
+	char* pstrBuffer = NULL;
+
+	pstrBuffer = getcwd(strBuffer, _MAX_PATH);
+	
 
 	AppDelegate app;
 	cocos2d::Application::getInstance()->run();
@@ -55,21 +62,7 @@ void Runtime::CreateScene(int speed)
 
 	assert(newScene != nullptr && "Failed to create new scene");
 
-	auto player = GameObject::CreateFromJson("player.json", speed);
-
-	//TODO : Make proper error
-	assert(player != nullptr && "Failed to create gameobject from player.json");
-
-	//Add level background
-	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayer();
-
-	assert(gameObjectsLayer != nullptr && "Failed to create default layer");
-
-	gameObjectsLayer->LoadLevel("level1.tmx", 2.0F);
-	gameObjectsLayer->AddGameObject(std::move(player));
-
-	//TODO : Consider how to skip this verbose step.
-	gameObjectsLayer->SetInitialPositions();
+	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson("ecgsave1.json");
 
 	newScene->addChild(gameObjectsLayer);
 

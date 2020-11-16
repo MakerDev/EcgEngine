@@ -1,5 +1,11 @@
+#include <iostream>
+#include <fstream>
+#include <rapidjson/document.h>
+
 #include "DefaultLayer.h"
 #include "Level.h"
+
+using namespace rapidjson;
 
 DefaultLayer* DefaultLayer::CreateDefaultLayer()
 {
@@ -14,6 +20,35 @@ DefaultLayer* DefaultLayer::CreateDefaultLayer()
 		CC_SAFE_DELETE(ret);
 		return nullptr;
 	}
+}
+
+DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
+{
+	auto defaultLayer = DefaultLayer::CreateDefaultLayer();
+	
+
+	auto jsonContent = readJson(filename);
+		
+	Document document;
+	document.Parse(jsonContent.c_str());
+
+	assert(document.HasMember("DefaultLayer") && "There is no default layer!");
+
+	const rapidjson::Value& layer = document["DefaultLayer"];
+
+	const rapidjson::Value& gameobjects = layer["GameObjects"];
+
+
+
+	auto player = GameObject::CreateFromJson("player.json");
+
+	defaultLayer->LoadLevel("level1.tmx", 2.0F);
+	defaultLayer->AddGameObject(std::move(player));
+
+	//TODO : Consider how to skip this verbose step.
+	defaultLayer->SetInitialPositions();
+
+	return defaultLayer;
 }
 
 bool DefaultLayer::init()
@@ -102,4 +137,22 @@ void DefaultLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 void DefaultLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	_heldKeys.erase(std::remove(_heldKeys.begin(), _heldKeys.end(), keyCode), _heldKeys.end());
+}
+
+string DefaultLayer::readJson(const char* filename)
+{
+	ifstream jsonFile;
+	jsonFile.open(filename);
+
+	assert(jsonFile.is_open() && "Cannot open json file");
+
+	string jsonContent;
+
+	jsonFile.seekg(0, std::ios::end);
+	const int size = jsonFile.tellg();
+	jsonContent.resize(size);
+	jsonFile.seekg(0, std::ios::beg);
+	jsonFile.read(&jsonContent[0], size);
+
+	return jsonContent;
 }

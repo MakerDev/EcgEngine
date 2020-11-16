@@ -15,6 +15,7 @@ class DefaultLayer : public cocos2d::Layer
 {
 public:
 	static DefaultLayer* CreateDefaultLayer();
+	static DefaultLayer* CreateDefaultLayerFromJson(const char* filename);
 
 	bool init() override;
 	void SetInitialPositions();
@@ -34,5 +35,8 @@ protected:
 	unique_ptr<Level> _level;
 	vector<unique_ptr<GameObject>> _gameObjects;
 	vector<EventKeyboard::KeyCode> _heldKeys;
+
+private:
+	static string readJson(const char* filename);
 };
 

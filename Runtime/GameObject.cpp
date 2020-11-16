@@ -1,4 +1,5 @@
 #include <functional>
+#include <rapidjson/document.h>
 
 #include "GameObject.h"
 #include "KeyEventTrigger.h"
@@ -58,10 +59,13 @@ void GameObject::onUpdate(float delta, const vector<EventKeyboard::KeyCode>& hel
 	}
 }
 
+//TODO : void* 배열을 인자로 받기 -> 각 액션에 필요한 파라미터 리스트임
 void GameObject::addAction(string name, void* param)
 {
 	if (name == "MoveX")
 	{
+		/// <param name="keycode">어떤키를 누를때 움직일 것인가</param>
+		/// <param name="delta">얼마나 움직일지</param>
 		assert(param != nullptr && "Param should never be null for MoveX");
 
 		float delta = *((float*)param);
@@ -69,7 +73,6 @@ void GameObject::addAction(string name, void* param)
 		std::function<void(void)> func = std::bind(RuntimeActionTemplates::MoveX, this, -delta);
 		std::function<void(void)> flipFalse = std::bind(RuntimeActionTemplates::FlipSpriteXFalse, this);
 
-		//TODO : replace these with smart-pointers
 		auto trigger = make_unique<KeyEventTrigger>(KeyEventType::Down, EventKeyboard::KeyCode::KEY_LEFT_ARROW);
 		auto runtimeAction = make_shared<RuntimeAction>(std::move(trigger));
 		runtimeAction->pushFunction(func);
