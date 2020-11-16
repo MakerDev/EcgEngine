@@ -8,5 +8,6 @@ namespace EcgEngine.Core
         public const string EDITOR_REGION = "EditorRegion"; //For Property editor and scene editor
         public const string SCENE_EDITOR_PANEL_REGION = "SceneEditorPanelRegion";
         public const string SCRIPT_EDITOR_REGION = "ScriptEditorRegion";
+        public const string ACTION_LIST_REGION = "ActionListRegion";
     }
 }

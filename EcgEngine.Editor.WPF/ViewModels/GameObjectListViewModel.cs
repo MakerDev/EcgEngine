@@ -55,6 +55,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
             _gameManager = gameManager;
             _regionManager = regionManager;
 
+            //TODO : 두 번쨰 로딩에서 오브젝트 클릭하면 터지는 거 해결하기
             ObjectSelectedCommand = new DelegateCommand(OnObjectSelected);
             AddNewObjectCommand = new DelegateCommand(AddNewObject);
 
