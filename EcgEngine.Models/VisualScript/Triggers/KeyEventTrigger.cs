@@ -1,12 +1,22 @@
-﻿using EcgEngine.Models.VisualScript.VisualScript;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Windows.Forms;
 
 namespace EcgEngine.Models.VisualScript.Triggers
 {
-    public class KeyEventTrigger : Trigger
+    public enum KeyEventType
     {
+        Down,
+        Press,
+        Up,
+    }
 
+    public class KeyEventTrigger : Trigger
+    {        
+        public KeyEventType KeyEventType { get; set; } = KeyEventType.Down;
+        public Keys Key { get; set; }
+
+        public KeyEventTrigger()
+        {
+            Type = TriggerType.KeyBoard;
+        }
     }
 }

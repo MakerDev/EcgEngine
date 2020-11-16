@@ -1,10 +1,12 @@
-﻿using System;
+﻿using EcgEngine.Models.VisualScript.Triggers;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
-namespace EcgEngine.Models.VisualScript.VisualScript
+namespace EcgEngine.Models.VisualScript.Triggers
 {
-    public enum TriggetType
+    public enum TriggerType
     {
         KeyBoard,
         Mouse,
@@ -14,6 +16,9 @@ namespace EcgEngine.Models.VisualScript.VisualScript
 
     public class Trigger
     {
-        public TriggetType Type { get; protected set; }
+        public string Name { get; set; } = "";        
+        public TriggerType Type { get; protected set; }        
+
+        public KeyEventTrigger KeyEventTrigger { get; set; }
     }
 }

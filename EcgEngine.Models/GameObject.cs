@@ -1,5 +1,6 @@
 ﻿using EcgEngine.Models.VisualScript;
 using System;
+using System.Drawing;
 
 namespace EcgEngine.Models
 {
@@ -11,16 +12,16 @@ namespace EcgEngine.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsPlayer { get; set; }
-        public string SpriteName { get; private set; }
-        public string SpritePath { get; private set; }
+        public Point Position { get; set; }
+        public string SpriteName { get; set; }
+        public string SpritePath { get; set; }
+        public float ScaleFactor { get; set; } = 2.0F;
 
-        public void SelectSpritePath()
-        {
+        #region Script
 
-        }
 
-        public ScriptComponent ScriptComponent { get; set; }
+        #endregion
 
-        
+
     }
 }
