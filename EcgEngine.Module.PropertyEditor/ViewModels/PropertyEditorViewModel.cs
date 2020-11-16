@@ -1,4 +1,5 @@
-﻿using EcgEngine.Core.Events;
+﻿using EcgEngine.Core;
+using EcgEngine.Core.Events;
 using EcgEngine.Models;
 using Prism.Events;
 using Prism.Mvvm;
@@ -11,6 +12,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         //Dummy temp var
         private GameObject _gameObject = new GameObject();
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
 
         public GameObject GameObject
         {
@@ -65,9 +67,10 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
         }
 
-        public PropertyEditorViewModel(IEventAggregator eventAggregator)
+        public PropertyEditorViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
+            _regionManager = regionManager;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -82,6 +85,10 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GameObject = navigationContext.Parameters["GameObject"] as GameObject;
+
+            var p = new NavigationParameters();
+            p.Add("GameObject", GameObject);
+            _regionManager.RequestNavigate(RegionNames.SCRIPT_EDITOR_REGION, "ScriptEditor", p);
         }
     }
 }

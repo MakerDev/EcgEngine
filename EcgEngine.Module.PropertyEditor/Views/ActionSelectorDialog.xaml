@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="EcgEngine.Module.PropertyEditor.Views.ActionSelectorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ActionSelectorDialogViewModel}"             
+             mc:Ignorable="d"
+             Width="200" Height="200"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel 
+        Width="150"
+        HorizontalAlignment="Center">
+        <TextBlock 
+            FontSize="24" HorizontalAlignment="Center"
+            Text="MoveX"  />
+        <TextBlock 
+            HorizontalAlignment="Center"
+            FontSize="18"
+            Text="Direction" />
+        <StackPanel 
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <RadioButton Content="Right" />
+            <RadioButton 
+                IsChecked="{Binding IsDirectionLeft}"
+                Content="Left" />
+        </StackPanel>
+        <TextBlock Text="Speed" FontSize="18" HorizontalAlignment="Center"/>
+        <TextBox 
+            HorizontalContentAlignment="Center"
+            FontSize="16"
+            Text="{Binding Speed, FallbackValue=2}" Width="100" Height="28"/>
+
+        <Button 
+            Margin="0 10 0 0"
+            Content="Ok" 
+            Command="{Binding CloseDialogCommand}" Width="120" Height="30" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="EcgEngine.Module.PropertyEditor.Views.TriggerEditorWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TriggerEditorWindowViewModel}"             
+             mc:Ignorable="d"
+             Height="150"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel 
+        Width="250"
+        HorizontalAlignment="Center">
+        <TextBlock 
+            FontSize="20" HorizontalAlignment="Center"
+            Text="KeyboardTrigger"  />
+        <TextBlock 
+            HorizontalAlignment="Center"
+            FontSize="18"
+            Text="Key" />
+        <StackPanel 
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <RadioButton Content="Right" Margin="10 0" />
+            <RadioButton 
+                IsChecked="{Binding IsLeftKey}"
+                Content="Left" />
+        </StackPanel>
+
+        <Button 
+            Margin="0 10 0 0"
+            Content="Ok" 
+            Command="{Binding CloseCommand}" Width="120" Height="30" />
+    </StackPanel>
+</UserControl>

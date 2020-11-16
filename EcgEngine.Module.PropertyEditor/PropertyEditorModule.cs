@@ -14,7 +14,15 @@ namespace EcgEngine.Module.PropertyEditor
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<TriggerItemViewModel>();
+            containerRegistry.Register<ActionItemViewModel>();
+
+            containerRegistry.RegisterDialog<TriggerEditorWindow, TriggerEditorWindowViewModel>();
+            containerRegistry.RegisterDialog<ActionSelectorDialog, ActionSelectorDialogViewModel>();
+
             containerRegistry.RegisterForNavigation<PropertyEditorView, PropertyEditorViewModel>();
+            containerRegistry.RegisterForNavigation<ScriptEditor, ScriptEditorViewModel>();
+            containerRegistry.RegisterForNavigation<ActionEditorPanel, ActionEditorPanelViewModel>();
         }
     }
 }
