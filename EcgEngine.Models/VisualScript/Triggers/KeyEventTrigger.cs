@@ -9,14 +9,14 @@ namespace EcgEngine.Models.VisualScript.Triggers
         Up,
     }
 
-    public class KeyEventTrigger : Trigger
-    {        
+    public class KeyEventTrigger
+    {
         public KeyEventType KeyEventType { get; set; } = KeyEventType.Down;
         public Keys Key { get; set; }
 
-        public KeyEventTrigger()
+        public override string ToString()
         {
-            Type = TriggerType.KeyBoard;
+            return $"KeyEventType={KeyEventType} | Key={Key}";
         }
     }
 }

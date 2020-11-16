@@ -1,5 +1,6 @@
 ﻿using EcgEngine.Models.VisualScript;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace EcgEngine.Models
@@ -17,11 +18,6 @@ namespace EcgEngine.Models
         public string SpritePath { get; set; }
         public float ScaleFactor { get; set; } = 2.0F;
 
-        #region Script
-
-
-        #endregion
-
-
+        public List<ScriptComponent> ScriptComponents { get; set; } = new List<ScriptComponent>();
     }
 }

@@ -9,7 +9,7 @@ namespace EcgEngine.Models.VisualScript
     {
         public int Id { get; set; }
         public string Comment { get; set; }
-        public Trigger Trigger { get; set; }
-        public Action Action { get; set; }
+        public Trigger Trigger { get; set; } = new Trigger();
+        public List<Action> Action { get; set; } = new List<Action>();
     }
 }
