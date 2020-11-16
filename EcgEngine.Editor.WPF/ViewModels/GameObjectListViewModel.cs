@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace EcgEngine.Editor.WPF.ViewModels
 {
@@ -19,10 +20,15 @@ namespace EcgEngine.Editor.WPF.ViewModels
         private readonly GameManager _gameManager;
         private readonly IRegionManager _regionManager;
 
+        public Action RefreshList { get; set; } = null;
+
         private ObservableCollection<GameObject> _gameObjects = new ObservableCollection<GameObject>();
         public ObservableCollection<GameObject> GameObjects
         {
-            get { return _gameObjects; }
+            get
+            {
+                return _gameObjects;
+            }
             set { SetProperty(ref _gameObjects, value); }
         }
 
@@ -40,32 +46,46 @@ namespace EcgEngine.Editor.WPF.ViewModels
             set { SetProperty(ref _selectedObjectIndex, value); }
         }
 
-        public DelegateCommand<GameObject> ObjectSelectedCommand { get; set; }
+        public DelegateCommand ObjectSelectedCommand { get; set; }
         public DelegateCommand AddNewObjectCommand { get; set; }
-        public GameObjectListViewModel(GameManager gameManager, IRegionManager regionManager)
+        public GameObjectListViewModel(GameManager gameManager,
+                                       IRegionManager regionManager,
+                                       IEventAggregator eventAggregator)
         {
             _gameManager = gameManager;
             _regionManager = regionManager;
 
-            GameObjects.AddRange(gameManager.GameObjects);
-
-            ObjectSelectedCommand = new DelegateCommand<GameObject>(OnObjectSelected);
+            ObjectSelectedCommand = new DelegateCommand(OnObjectSelected);
             AddNewObjectCommand = new DelegateCommand(AddNewObject);
+
+            eventAggregator.GetEvent<SavefileLoadedEvent>().Subscribe(() =>
+            {
+                SelectedObjectIndex = -1;
+                GameObjects.Clear();
+                GameObjects.AddRange(_gameManager.GameObjects);
+            });
+
+            eventAggregator.GetEvent<GameObjectModifiedEvent>().Subscribe((obj) =>
+            {
+                RefreshList?.Invoke();
+            });
         }
 
         private void AddNewObject()
         {
             var newObject = _gameManager.CreateGameObject();
             GameObjects.Add(newObject);
-            RaisePropertyChanged(nameof(GameObjects));
         }
 
-        private void OnObjectSelected(GameObject selectedObject)
+        private void OnObjectSelected()
         {
-            if (selectedObject == null)
+            if (SelectedObjectIndex == -1)
             {
+                _regionManager.Regions[RegionNames.EDITOR_REGION].RemoveAll();
                 return;
             }
+
+            GameObject selectedObject = GameObjects[SelectedObjectIndex];
 
             var param = new NavigationParameters();
             param.Add("GameObject", selectedObject);

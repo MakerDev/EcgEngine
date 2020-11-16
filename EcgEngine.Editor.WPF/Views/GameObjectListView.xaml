@@ -19,8 +19,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction 
-                        Command="{Binding ObjectSelectedCommand}"
-                        CommandParameter="{Binding SelectedItem, ElementName= _gameObjectListBox}" />
+                        Command="{Binding ObjectSelectedCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             

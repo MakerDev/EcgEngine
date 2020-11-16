@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:viewmodels="clr-namespace:EcgEngine.Editor.WPF.ViewModels" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:core="clr-namespace:EcgEngine.Core;assembly=EcgEngine.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:SceneEditorWindowViewModel}"             
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
@@ -17,9 +18,11 @@
                     HorizontalAlignment="Center" 
                     x:Name="_stackPanel" />
             </StackPanel>
-            <Grid                
+            <ContentControl                
                 x:Name="_sceneEditorPanel" 
                 Width="240"
+                prism:RegionManager.RegionName
+                    ="{x:Static core:RegionNames.SCENE_EDITOR_PANEL_REGION}"
                 />
         </StackPanel>
 
