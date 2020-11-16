@@ -1,6 +1,7 @@
 ﻿using EcgEngine.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,13 +11,15 @@ namespace EcgEngine.Services
     {
         private readonly IAsyncJsonSavefileManager _jsonSavefileManager;
 
-        public string SavefilePath { get; private set; } = @"./";
-        public string SavefileName { get; private set; } = @"ecgsave1.json";
-                
-        //TODO : Make multiple layer avaliable
-        public Layer DefaultLayer { get; private set; }
+        public GameData GameData { get; private set; } = new GameData();
 
-        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
+        public List<GameObject> GameObjects
+        {
+            get
+            {
+                return GameData.GameObjects;
+            }
+        }
 
         public GameManager(IAsyncJsonSavefileManager jsonSavefileManager)
         {
@@ -26,16 +29,15 @@ namespace EcgEngine.Services
         public async Task LoadSaveFile(string fullpath)
         {
             //TODO : Improve this by aggregating all svae-file related information to seperate class
-            var gameManager = await _jsonSavefileManager.LoadAsync<GameManager>(fullpath, false);
-            SavefileName = gameManager.SavefileName;
-            SavefilePath = gameManager.SavefilePath;
-            DefaultLayer = gameManager.DefaultLayer;
-            GameObjects = gameManager.GameObjects;
+            var gameData = await _jsonSavefileManager.LoadAsync<GameData>(fullpath, false);
+
+            GameData = gameData;
         }
 
         public async Task SaveAsync()
         {
-            await _jsonSavefileManager.SaveAsync(this, SavefilePath + SavefileName);
+            var fullpath = Path.Combine(GameData.SavefilePath, GameData.SavefileName);
+            await _jsonSavefileManager.SaveAsync(GameData, fullpath, false);
         }
 
         public GameObject CreateGameObject(string name = null)
