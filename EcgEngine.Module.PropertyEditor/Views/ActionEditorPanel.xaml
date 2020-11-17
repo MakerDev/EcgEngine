@@ -17,6 +17,7 @@
                 DockPanel.Dock="Top"
                 x:Name="_actionList"
                 Width="300"
+                SelectedIndex="{Binding SelectedActionItemIndex}"
                 ItemsSource="{Binding ActionItemViewModels}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -26,7 +27,8 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:ActionItem />
+                    <local:ActionItem>
+                    </local:ActionItem>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

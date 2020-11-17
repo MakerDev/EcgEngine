@@ -32,7 +32,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         private readonly IContainerExtension _containerExtension;
         private readonly IDialogService _dialogService;
 
-        public int SelectedTriggerItemIndex
+        public int SelectedActionItemIndex
         {
             get
             {
@@ -46,6 +46,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public DelegateCommand ItemSelectedCommand { get; set; }
         public DelegateCommand AddNewActionCommand { get; set; }
+        public DelegateCommand EditActionCommand { get; set; }
 
         public ActionEditorPanelViewModel(IContainerExtension containerExtension, IDialogService dialogService)
         {
@@ -53,6 +54,21 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             _dialogService = dialogService;
 
             AddNewActionCommand = new DelegateCommand(AddNewAction);
+            EditActionCommand = new DelegateCommand(EditAction);
+        }
+
+        private void EditAction()
+        {
+            _dialogService.ShowDialog("ActionSelectorDialog", null, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    //TODO : Add edit functionality. This is replacement by selecting new one again.
+                    ScriptComponent.Actions[SelectedActionItemIndex] = result.Parameters.GetValue<Models.VisualScript.Action>("Action");
+                }
+            });
+
+            RefreshActionItems();
         }
 
         public void AddNewAction()
@@ -60,26 +76,36 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             Models.VisualScript.Action action = null;
             //Select new object from selector
 
-            //TODO : Dialog service bug? Fix this
             _dialogService.ShowDialog("ActionSelectorDialog", null, result =>
             {
-                action = result.Parameters.GetValue<Models.VisualScript.Action>("Action");
+                if (result.Result == ButtonResult.OK)
+                {
+                    action = result.Parameters.GetValue<Models.VisualScript.Action>("Action");
+                }
             });
 
-            ScriptComponent.Action.Add(action);
+            ScriptComponent.Actions.Add(action);
             RefreshActionItems();
         }
+
+
         public void RefreshActionItems()
         {
+            //TODO : restore this value?
+            SelectedActionItemIndex = -1;
             ActionItemViewModels.Clear();
 
-            foreach (var action in ScriptComponent.Action)
+            foreach (var action in ScriptComponent.Actions)
             {
                 var vm = _containerExtension.Resolve<ActionItemViewModel>();
-                vm.Action = action;
 
+                //TODO : Try to remove this init stages
+                vm.Action = action;
+                //TODO : 이거 위치 바꾸기
+                vm.EditActionCommand = EditActionCommand;
                 ActionItemViewModels.Add(vm);
             }
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -93,7 +119,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            SelectedTriggerItemIndex = -1;
+            SelectedActionItemIndex = -1;
             ScriptComponent = navigationContext.Parameters["ScriptComponent"] as ScriptComponent;
             RefreshActionItems();
         }
