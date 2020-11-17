@@ -8,7 +8,7 @@ namespace EcgEngine.Models.VisualScript
     public class Action
     {
         public string Name { get; set; }
-        public List<ActionArgument> Arguments { get; private set; } = new List<ActionArgument>();
+        public List<ActionArgument> Arguments { get; set; } = new List<ActionArgument>();
 
         public override string ToString()
         {
