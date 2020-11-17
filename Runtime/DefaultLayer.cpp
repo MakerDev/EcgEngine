@@ -26,7 +26,6 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 {
 	auto defaultLayer = DefaultLayer::CreateDefaultLayer();
 	
-
 	auto jsonContent = readJson(filename);
 		
 	Document document;
@@ -36,14 +35,15 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 
 	const rapidjson::Value& layer = document["DefaultLayer"];
 
-	const rapidjson::Value& gameobjects = layer["GameObjects"];
+	const rapidjson::Value& gameobjects = document["GameObjects"];
 
-
-
-	auto player = GameObject::CreateFromJson("player.json");
+	for (auto& gameObject : gameobjects.GetArray())
+	{		
+		auto player = GameObject::CreateFromJsonValue(gameObject);
+		defaultLayer->AddGameObject(std::move(player));
+	}
 
 	defaultLayer->LoadLevel("level1.tmx", 2.0F);
-	defaultLayer->AddGameObject(std::move(player));
 
 	//TODO : Consider how to skip this verbose step.
 	defaultLayer->SetInitialPositions();

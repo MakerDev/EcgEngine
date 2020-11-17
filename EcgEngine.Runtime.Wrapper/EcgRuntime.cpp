@@ -15,9 +15,16 @@ namespace EcgRuntime
 		_runtimeNative = nullptr;
 	}
 
+	void EcgRuntime::Initialize(int parent)
+	{
+		_runtimeNative->initialize(parent);
+		this->_isLoaded = true;	
+	}
+
 	void EcgRuntime::Destroy()
 	{
 		_runtimeNative->destroy();
+		this->_isLoaded = false;
 	}
 
 	void EcgRuntime::CreateNewScene()
@@ -35,10 +42,11 @@ namespace EcgRuntime
 		_runtimeNative->Run();
 	}
 
-	void EcgRuntime::Initialize(int parent)
+	bool EcgRuntime::IsLoaded()
 	{
-		_runtimeNative->initialize(parent);
+		return this->_isLoaded;
 	}
+
 
 	void EcgRuntime::SwitchScene()
 	{

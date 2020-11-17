@@ -180,6 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
     <ClInclude Include="KeyEventTypes.h" />

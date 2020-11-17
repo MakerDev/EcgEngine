@@ -22,6 +22,9 @@
     <Filter Include="Runtime\VisualScript\Types">
       <UniqueIdentifier>{4b35b9e0-226f-4b63-900f-5c4c32ee8ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Runtime\VisualScript\Interop">
+      <UniqueIdentifier>{24265546-6394-4750-a0a5-8259aced8804}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="EventContext.h">
       <Filter>Runtime\VisualScript\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionArgument.h">
+      <Filter>Runtime\VisualScript\Interop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

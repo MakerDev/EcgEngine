@@ -7,9 +7,6 @@ namespace EcgRuntime
 {
 	public ref class EcgRuntime
 	{
-	private:
-		::Runtime* _runtimeNative;
-
 	public:
 		EcgRuntime();
 		virtual ~EcgRuntime();
@@ -20,6 +17,11 @@ namespace EcgRuntime
 		void CreateNewScene();
 		void CreateNewScene(int speed);
 		void Run();
+		bool IsLoaded();
+
+	private:
+		::Runtime* _runtimeNative;
+		bool _isLoaded = false;
 	};
 }
 

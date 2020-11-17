@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <rapidjson/document.h>
 
 #include "cocos2d.h"
 #include "RuntimeAction.h"
@@ -11,6 +12,7 @@ class GameObject : public Node
 {
 public:
 	static unique_ptr<GameObject> CreateFromJson(string filename, int speed=4);
+	static unique_ptr<GameObject> CreateFromJsonValue(const rapidjson::Value& value);
 	Point position;
 	Size size;
 
@@ -28,6 +30,9 @@ private:
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
 
 	void addAction(string name, void* param);
+
+	//TODO : this is temporal
+	void addActionFromJsonValue(const rapidjson::Value& value);
 
 	float _scaleFactor = 1.0F;
 };
