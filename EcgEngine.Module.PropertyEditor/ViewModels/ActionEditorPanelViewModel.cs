@@ -4,10 +4,7 @@ using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
@@ -105,7 +102,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
                 vm.EditActionCommand = EditActionCommand;
                 ActionItemViewModels.Add(vm);
             }
-
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -4,13 +4,11 @@ using EcgEngine.Models;
 using EcgEngine.Services;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace EcgEngine.Editor.WPF.ViewModels
 {
@@ -19,6 +17,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
     {
         private readonly GameManager _gameManager;
         private readonly IRegionManager _regionManager;
+        private readonly IContainerExtension _containerExtension;
 
         public Action RefreshList { get; set; } = null;
 
@@ -50,10 +49,12 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public DelegateCommand AddNewObjectCommand { get; set; }
         public GameObjectListViewModel(GameManager gameManager,
                                        IRegionManager regionManager,
-                                       IEventAggregator eventAggregator)
+                                       IEventAggregator eventAggregator,
+                                       IContainerExtension containerExtension)
         {
             _gameManager = gameManager;
             _regionManager = regionManager;
+            _containerExtension = containerExtension;
 
             //TODO : 두 번쨰 로딩에서 오브젝트 클릭하면 터지는 거 해결하기
             ObjectSelectedCommand = new DelegateCommand(OnObjectSelected);
@@ -62,6 +63,8 @@ namespace EcgEngine.Editor.WPF.ViewModels
             eventAggregator.GetEvent<SavefileLoadedEvent>().Subscribe(() =>
             {
                 SelectedObjectIndex = -1;
+
+                //Refresh region content
                 GameObjects.Clear();
                 GameObjects.AddRange(_gameManager.GameObjects);
             });
@@ -91,7 +94,6 @@ namespace EcgEngine.Editor.WPF.ViewModels
             var param = new NavigationParameters();
             param.Add("GameObject", selectedObject);
 
-            //TODO : Replace hardcodede data to constant
             _regionManager.RequestNavigate(RegionNames.EDITOR_REGION, "PropertyEditorView", param);
         }
     }

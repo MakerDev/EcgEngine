@@ -1,5 +1,4 @@
 ﻿using EcgEngine.Core;
-using EcgEngine.Services;
 using Prism.Regions;
 using System.Windows;
 

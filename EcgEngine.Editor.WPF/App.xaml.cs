@@ -1,8 +1,8 @@
-﻿using EcgEngine.Editor.WPF.ViewModels;
+﻿using EcgEngine.Core;
+using EcgEngine.Editor.WPF.ViewModels;
 using EcgEngine.Editor.WPF.Views;
 using EcgEngine.Module.PropertyEditor;
 using EcgEngine.Services;
-using EcgRuntime;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Unity;
@@ -20,10 +20,11 @@ namespace EcgEngine.Editor.WPF
         {
             return Container.Resolve<ShellView>();
         }
-        
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+
             containerRegistry.RegisterSingleton<GameManager>();
             containerRegistry.RegisterSingleton<EcgRuntime.EcgRuntime>();
 

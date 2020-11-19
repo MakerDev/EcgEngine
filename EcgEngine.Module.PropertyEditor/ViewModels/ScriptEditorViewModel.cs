@@ -7,12 +7,12 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
 
 namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
     public class ScriptEditorViewModel : BindableBase, INavigationAware
     {
+        private readonly IRegionManager _regionManager;
         private readonly IContainerExtension _containerExtension;
 
         public GameObject GameObject { get; set; }
@@ -50,6 +50,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public ScriptEditorViewModel(IRegionManager regionManager, IContainerExtension containerExtension)
         {
+            _regionManager = regionManager;
             _containerExtension = containerExtension;
 
             ItemSelectedCommand = new DelegateCommand(() =>
@@ -61,7 +62,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
                 var p = new NavigationParameters();
                 p.Add("ScriptComponent", ScriptComponents[SelectedTriggerItemIndex]);
-                regionManager.RequestNavigate(RegionNames.ACTION_LIST_REGION, "ActionEditorPanel", p);
+                _regionManager.RequestNavigate(RegionNames.ACTION_LIST_REGION, "ActionEditorPanel", p);
             });
 
             CreateNewScriptCommand = new DelegateCommand(CreateNewScript);
@@ -86,7 +87,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //TODO : consider change to using RegionContext
             var gameObject = navigationContext.Parameters["GameObject"] as GameObject;
             SelectedTriggerItemIndex = -1;
 

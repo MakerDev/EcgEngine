@@ -4,7 +4,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
-using System;
 using System.IO;
 
 namespace EcgEngine.Editor.WPF.ViewModels
@@ -29,7 +28,9 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand LoadCommand { get; set; }
 
-        public ShellViewModel(GameManager gameManager, IDialogService dialogService, IEventAggregator eventAggregator)
+        public ShellViewModel(GameManager gameManager,
+                              IDialogService dialogService,
+                              IEventAggregator eventAggregator)
         {
             PlayCommand = new DelegateCommand(OpenPlaywindow);
             SelectSavefilePathCommand = new DelegateCommand(SelectSavefilePath);

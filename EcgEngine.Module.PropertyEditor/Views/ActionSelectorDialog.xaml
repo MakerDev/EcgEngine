@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              Width="200" Height="200"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel 
+    <StackPanel
         Width="150"
         HorizontalAlignment="Center">
         <TextBlock 

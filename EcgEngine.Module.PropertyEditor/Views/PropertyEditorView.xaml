@@ -55,7 +55,6 @@
                         Width="100" Height="30" />
                 </StackPanel>
             </StackPanel>
-
         </StackPanel>
         <ContentControl 
             Width="700"

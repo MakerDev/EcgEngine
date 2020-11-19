@@ -16,11 +16,17 @@ namespace EcgEngine.Models.VisualScript.Triggers
 
     public class Trigger
     {
-        //TODO : Create default name with trigger global id
-        public string Name { get; set; } = "trigger1";
+        static public int TriggerCount { get; private set; } = 0;
+        public string Name { get; set; } = "";
         public TriggerType Type { get; set; } = TriggerType.KeyBoard;
         //TODO: try fix this
         public KeyEventTrigger KeyEventTrigger { get; set; } = new KeyEventTrigger();
+
+        public Trigger()
+        {
+            TriggerCount++;
+            Name = $"trigger{TriggerCount}";
+        }
 
         public override string ToString()
         {

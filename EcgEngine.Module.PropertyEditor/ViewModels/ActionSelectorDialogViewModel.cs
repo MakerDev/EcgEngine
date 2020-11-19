@@ -2,9 +2,6 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using EcgEngine.Models.VisualScript;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
