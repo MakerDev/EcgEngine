@@ -25,6 +25,9 @@
     <Filter Include="Runtime\VisualScript\Interop">
       <UniqueIdentifier>{24265546-6394-4750-a0a5-8259aced8804}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Runtime\VisualScript\ActionTemplates">
+      <UniqueIdentifier>{22f1d6dc-4b06-41f7-b76d-ec9ab2f08583}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,11 +66,20 @@
     <ClCompile Include="Runtime.cpp">
       <Filter>Runtime</Filter>
     </ClCompile>
-    <ClCompile Include="RuntimeActionTemplates.cpp">
-      <Filter>Runtime\VisualScript</Filter>
-    </ClCompile>
     <ClCompile Include="EventContext.cpp">
       <Filter>Runtime\VisualScript\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveX.cpp">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionArgument.cpp">
+      <Filter>Runtime\VisualScript\Interop</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeActionTemplates.cpp">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeJumpBy.cpp">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +116,6 @@
     <ClInclude Include="runtime-core.h">
       <Filter>Runtime</Filter>
     </ClInclude>
-    <ClInclude Include="RuntimeActionTemplates.h">
-      <Filter>Runtime\VisualScript</Filter>
-    </ClInclude>
     <ClInclude Include="RuntimeAction.h">
       <Filter>Runtime\VisualScript</Filter>
     </ClInclude>
@@ -127,6 +136,18 @@
     </ClInclude>
     <ClInclude Include="ActionArgument.h">
       <Filter>Runtime\VisualScript\Interop</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveX.h">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeActionTemplates.h">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeActionList.h">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeJumpBy.h">
+      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

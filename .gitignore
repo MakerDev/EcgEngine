@@ -9,9 +9,7 @@ proj.android/
 proj.ios_mac/
 proj.linux/
 cocos2d/
-cocos2d/**/*
 Debug.win32/
-Debug.win32/**/*
 *.lib
 *.obj
 

@@ -5,7 +5,7 @@ RuntimeAction::RuntimeAction(unique_ptr<Trigger> trigger) noexcept
 {
 }
 
-void RuntimeAction::execute()
+void RuntimeAction::Execute()
 {
 	for (auto i = _functions.begin(); i != _functions.end(); i++)
 	{
@@ -13,7 +13,7 @@ void RuntimeAction::execute()
 	}
 }
 
-void RuntimeAction::pushFunction(std::function<void(void)> function)
+void RuntimeAction::PushFunctiona(std::function<void(void)> function)
 {
 	_functions.push_back(function);
 }

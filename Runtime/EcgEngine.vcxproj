@@ -165,6 +165,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="ActionArgument.cpp" />
     <ClCompile Include="DefaultLayer.cpp" />
     <ClCompile Include="EventContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -172,18 +173,22 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
+    <ClCompile Include="MoveX.cpp" />
     <ClCompile Include="Runtime.cpp" />
     <ClCompile Include="RuntimeActionTemplates.cpp" />
     <ClCompile Include="KeyEventTrigger.cpp" />
     <ClCompile Include="RuntimeAction.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RuntimeJumpBy.cpp" />
     <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionArgument.h" />
+    <ClInclude Include="RuntimeActionList.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
     <ClInclude Include="KeyEventTypes.h" />
+    <ClInclude Include="MoveX.h" />
     <ClInclude Include="RuntimeAction.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="DefaultLayer.h" />
@@ -196,6 +201,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="runtime-core.h" />
     <ClInclude Include="Runtime.h" />
     <ClInclude Include="RuntimeActionTemplates.h" />
+    <ClInclude Include="RuntimeJumpBy.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="TriggerTypes.h" />
     <ClInclude Include="main.h" />

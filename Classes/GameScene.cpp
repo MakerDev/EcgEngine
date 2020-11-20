@@ -77,8 +77,8 @@ bool GameScene::init()
 	player_sprite->setPosition(_level->positionForTileCoordinate(size, point));
 
 	_player = new Player();
-	_player->retain();
 	_player->state = Player::State::Standing;
+	_player->retain();
 	this->setupAnimations();
 
 	this->addChild(player_sprite);
@@ -89,6 +89,9 @@ bool GameScene::init()
 	listener->onKeyReleased = CC_CALLBACK_2(GameScene::onKeyReleased, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	_jumpAction = JumpBy::create(0.4f, Point(0, 0), 120, 1);
+	_jumpAction->retain();
 
 	return true;
 }
@@ -117,7 +120,24 @@ void GameScene::updateScene(float delta) {
 	this->updatePlayer(delta);
 }
 
+static bool isJumping = false;
+
 void GameScene::updatePlayer(float delta) {
+
+	if (std::find(heldKeys.begin(), heldKeys.end(), EventKeyboard::KeyCode::KEY_SPACE) != heldKeys.end()) {
+
+		if (_jumpAction->isDone())
+		{
+			//_jumpAction = JumpBy::create(0.4f, Point(0, 0), 120, 1);
+			isJumping = false;
+		}
+
+		if (!isJumping)
+		{
+			player_sprite->runAction(_jumpAction);
+			isJumping = true;
+		}
+	}
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) != heldKeys.end()) {
 

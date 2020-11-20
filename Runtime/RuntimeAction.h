@@ -11,8 +11,8 @@ class RuntimeAction
 public:
 	RuntimeAction(unique_ptr<Trigger> trigger) noexcept;
 
-	void execute();
-	void pushFunction(std::function<void(void)> function);
+	void Execute();
+	void PushFunctiona(std::function<void(void)> function);
 	const Trigger& GetTrigger() const noexcept;
 
 private:

@@ -64,7 +64,7 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    
+    Action* _jumpAction;
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 };

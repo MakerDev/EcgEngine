@@ -11,28 +11,27 @@ using namespace cocos2d;
 class GameObject : public Node
 {
 public:
-	static unique_ptr<GameObject> CreateFromJson(string filename, int speed=4);
 	static unique_ptr<GameObject> CreateFromJsonValue(const rapidjson::Value& value);
+	float GetScaleFactor() const noexcept;
+	void SetScaleFactor(float scaleFactor);
+	Point GetPosition() const;
+	virtual void onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys);
+
+public:
 	Point position;
 	Size size;
 
 	//TODO: Encapsulate all sprite and animation related fields to seperate component ex) Visual
 	Sprite* sprite;
 
-	float getScaleFactor() const noexcept;
-	void setScaleFactor(float scaleFactor);
-
-	virtual void onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys);
+private:
+	//TODO : this is temporal
+	void addActionFromJsonValue(const rapidjson::Value& value);
 
 private:
 	//TODO: 적절한 key를 선택하고 map으로 구조를 바꿔효율 높이기
 	//TODO : change to smart pointers
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
-
-	void addAction(string name, void* param);
-
-	//TODO : this is temporal
-	void addActionFromJsonValue(const rapidjson::Value& value);
 
 	float _scaleFactor = 1.0F;
 };
