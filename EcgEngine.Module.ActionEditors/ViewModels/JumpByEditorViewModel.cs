@@ -36,9 +36,9 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 return;
             }
 
-            var originalAction = navigationContext.Parameters["OriginalAction"] as JumpBy;
-            Duration = originalAction.Duration;
-            Speed = originalAction.Speed;
+            var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
+            Speed = int.Parse(action.Arguments.FirstOrDefault(x=>x.Name == "Speed").Value);
+            Duration = float.Parse(action.Arguments.FirstOrDefault(x => x.Name == "Duration").Value);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

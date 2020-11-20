@@ -9,6 +9,7 @@ namespace EcgEngine.Models.VisualScript.ActionPresets
         public int Speed { get; private set; }
         public float Duration { get; private set; }
 
+
         public JumpBy(float duration, int speed)
         {
             Name = nameof(JumpBy);

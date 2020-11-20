@@ -56,7 +56,10 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         private void EditAction()
         {
-            _dialogService.ShowDialog("ActionSelectorDialog", null, result =>
+            var dialogParameters = new DialogParameters();
+            dialogParameters.Add("OriginalAction", ScriptComponent.Actions[SelectedActionItemIndex]);
+
+            _dialogService.ShowDialog("ActionSelectorDialog", dialogParameters, result =>
             {
                 if (result.Result == ButtonResult.OK)
                 {
