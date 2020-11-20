@@ -5,9 +5,10 @@
              xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:TriggerEditorWindowViewModel}"             
              mc:Ignorable="d"
-             Height="150"
+             Height="250"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel 
         Width="250"
@@ -18,15 +19,36 @@
         <TextBlock 
             HorizontalAlignment="Center"
             FontSize="18"
-            Text="Key" />
+            Margin="0 10"
+            Text="Key Event Type" />
         <StackPanel 
             HorizontalAlignment="Center"
             Orientation="Horizontal">
-            <RadioButton Content="Right" Margin="10 0" />
+            <RadioButton                     
+               IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
+                    ConverterParameter=0}"                
+                Content="Down" Margin="10 0" />
             <RadioButton 
-                IsChecked="{Binding IsLeftKey}"
-                Content="Left" />
+                IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
+                    ConverterParameter=1}"
+                Content="Press" />
+
+            <RadioButton 
+                IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
+                    ConverterParameter=2}"
+                Content="Up" />
         </StackPanel>
+
+        <TextBox 
+            Margin="0 10"
+            Width="150" Height="30" 
+            Text="{Binding KeyCode}"
+            PreviewKeyDown="TextBox_PreviewKeyDown"
+            >
+        </TextBox>
 
         <Button 
             Margin="0 10 0 0"

@@ -89,10 +89,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             var p = new NavigationParameters();
             p.Add("GameObject", GameObject);
 
-            //HACK: ActionListRegion should be deleted as it's nested region. Create custom
-            //region behavior or interface to force clean up the subregions when removing the containing view.
-            //Probably the interface should be attached to the view not to the viewmodel
-            //_regionManager.Regions.Remove(RegionNames.ACTION_LIST_REGION);
             _regionManager.RequestNavigate(RegionNames.SCRIPT_EDITOR_REGION, "ScriptEditor", p);
         }
     }

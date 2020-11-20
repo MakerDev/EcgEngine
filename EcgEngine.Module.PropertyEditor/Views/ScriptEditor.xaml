@@ -44,6 +44,7 @@
 
         <ContentControl 
             Width="400"
+            prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
             prism:RegionManager.RegionName="{x:Static core:RegionNames.ACTION_LIST_REGION}" />
     </StackPanel>
 </UserControl>

@@ -27,7 +27,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public DelegateCommand EditTriggerPropertyCommand { get; set; }
 
-        public TriggerItemViewModel(DialogService dialogService)
+        public TriggerItemViewModel(IDialogService dialogService)
         {
             EditTriggerPropertyCommand = new DelegateCommand(() =>
             {
@@ -39,6 +39,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
                     if (result.Result == ButtonResult.OK)
                     {
                         Trigger = result.Parameters.GetValue<Trigger>("Trigger");
+                        RaisePropertyChanged(nameof(Trigger));
                         ScriptComponent.Trigger = Trigger;
                     }
                 });

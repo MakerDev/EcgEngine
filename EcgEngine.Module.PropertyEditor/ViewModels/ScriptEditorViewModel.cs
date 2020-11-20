@@ -45,6 +45,13 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
         }
 
+        private IRegionManager _scopedRegionManager;
+        public IRegionManager ScopedRegionManager
+        {
+            get { return _scopedRegionManager; }
+            set { SetProperty(ref _scopedRegionManager, value); }
+        }
+
         public DelegateCommand ItemSelectedCommand { get; set; }
         public DelegateCommand CreateNewScriptCommand { get; set; }
 
@@ -52,6 +59,8 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         {
             _regionManager = regionManager;
             _containerExtension = containerExtension;
+
+            ScopedRegionManager = regionManager.CreateRegionManager();
 
             ItemSelectedCommand = new DelegateCommand(() =>
             {
@@ -62,7 +71,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
                 var p = new NavigationParameters();
                 p.Add("ScriptComponent", ScriptComponents[SelectedTriggerItemIndex]);
-                _regionManager.RequestNavigate(RegionNames.ACTION_LIST_REGION, "ActionEditorPanel", p);
+                ScopedRegionManager.RequestNavigate(RegionNames.ACTION_LIST_REGION, "ActionEditorPanel", p);
             });
 
             CreateNewScriptCommand = new DelegateCommand(CreateNewScript);
