@@ -6,6 +6,9 @@ namespace EcgEngine.Models.VisualScript.ActionPresets
 {
     public class MoveX : Action
     {
+        public string Direction { get; private set; }
+        public int Speed { get; private set; }
+
         public MoveX(string direction, int speed)
         {
             Name = "MoveX";
@@ -24,6 +27,9 @@ namespace EcgEngine.Models.VisualScript.ActionPresets
                 Type = "int",
                 Value = velocity.ToString(),
             });
+
+            Direction = direction;
+            Speed = speed;
         }
     }
 }
