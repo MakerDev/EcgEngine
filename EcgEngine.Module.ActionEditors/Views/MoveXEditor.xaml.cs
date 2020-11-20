@@ -2,7 +2,7 @@
 using EcgEngine.Models.VisualScript;
 using System.Windows.Controls;
 
-namespace EcgEngine.Module.PropertyEditor.Views.ActionEditorViews
+namespace EcgEngine.Module.ActionEditors.Views
 {
     /// <summary>
     /// Interaction logic for MoveXEditor

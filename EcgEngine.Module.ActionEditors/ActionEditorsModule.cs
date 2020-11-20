@@ -1,5 +1,5 @@
 ﻿using EcgEngine.Core.Interfaces;
-using EcgEngine.Module.PropertyEditor.Views.ActionEditorViews;
+using EcgEngine.Module.ActionEditors.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;

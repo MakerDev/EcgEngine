@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:actioneditorviews="clr-namespace:EcgEngine.Module.PropertyEditor.Views.ActionEditorViews"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:core="clr-namespace:EcgEngine.Core;assembly=EcgEngine.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionSelectorDialogViewModel}"             
              mc:Ignorable="d"
