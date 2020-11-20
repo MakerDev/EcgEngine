@@ -4,29 +4,18 @@
 #include "ActionArgument.h"
 #include "RuntimeJumpBy.h"
 
-/// <summary>
-/// Json param:
-/// -duration
-/// -height
-/// </summary>
-/// <param name="targetGameObject"></param>
-/// <param name="runtimeAction"></param>
-/// <param name="actionValueObject"></param>
-void RuntimeJumpBy::AddActionFromJson(GameObject* targetGameObject, RuntimeAction* runtimeAction, const rapidjson::Value& actionValueObject)
+
+unique_ptr<RuntimeJumpBy> RuntimeJumpBy::Create(float duration, int height)
 {
-	const auto& arguments = actionValueObject["Arguments"].GetArray();
+	auto jumpByAction = make_unique<RuntimeJumpBy>();
 
-	//Arg1 : Duration to height repeat
-	const ActionArgument durationArg(arguments[0]);
-	const float duration = stof(durationArg.GetValue());
+	if (jumpByAction && jumpByAction->initWithDuration(duration, Vec2(0, 0), height, 1))
+	{
+		jumpByAction->autorelease();
+		return jumpByAction;
+	}
 
-	const ActionArgument heightArg(arguments[1]);
-	const float height = stoi(heightArg.GetValue());
-
-	std::function<void(void)> jumpFunc =
-		std::bind(RuntimeJumpBy::JumpByAction, targetGameObject, duration, height);
-
-	runtimeAction->PushFunction(jumpFunc);
+	return nullptr;
 }
 
 void RuntimeJumpBy::update(float t)
@@ -59,8 +48,8 @@ void RuntimeJumpBy::update(float t)
 
 		_previousPos = newPos;
 
-		//TODO: 바닥과 충돌하면
-		_target->stopAction(this);
+		//TODO: 바닥과 충돌하면 액션 중지하고 y좌표 적절히 세팅
+		//_target->stopAction(this);
 #else
 		_target->setPosition(_startPosition + Vec2(x, y));
 #endif // !CC_ENABLE_STACKABLE_ACTIONS
@@ -87,17 +76,4 @@ bool RuntimeJumpBy::initWithDuration(float duration, const Vec2& position, float
 	}
 
 	return false;
-}
-
-void RuntimeJumpBy::JumpByAction(GameObject* target, float duration, int height)
-{
-	if (_action == nullptr)
-	{
-		_action = JumpBy::create(duration, Vec2(0, 0), height, 1);
-	}
-
-	if (_isInitialJump || _action->isDone())
-	{
-		target->sprite->runAction(_action);
-	}
 }

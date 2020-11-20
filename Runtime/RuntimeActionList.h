@@ -2,7 +2,7 @@
 #include <map>
 
 #include "MoveX.h"
-#include "RuntimeJumpBy.h"
+#include "RuntimeJumpByFunctor.h"
 
 #define REGISTER_FUNC_TYPE function<void(GameObject*, RuntimeAction* runtimeAction, const rapidjson::Value&)>
 

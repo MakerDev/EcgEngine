@@ -16,6 +16,7 @@ public:
 	void SetScaleFactor(float scaleFactor);
 	Point GetPosition() const;
 	virtual void onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys);
+	Sprite* GetSprite() const;
 
 public:
 	Point position;

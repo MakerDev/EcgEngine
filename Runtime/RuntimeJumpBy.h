@@ -1,10 +1,11 @@
 #pragma once
+#include "ActionFunctor.h"
 #include "GameObject.h"
 
-class RuntimeJumpBy : ActionInterval
+class RuntimeJumpBy : public ActionInterval
 {
 public:
-	static void AddActionFromJson(GameObject* targetGameObject, RuntimeAction* runtimeAction, const rapidjson::Value& actionValueObject);
+	static unique_ptr<RuntimeJumpBy> Create(float duration, int height);
 	/**
 	 * @param time In seconds.
 	 */
@@ -14,17 +15,13 @@ public:
 	 * initializes the action
 	 * @param duration in seconds
 	 */
+
 	bool initWithDuration(float duration, const Vec2& position, float height, int jumps);
-
-
-	static void JumpByAction(GameObject* target, float duration, int height);
 protected:
 	Vec2           _startPosition;
 	Vec2           _delta;
 	float           _height;
 	int             _jumps;
 	Vec2           _previousPos;
-	JumpBy* _action = nullptr;
-	bool _isInitialJump = true;
 };
 

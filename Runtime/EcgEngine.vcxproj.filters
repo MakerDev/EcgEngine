@@ -81,6 +81,9 @@
     <ClCompile Include="ActionFunctor.cpp">
       <Filter>src\VisualScript\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="RuntimeJumpByFunctor.cpp">
+      <Filter>src\VisualScript\ActionTemplates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="ActionFunctor.h">
       <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeJumpByFunctor.h">
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

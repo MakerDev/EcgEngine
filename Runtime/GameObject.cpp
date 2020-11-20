@@ -34,9 +34,6 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 		gameObject->addActionFromJsonValue(scriptComponent);
 	}
 
-	//float moveDelta = 2;
-	//gameObject->addAction("MoveX", &moveDelta);
-
 	return std::move(gameObject);
 }
 
@@ -75,6 +72,11 @@ void GameObject::onUpdate(float delta, const vector<EventKeyboard::KeyCode>& hel
 	}
 }
 
+Sprite* GameObject::GetSprite() const
+{
+	return sprite;
+}
+
 /// <summary>
 /// Add action from json 'ScriptComponent' Value
 /// </summary>
@@ -104,7 +106,7 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 			}
 			else if (actionName.compare("JumpBy") == 0)
 			{
-				RuntimeJumpBy::AddActionFromJson(this, runtimeAction.get(), actionValue);
+				RuntimeJumpByFunctor::AddActionFromJson(this, runtimeAction.get(), actionValue);
 			}
 		}
 
