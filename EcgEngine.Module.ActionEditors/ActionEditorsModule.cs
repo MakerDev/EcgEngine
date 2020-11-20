@@ -1,15 +1,13 @@
 ﻿using EcgEngine.Core.Interfaces;
-using EcgEngine.Module.PropertyEditor.ViewModels;
-using EcgEngine.Module.PropertyEditor.Views;
 using EcgEngine.Module.PropertyEditor.Views.ActionEditorViews;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using System.Linq;
 
-namespace EcgEngine.Module.PropertyEditor
+namespace EcgEngine.Module.ActionEditors
 {
-    public class PropertyEditorModule : IModule
+    public class ActionEditorsModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
@@ -17,22 +15,6 @@ namespace EcgEngine.Module.PropertyEditor
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.Register<TriggerItemViewModel>();
-            containerRegistry.Register<ActionItemViewModel>();
-
-            containerRegistry.RegisterDialog<TriggerEditorWindow, TriggerEditorWindowViewModel>();
-            containerRegistry.RegisterDialog<ActionSelectorDialog, ActionSelectorDialogViewModel>();
-
-            containerRegistry.RegisterForNavigation<ScriptEditor, ScriptEditorViewModel>();
-            containerRegistry.RegisterForNavigation<ActionEditorPanel, ActionEditorPanelViewModel>();
-            containerRegistry.RegisterForNavigation<PropertyEditorView, PropertyEditorViewModel>();
-
-            //containerRegistry.RegisterForNavigation<MoveXEditor, MoveXEditorViewModel>();
-            RegisterActionEditors(containerRegistry);
-        }
-
-        public void RegisterActionEditors(IContainerRegistry containerRegistry)
         {
             var types = typeof(MoveXEditor).Assembly
                 .GetTypes();
@@ -51,6 +33,7 @@ namespace EcgEngine.Module.PropertyEditor
                 ViewModelLocationProvider.Register(actionEditorView.ToString(), actionEditorViewModels[$"{actionEditorView.Name}ViewModel"]);
                 containerRegistry.RegisterForNavigation(actionEditorView, actionEditorView.Name);
             }
+
         }
     }
 }

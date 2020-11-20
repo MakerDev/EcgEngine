@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj" />
     <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
     <ProjectReference Include="..\EcgEngine.Module.PropertyEditor\EcgEngine.Module.PropertyEditor.csproj" />

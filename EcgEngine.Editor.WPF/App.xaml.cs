@@ -1,6 +1,7 @@
 ﻿using EcgEngine.Core;
 using EcgEngine.Editor.WPF.ViewModels;
 using EcgEngine.Editor.WPF.Views;
+using EcgEngine.Module.ActionEditors;
 using EcgEngine.Module.PropertyEditor;
 using EcgEngine.Services;
 using Prism.Ioc;
@@ -36,6 +37,7 @@ namespace EcgEngine.Editor.WPF
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<PropertyEditorModule>();
+            moduleCatalog.AddModule<ActionEditorsModule>();
         }
     }
 }

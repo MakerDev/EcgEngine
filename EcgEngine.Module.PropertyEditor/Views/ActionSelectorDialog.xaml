@@ -4,38 +4,36 @@
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:actioneditorviews="clr-namespace:EcgEngine.Module.PropertyEditor.Views.ActionEditorViews"
+             xmlns:core="clr-namespace:EcgEngine.Core;assembly=EcgEngine.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionSelectorDialogViewModel}"             
              mc:Ignorable="d"
-             Width="880" Height="650"
+             Width="800" Height="450"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel
-        Width="150"
-        HorizontalAlignment="Center">
-        <TextBlock 
-            FontSize="24" HorizontalAlignment="Center"
-            Text="MoveX"  />
-        <TextBlock 
-            HorizontalAlignment="Center"
-            FontSize="18"
-            Text="Direction" />
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <RadioButton Content="Right" />
-            <RadioButton 
-                IsChecked="{Binding IsDirectionLeft}"
-                Content="Left" />
-        </StackPanel>
-        <TextBlock Text="Speed" FontSize="18" HorizontalAlignment="Center"/>
-        <TextBox 
-            HorizontalContentAlignment="Center"
-            FontSize="16"
-            Text="{Binding Speed, FallbackValue=2}" Width="100" Height="28"/>
+    <StackPanel Orientation="Horizontal">
+        <ListBox>
+            <ListBoxItem>
+                <Button Content="MoveX" 
+                        Width="150" Height="30"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="MoveXEditor"
+                        />
+            </ListBoxItem>
+        </ListBox>
+        
+        <StackPanel
+            Width="450"
+            HorizontalAlignment="Center">
+            <ContentControl 
+                Height="350"
+                prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
+                prism:RegionManager.RegionName
+                    ="{x:Static core:RegionNames.ACTION_SELECTOR_EDITOR_REGION}"/>
 
-        <Button 
-            Margin="0 10 0 0"
-            Content="Ok" 
-            Command="{Binding CloseDialogCommand}" Width="120" Height="30" />
+            <Button 
+                Margin="0 20 0 0"
+                Content="Ok" 
+                Command="{Binding CloseDialogCommand}" Width="120" Height="30" />
+        </StackPanel>
     </StackPanel>
 </UserControl>

@@ -9,6 +9,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converter:StringToFloatConverter x:Key="StringToFloatConverter" />
             <converter:IntegerToStringConverter x:Key="IntegerToStringConverter" />
+            <converter:KeyEventTypeToRadioButtonStateConverter x:Key="KeyEventTypeToRadioButtonStateConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿using System.Windows.Input;
 
 namespace EcgEngine.Models.VisualScript.Triggers
 {
@@ -12,7 +12,7 @@ namespace EcgEngine.Models.VisualScript.Triggers
     public class KeyEventTrigger
     {
         public KeyEventType KeyEventType { get; set; } = KeyEventType.Down;
-        public Keys Key { get; set; }
+        public CocosKeyCode Key { get; set; }
 
         public override string ToString()
         {
