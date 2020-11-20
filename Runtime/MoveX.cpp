@@ -23,11 +23,11 @@ void MoveX::AddActionFromJson(GameObject* targetGameObject,
 
 	if (arg1.GetValue().compare("Right") == 0)
 	{
-		runtimeAction->PushFunctiona(flipTrue);
+		runtimeAction->PushFunction(flipTrue);
 	}
 	else
 	{
-		runtimeAction->PushFunctiona(flipFalse);
+		runtimeAction->PushFunction(flipFalse);
 	}
 
 	const ActionArgument arg2(arguments[1]);
@@ -35,5 +35,5 @@ void MoveX::AddActionFromJson(GameObject* targetGameObject,
 	int velocity = stoi(arg2.GetValue());
 	std::function<void(void)> moveFunc = std::bind(RuntimeActionTemplates::MoveX, targetGameObject, velocity);
 
-	runtimeAction->PushFunctiona(moveFunc);
+	runtimeAction->PushFunction(moveFunc);
 }

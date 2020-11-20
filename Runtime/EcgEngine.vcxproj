@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="ActionArgument.cpp" />
+    <ClCompile Include="ActionFunctor.cpp" />
     <ClCompile Include="DefaultLayer.cpp" />
     <ClCompile Include="EventContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -178,12 +179,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="RuntimeActionTemplates.cpp" />
     <ClCompile Include="KeyEventTrigger.cpp" />
     <ClCompile Include="RuntimeAction.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="RuntimeJumpBy.cpp" />
     <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionArgument.h" />
+    <ClInclude Include="ActionFunctor.h" />
     <ClInclude Include="RuntimeActionList.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
@@ -204,7 +205,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="RuntimeJumpBy.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="TriggerTypes.h" />
-    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

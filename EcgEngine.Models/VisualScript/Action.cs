@@ -12,11 +12,11 @@ namespace EcgEngine.Models.VisualScript
 
         public override string ToString()
         {
-            var result = $"{Name} + ";
+            var result = $"{Name}| ";
 
             foreach (var arg in Arguments)
             {
-                result += arg.ToString();
+                result += arg.ToString() + ", ";
             }
 
             return result;

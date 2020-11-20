@@ -29,7 +29,6 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 
 	auto& scriptComponents = value["ScriptComponents"];
 
-
 	for (auto& scriptComponent : scriptComponents.GetArray())
 	{
 		gameObject->addActionFromJsonValue(scriptComponent);
@@ -98,10 +97,14 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 		{
 			string actionName = actionValue["Name"].GetString();
 
-			//TODO : Extract this to proprt function
+			//TODO : Extract this to proper function or class
 			if (actionName.compare("MoveX") == 0)
 			{
 				MoveX::AddActionFromJson(this, runtimeAction.get(), actionValue);
+			}
+			else if (actionName.compare("JumpBy") == 0)
+			{
+				RuntimeJumpBy::AddActionFromJson(this, runtimeAction.get(), actionValue);
 			}
 		}
 

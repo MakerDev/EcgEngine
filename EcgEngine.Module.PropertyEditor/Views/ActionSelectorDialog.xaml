@@ -19,6 +19,13 @@
                         CommandParameter="MoveXEditor"
                         />
             </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="JumpBy" 
+                        Width="150" Height="30"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="JumpByEditor"
+                        />
+            </ListBoxItem>
         </ListBox>
         
         <StackPanel

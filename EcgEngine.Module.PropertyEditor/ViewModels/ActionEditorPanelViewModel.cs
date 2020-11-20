@@ -104,6 +104,13 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            SelectedActionItemIndex = -1;
+            ScriptComponent = navigationContext.Parameters["ScriptComponent"] as ScriptComponent;
+            RefreshActionItems();
+        }
+
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -111,13 +118,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            SelectedActionItemIndex = -1;
-            ScriptComponent = navigationContext.Parameters["ScriptComponent"] as ScriptComponent;
-            RefreshActionItems();
         }
     }
 }

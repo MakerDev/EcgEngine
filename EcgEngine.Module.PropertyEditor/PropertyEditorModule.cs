@@ -26,9 +26,6 @@ namespace EcgEngine.Module.PropertyEditor
             containerRegistry.RegisterForNavigation<ScriptEditor, ScriptEditorViewModel>();
             containerRegistry.RegisterForNavigation<ActionEditorPanel, ActionEditorPanelViewModel>();
             containerRegistry.RegisterForNavigation<PropertyEditorView, PropertyEditorViewModel>();
-
-            //containerRegistry.RegisterForNavigation<MoveXEditor, MoveXEditorViewModel>();
-            //RegisterActionEditors(containerRegistry);
         }
     }
 }

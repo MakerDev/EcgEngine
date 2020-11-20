@@ -13,7 +13,7 @@ void RuntimeAction::Execute()
 	}
 }
 
-void RuntimeAction::PushFunctiona(std::function<void(void)> function)
+void RuntimeAction::PushFunction(std::function<void(void)> function)
 {
 	_functions.push_back(function);
 }

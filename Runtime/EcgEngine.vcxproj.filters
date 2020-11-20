@@ -1,38 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime">
+    <Filter Include="src">
       <UniqueIdentifier>{0f787aff-93de-4611-bc0d-92d6ce7a640a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime\VisualScript">
+    <Filter Include="src\VisualScript">
       <UniqueIdentifier>{21113b06-1c7f-4c63-a5cf-6625e607fe0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime\VisualScript\Triggers">
+    <Filter Include="src\VisualScript\Triggers">
       <UniqueIdentifier>{b48e17d3-606a-4e98-a3a7-081ed4668984}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime\VisualScript\Types">
+    <Filter Include="src\VisualScript\Types">
       <UniqueIdentifier>{4b35b9e0-226f-4b63-900f-5c4c32ee8ac6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime\VisualScript\Interop">
+    <Filter Include="src\VisualScript\Interop">
       <UniqueIdentifier>{24265546-6394-4750-a0a5-8259aced8804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Runtime\VisualScript\ActionTemplates">
+    <Filter Include="src\VisualScript\ActionTemplates">
       <UniqueIdentifier>{22f1d6dc-4b06-41f7-b76d-ec9ab2f08583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\VisualScript\Actions">
+      <UniqueIdentifier>{6641f6c5-a3c1-4af3-99c7-74d935db0f08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -46,46 +43,46 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="RuntimeAction.cpp">
-      <Filter>Runtime\VisualScript</Filter>
+      <Filter>src\VisualScript</Filter>
     </ClCompile>
     <ClCompile Include="KeyEventTrigger.cpp">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClCompile>
     <ClCompile Include="DefaultLayer.cpp">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Runtime.cpp">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="EventContext.cpp">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClCompile>
     <ClCompile Include="MoveX.cpp">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClCompile>
     <ClCompile Include="ActionArgument.cpp">
-      <Filter>Runtime\VisualScript\Interop</Filter>
+      <Filter>src\VisualScript\Interop</Filter>
     </ClCompile>
     <ClCompile Include="RuntimeActionTemplates.cpp">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClCompile>
     <ClCompile Include="RuntimeJumpBy.cpp">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -102,52 +99,55 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="DefaultLayer.h">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Runtime.h">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="runtime-core.h">
-      <Filter>Runtime</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeAction.h">
-      <Filter>Runtime\VisualScript</Filter>
+      <Filter>src\VisualScript</Filter>
     </ClInclude>
     <ClInclude Include="TriggerTypes.h">
-      <Filter>Runtime\VisualScript\Types</Filter>
+      <Filter>src\VisualScript\Types</Filter>
     </ClInclude>
     <ClInclude Include="KeyEventTypes.h">
-      <Filter>Runtime\VisualScript\Types</Filter>
+      <Filter>src\VisualScript\Types</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClInclude>
     <ClInclude Include="KeyEventTrigger.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClInclude>
     <ClInclude Include="EventContext.h">
-      <Filter>Runtime\VisualScript\Triggers</Filter>
+      <Filter>src\VisualScript\Triggers</Filter>
     </ClInclude>
     <ClInclude Include="ActionArgument.h">
-      <Filter>Runtime\VisualScript\Interop</Filter>
+      <Filter>src\VisualScript\Interop</Filter>
     </ClInclude>
     <ClInclude Include="MoveX.h">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeActionTemplates.h">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeActionList.h">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeJumpBy.h">
-      <Filter>Runtime\VisualScript\ActionTemplates</Filter>
+      <Filter>src\VisualScript\ActionTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
