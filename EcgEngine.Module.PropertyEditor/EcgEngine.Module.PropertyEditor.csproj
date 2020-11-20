@@ -11,6 +11,7 @@
     <ProjectReference Include="..\..\EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj" />
     <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+    <ProjectReference Include="..\EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj" />
     <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
   </ItemGroup>
 </Project>
