@@ -13,7 +13,7 @@ MoveXFunctor::MoveXFunctor(function<void(void)> flipFuction, function<void(void)
 {
 
 }
-
+//TODO : Make this non static so that ActionFunctor can be abstract
 void MoveXFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
 {
 	const auto& arguments = actionObjectValue["Arguments"].GetArray();

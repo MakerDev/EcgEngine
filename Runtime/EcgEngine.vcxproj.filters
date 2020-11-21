@@ -84,9 +84,6 @@
     <ClCompile Include="ActionFunctor.cpp">
       <Filter>src\VisualScript</Filter>
     </ClCompile>
-    <ClCompile Include="MoveX.cpp">
-      <Filter>src\VisualScript\Actions</Filter>
-    </ClCompile>
     <ClCompile Include="MoveXFunctor.cpp">
       <Filter>src\VisualScript\Actions</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
     </ClInclude>
     <ClInclude Include="ActionFunctor.h">
       <Filter>src\VisualScript</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveX.h">
-      <Filter>src\VisualScript\Actions</Filter>
     </ClInclude>
     <ClInclude Include="MoveXFunctor.h">
       <Filter>src\VisualScript\Actions</Filter>

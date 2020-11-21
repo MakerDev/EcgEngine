@@ -174,7 +174,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
-    <ClCompile Include="MoveX.cpp" />
     <ClCompile Include="MoveXFunctor.cpp" />
     <ClCompile Include="Runtime.cpp" />
     <ClCompile Include="RuntimeActionCatalog.cpp" />
@@ -193,7 +192,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
     <ClInclude Include="KeyEventTypes.h" />
-    <ClInclude Include="MoveX.h" />
     <ClInclude Include="RuntimeAction.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="DefaultLayer.h" />
