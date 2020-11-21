@@ -175,7 +175,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="MoveX.cpp" />
+    <ClCompile Include="MoveXFunctor.cpp" />
     <ClCompile Include="Runtime.cpp" />
+    <ClCompile Include="RuntimeActionCatalog.cpp" />
     <ClCompile Include="RuntimeActionTemplates.cpp" />
     <ClCompile Include="KeyEventTrigger.cpp" />
     <ClCompile Include="RuntimeAction.cpp" />
@@ -186,7 +188,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="ActionFunctor.h" />
-    <ClInclude Include="RuntimeActionList.h" />
+    <ClInclude Include="MoveXFunctor.h" />
+    <ClInclude Include="RuntimeActionCatalog.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
     <ClInclude Include="KeyEventTypes.h" />

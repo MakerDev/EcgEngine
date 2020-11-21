@@ -28,6 +28,9 @@
     <Filter Include="src\VisualScript\Actions">
       <UniqueIdentifier>{6641f6c5-a3c1-4af3-99c7-74d935db0f08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\VisualScript\CustomCocosActions">
+      <UniqueIdentifier>{5c7bcf1b-9af3-4dcd-aa8c-102ec181967d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
@@ -66,23 +69,29 @@
     <ClCompile Include="EventContext.cpp">
       <Filter>src\VisualScript\Triggers</Filter>
     </ClCompile>
-    <ClCompile Include="MoveX.cpp">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
-    </ClCompile>
     <ClCompile Include="ActionArgument.cpp">
       <Filter>src\VisualScript\Interop</Filter>
     </ClCompile>
     <ClCompile Include="RuntimeActionTemplates.cpp">
       <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClCompile>
-    <ClCompile Include="RuntimeJumpBy.cpp">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionFunctor.cpp">
+    <ClCompile Include="RuntimeJumpByFunctor.cpp">
       <Filter>src\VisualScript\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="RuntimeJumpByFunctor.cpp">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
+    <ClCompile Include="RuntimeJumpBy.cpp">
+      <Filter>src\VisualScript\CustomCocosActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionFunctor.cpp">
+      <Filter>src\VisualScript</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveX.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveXFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeActionCatalog.cpp">
+      <Filter>src\VisualScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,23 +146,26 @@
     <ClInclude Include="ActionArgument.h">
       <Filter>src\VisualScript\Interop</Filter>
     </ClInclude>
-    <ClInclude Include="MoveX.h">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
-    </ClInclude>
     <ClInclude Include="RuntimeActionTemplates.h">
       <Filter>src\VisualScript\ActionTemplates</Filter>
     </ClInclude>
-    <ClInclude Include="RuntimeActionList.h">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
-    </ClInclude>
-    <ClInclude Include="RuntimeJumpBy.h">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionFunctor.h">
+    <ClInclude Include="RuntimeJumpByFunctor.h">
       <Filter>src\VisualScript\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="RuntimeJumpByFunctor.h">
-      <Filter>src\VisualScript\ActionTemplates</Filter>
+    <ClInclude Include="RuntimeJumpBy.h">
+      <Filter>src\VisualScript\CustomCocosActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionFunctor.h">
+      <Filter>src\VisualScript</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveX.h">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveXFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeActionCatalog.h">
+      <Filter>src\VisualScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

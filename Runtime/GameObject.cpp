@@ -4,9 +4,8 @@
 #include "GameObject.h"
 #include "KeyEventTrigger.h"
 #include "KeyEventTypes.h"
-#include "RuntimeActionTemplates.h"
 #include "ActionArgument.h"
-#include "RuntimeActionList.h"
+#include "RuntimeActionCatalog.h"
 
 unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& value)
 {
@@ -99,15 +98,7 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 		{
 			string actionName = actionValue["Name"].GetString();
 
-			//TODO : Extract this to proper function or class
-			if (actionName.compare("MoveX") == 0)
-			{
-				MoveX::AddActionFromJson(this, runtimeAction.get(), actionValue);
-			}
-			else if (actionName.compare("JumpBy") == 0)
-			{
-				RuntimeJumpByFunctor::AddActionFromJson(this, runtimeAction.get(), actionValue);
-			}
+			RuntimeActionCatalog::AddAction(actionName, runtimeAction.get(), this, actionValue);
 		}
 
 		this->_keyboardTriggeredActions.push_back(runtimeAction);

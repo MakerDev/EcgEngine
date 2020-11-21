@@ -6,16 +6,9 @@ class RuntimeJumpBy : public ActionInterval
 {
 public:
 	static unique_ptr<RuntimeJumpBy> Create(float duration, int height);
-	/**
-	 * @param time In seconds.
-	 */
+
+
 	virtual void update(float time) override;
-
-	/**
-	 * initializes the action
-	 * @param duration in seconds
-	 */
-
 	bool initWithDuration(float duration, const Vec2& position, float height, int jumps);
 protected:
 	Vec2           _startPosition;

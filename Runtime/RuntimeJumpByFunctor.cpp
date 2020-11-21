@@ -1,17 +1,17 @@
 #include "RuntimeJumpByFunctor.h"
 #include "ActionArgument.h"
 
-void RuntimeJumpByFunctor::AddActionFromJson(GameObject* targetGameObject, RuntimeAction* runtimeAction, const rapidjson::Value& actionValueObject)
+void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
 	const auto& arguments = actionValueObject["Arguments"].GetArray();
 
-	//Arg1 : Duration to height repeat
+	//Arg1 : Duration
 	const ActionArgument durationArg(arguments[0]);
 	const float duration = stof(durationArg.GetValue());
 
+	//Arg2 : Height
 	const ActionArgument heightArg(arguments[1]);
 	const float height = stoi(heightArg.GetValue());
-
 
 	std::unique_ptr<ActionFunctor> functor = make_unique<RuntimeJumpByFunctor>(targetGameObject, duration, height);
 	runtimeAction->PushFunctor(std::move(functor));
@@ -36,9 +36,5 @@ void RuntimeJumpByFunctor::Execute()
 		sprite->runAction(_jumpBy.get());
 		CCLOG("executed");
 		_isFirstJump = false;
-	}/*
-	else if (_jumpBy->isDone())
-	{
-		sprite->runAction(_jumpBy.get());
-	}	*/
+	}
 }
