@@ -21,6 +21,7 @@
             <ContentControl                
                 x:Name="_sceneEditorPanel" 
                 Width="240"
+                prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
                 prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.SCENE_EDITOR_PANEL_REGION}"
                 />

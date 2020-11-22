@@ -1,4 +1,6 @@
-﻿using Prism.Ioc;
+﻿using EcgEngine.Module.SceneEditor.ViewModels;
+using EcgEngine.Module.SceneEditor.Views;
+using Prism.Ioc;
 using Prism.Modularity;
 
 namespace EcgEngine.Module.SceneEditor
@@ -12,7 +14,7 @@ namespace EcgEngine.Module.SceneEditor
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<SceneEditorPanel, SceneEditorPanelViewModel>();
         }
     }
 }

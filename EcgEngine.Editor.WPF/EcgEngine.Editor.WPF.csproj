@@ -29,6 +29,7 @@
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
     <ProjectReference Include="..\EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj" />
     <ProjectReference Include="..\EcgEngine.Module.PropertyEditor\EcgEngine.Module.PropertyEditor.csproj" />
+    <ProjectReference Include="..\EcgEngine.Module.SceneEditor\EcgEngine.Module.SceneEditor.csproj" />
     <ProjectReference Include="..\EcgEngine.Runtime.Wrapper\EcgEngine.Runtime.Wrapper.vcxproj" />
     <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
     <ProjectReference Include="..\Runtime\EcgEngine.vcxproj" />

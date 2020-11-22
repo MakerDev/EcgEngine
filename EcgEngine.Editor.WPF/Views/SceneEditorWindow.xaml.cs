@@ -26,25 +26,5 @@ namespace EcgEngine.Editor.WPF.Views
             var handle = ((HwndSource)HwndSource.FromVisual(_stackPanel)).Handle.ToInt32();
             _ecgRuntime.Initialize(handle);
         }
-
-
-        private void NextScene(object sender, RoutedEventArgs e)
-        {
-            _ecgRuntime.SwitchScene();
-        }
-
-        private void CreateScene(object sender, RoutedEventArgs e)
-        {
-            //_ecgRuntime.CreateNewScene(_currentSpeed);
-        }
-
-        private void IncreaseSpeed(object sender, RoutedEventArgs e)
-        {
-            var button = sender as System.Windows.Controls.Button;
-            int delta = int.Parse(button.Tag.ToString());
-            //_currentSpeed += delta;
-
-            //_ecgRuntime.CreateNewScene(_currentSpeed);
-        }
     }
 }

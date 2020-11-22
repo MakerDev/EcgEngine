@@ -3,6 +3,7 @@ using EcgEngine.Editor.WPF.ViewModels;
 using EcgEngine.Editor.WPF.Views;
 using EcgEngine.Module.ActionEditors;
 using EcgEngine.Module.PropertyEditor;
+using EcgEngine.Module.SceneEditor;
 using EcgEngine.Services;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -38,6 +39,7 @@ namespace EcgEngine.Editor.WPF
         {
             moduleCatalog.AddModule<EcgEngineCoreModule>();
             moduleCatalog.AddModule<PropertyEditorModule>();
+            moduleCatalog.AddModule<SceneEditorModule>();
             moduleCatalog.AddModule<ActionEditorsModule>();
         }
     }

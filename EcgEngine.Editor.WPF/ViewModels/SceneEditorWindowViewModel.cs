@@ -1,5 +1,7 @@
-﻿using Prism.Commands;
+﻿using EcgEngine.Core;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 
@@ -16,6 +18,13 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public DelegateCommand RunGameCommand { get; set; }
         public DelegateCommand CreateSceneCommand { get; set; }
 
+        private IRegionManager _scopedRegionManager;
+        public IRegionManager ScopedRegionManager
+        {
+            get { return _scopedRegionManager; }
+            set { SetProperty(ref _scopedRegionManager, value); }
+        }
+
         public bool CanCloseDialog()
         {
             return true;
@@ -28,10 +37,10 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-
+            ScopedRegionManager.RequestNavigate(RegionNames.SCENE_EDITOR_PANEL_REGION, "SceneEditorPanel");
         }
 
-        public SceneEditorWindowViewModel(EcgRuntime.EcgRuntime ecgRuntime)
+        public SceneEditorWindowViewModel(EcgRuntime.EcgRuntime ecgRuntime, IRegionManager regionManager)
         {
             _ecgRuntime = ecgRuntime;
 
@@ -44,6 +53,8 @@ namespace EcgEngine.Editor.WPF.ViewModels
             {
                 _ecgRuntime.CreateNewScene();
             });
+
+            ScopedRegionManager = regionManager.CreateRegionManager();
         }
     }
 }

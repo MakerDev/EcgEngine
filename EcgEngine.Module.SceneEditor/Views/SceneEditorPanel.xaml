@@ -7,8 +7,15 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:SceneEditorPanelViewModel}"       
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"             
+             Width="240" Height="685"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-            
+        <TextBlock 
+            Text="Scene editor panel" 
+            VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            FontSize="42"
+            HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>
