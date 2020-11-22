@@ -36,6 +36,7 @@ namespace EcgEngine.Editor.WPF
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            moduleCatalog.AddModule<EcgEngineCoreModule>();
             moduleCatalog.AddModule<PropertyEditorModule>();
             moduleCatalog.AddModule<ActionEditorsModule>();
         }
