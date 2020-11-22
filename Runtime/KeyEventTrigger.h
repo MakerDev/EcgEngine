@@ -13,7 +13,7 @@ public:
 	static std::unique_ptr<KeyEventTrigger> CreateFromJsonValue(const rapidjson::Value& keyEventTrigger);
 	KeyEventTrigger(KeyEventType keyEventType, EventKeyboard::KeyCode keycode) noexcept;
 
-	bool IsMatched(const EventContext& context) const;
+	bool IsMatched(const EventContext& context) const noexcept override;
 
 private:
 	KeyEventType _type;

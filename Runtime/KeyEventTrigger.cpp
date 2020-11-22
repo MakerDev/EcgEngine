@@ -15,7 +15,7 @@ KeyEventTrigger::KeyEventTrigger(KeyEventType keyEventType, EventKeyboard::KeyCo
 {
 }
 
-bool KeyEventTrigger::IsMatched(const EventContext& context) const
+bool KeyEventTrigger::IsMatched(const EventContext& context) const noexcept
 {
 	if (context.TriggerType != TriggerType::KeyboardEvent)
 	{
