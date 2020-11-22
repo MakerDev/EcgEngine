@@ -27,6 +27,8 @@
 
 USING_NS_CC;
 
+#define CAMERA_SPRITE_OFFSET_X 100
+
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
@@ -55,14 +57,14 @@ bool GameScene::init()
 		return false;
 	}
 
-	_level = new Level();
-	_level->loadMap("level1.tmx");
-	_level->retain();
+	level = new Level();
+	level->loadMap("level1.tmx");
+	level->retain();
 
 	auto director = Director::getInstance();
-	_level->getMap()->setScale(SCALE_FACTOR);
+	level->getMap()->setScale(SCALE_FACTOR);
 
-	this->addChild(_level->getMap());
+	this->addChild(level->getMap());
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
 	AnimationCache::getInstance()->addAnimationsWithFile("solbrain-animations.plist");
@@ -74,15 +76,30 @@ bool GameScene::init()
 	Point point = Point(10, 2);
 	Size size = player_sprite->getContentSize();
 
-	player_sprite->setPosition(_level->positionForTileCoordinate(size, point));
+	player_sprite->setPosition(level->tileCoordinateToPosition(size, point));
 
-	_player = new Player();
-	_player->state = Player::State::Standing;
-	_player->retain();
+	player = new Player();
+	player->state = Player::State::Standing;
+	player->retain();
+
+	Point origin = Director::getInstance()->getVisibleOrigin();
+	Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
+	Point* center = new Point(wsize.width / 2 + origin.x, wsize.height / 2 + origin.y);
+
+	cameraTarget = Sprite::create();
+	cameraTarget->setPositionX(player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X); // set to players x
+	cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
+	cameraTarget->retain();
+
+	camera = Follow::create(cameraTarget, Rect::ZERO);
+	camera->retain();
+
+	this->runAction(camera);
+
 	this->setupAnimations();
-
 	this->addChild(player_sprite);
 	this->schedule(CC_SCHEDULE_SELECTOR(GameScene::updateScene));
+	this->addChild(cameraTarget);
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
@@ -111,12 +128,13 @@ void GameScene::setupAnimations() {
 
 void GameScene::movePlayerForTest(int x)
 {
-	_player->setPositionX(_player->getPositionX() + x);
+	player->setPositionX(player->getPositionX() + x);
 	player_sprite->setPositionX(player_sprite->getPositionX() + x);
 }
 
-void GameScene::updateScene(float delta) {
-
+void GameScene::updateScene(float delta)
+{
+	this->cameraTarget->setPositionX(player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X);
 	this->updatePlayer(delta);
 }
 
@@ -124,15 +142,10 @@ static bool isJumping = false;
 
 void GameScene::updatePlayer(float delta) {
 
+	//Jump
 	if (std::find(heldKeys.begin(), heldKeys.end(), EventKeyboard::KeyCode::KEY_SPACE) != heldKeys.end()) {
 
-		if (_jumpAction->isDone())
-		{
-			//_jumpAction = JumpBy::create(0.4f, Point(0, 0), 120, 1);
-			isJumping = false;
-		}
-
-		if (!isJumping)
+		if (_jumpAction->isDone() || !isJumping)
 		{
 			player_sprite->runAction(_jumpAction);
 			isJumping = true;
@@ -141,47 +154,53 @@ void GameScene::updatePlayer(float delta) {
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) != heldKeys.end()) {
 
-		_player->velocity.x = PLAYER_MAX_VELOCITY;
+		player->velocity.x = PLAYER_MAX_VELOCITY;
 
-		if (_player->grounded) {
-			_player->state = Player::State::Walking;
+		if (player->grounded) {
+			player->state = Player::State::Walking;
 		}
 
-		_player->facingRight = true;
+		player->facingRight = true;
 	}
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), LEFT_ARROW) != heldKeys.end()) {
-		_player->velocity.x = -PLAYER_MAX_VELOCITY;
-		if (_player->grounded) {
-			_player->state = Player::State::Walking;
+		player->velocity.x = -PLAYER_MAX_VELOCITY;
+		if (player->grounded) {
+			player->state = Player::State::Walking;
 		}
-		_player->facingRight = false;
+		player->facingRight = false;
 	}
+
 	// clamp the velocity to the maximum, x-axis only
-	if (std::abs(_player->velocity.x) > PLAYER_MAX_VELOCITY) {
-		_player->velocity.x = signum(_player->velocity.x) * PLAYER_MAX_VELOCITY;
+	if (std::abs(player->velocity.x) > PLAYER_MAX_VELOCITY) {
+		player->velocity.x = signum(player->velocity.x) * PLAYER_MAX_VELOCITY;
 	}
 	// clamp the velocity to 0 if it's < 1, and set the state to standing
-	if (std::abs(_player->velocity.x) < 1) {
-		_player->velocity.x = 0;
-		if (_player->grounded) {
-			_player->state = Player::State::Standing;
+	if (std::abs(player->velocity.x) < 1) {
+		player->velocity.x = 0;
+		if (player->grounded) {
+			player->state = Player::State::Standing;
 		}
 	}
+
+	//Rect player_rect = player_sprite->getTextureRect();
+	//Point tmp = level->positionToTileCoordinate(Point(player->position.x + player->velocity.x, player->position.y));
+
+
 
 	// unscale the velocity by the inverse delta time and set
 	// the latest position
-	_player->velocity = _player->velocity * delta;
-	_player->position = _player->position + _player->velocity;
-	_player->velocity = _player->velocity * 1 / delta;
+	player->velocity = player->velocity * delta;
+	player->position = player->position + player->velocity;
+	player->velocity = player->velocity * 1 / delta;
 
-	_player->velocity.x *= DAMPING;
+	player->velocity.x *= DAMPING;
 	this->updatePlayerSprite(delta);
 }
 
 void GameScene::updatePlayerSprite(float delta) {
 
-	if (_player->state == Player::State::Walking) {
+	if (player->state == Player::State::Walking) {
 
 		if (walkRight->isDone()) {
 			walkRight->startWithTarget(player_sprite);
@@ -189,7 +208,7 @@ void GameScene::updatePlayerSprite(float delta) {
 
 		walkRight->step(delta);
 
-		if (_player->facingRight) {
+		if (player->facingRight) {
 			player_sprite->setFlippedX(true);
 		}
 		else {
@@ -197,14 +216,14 @@ void GameScene::updatePlayerSprite(float delta) {
 		}
 
 	}
-	else if (_player->state == Player::State::Jumping) {
+	else if (player->state == Player::State::Jumping) {
 
 	}
 	else {
 		player_sprite->setSpriteFrame(Sprite::createWithSpriteFrameName("idle")->getSpriteFrame());
 	}
 
-	player_sprite->setPositionX(player_sprite->getPositionX() + _player->velocity.x);
+	player_sprite->setPositionX(player_sprite->getPositionX() + player->velocity.x);
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)

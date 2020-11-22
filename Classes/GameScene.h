@@ -37,13 +37,15 @@ using namespace std;
 class GameScene : public cocos2d::Layer
 {
 public:
-    Level* _level;
-    Player* _player;
+    Level* level;
+    Player* player;
     Sprite* player_sprite;
+    Sprite* cameraTarget;
 
     Animate* walkRight;
     Animate* jumping;
     Animate* falling;
+    Follow* camera;
 
     vector<EventKeyboard::KeyCode> heldKeys;
 
@@ -53,6 +55,7 @@ public:
     void updateScene(float interval);
     void updatePlayer(float interval);
     void updatePlayerSprite(float interval);
+
     void setupAnimations();
     void movePlayerForTest(int x);  
 
