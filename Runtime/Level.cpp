@@ -35,8 +35,6 @@ vector<Rect> Level::getCollisionTiles(Point point, int fromX, int fromY)
 				Sprite* tile = walls->getTileAt(Point((int)point.x + a, mapheight - ((int)point.y + b)));
 
 				if (tile != NULL) {
-
-					//CCLOG("%d %d",(int)point.x + a, mapheight - ((int)point.y + b));
 					DrawNode* rectWithBorder = DrawNode::create();
 
 					Vec2 vertices[] =
