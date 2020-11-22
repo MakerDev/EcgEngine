@@ -25,8 +25,8 @@ public:
 
 	void AddGameObject(unique_ptr<GameObject> gameObject);
 	//TODO: consider changing name to LoadTmxMap
-	void LoadLevel(string filename, float scaleFactor);
-	const vector<unique_ptr<GameObject>>& GetGameObjects() const;
+	void LoadTileMap(string filename, float scaleFactor);
+	const vector<unique_ptr<GameObject>>& GetGameObjects() const noexcept;
 
 protected:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
@@ -35,6 +35,7 @@ protected:
 	unique_ptr<Level> _level;
 	vector<unique_ptr<GameObject>> _gameObjects;
 	vector<EventKeyboard::KeyCode> _heldKeys;
+	vector<EventKeyboard::KeyCode> _releasedKeys;
 
 private:
 	static string readJson(const char* filename);

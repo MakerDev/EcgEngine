@@ -43,7 +43,7 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 		defaultLayer->AddGameObject(std::move(player));
 	}
 
-	defaultLayer->LoadLevel("level1.tmx", 2.0F);
+	defaultLayer->LoadTileMap("level1.tmx", 2.0F);
 
 	//TODO : Consider how to skip this verbose step.
 	defaultLayer->SetInitialPositions();
@@ -76,14 +76,14 @@ void DefaultLayer::SetInitialPositions()
 	{
 		GameObject& gameobject = *(i->get());
 
-		if (gameobject.sprite != nullptr)
+		if (gameobject.GetSprite() != nullptr)
 		{
 			//TODO: enable the case where _level doesn't have to be set.
 			assert(_level != nullptr);
 
 			//TODO Choose whether to use World Position or just to use TileCoordination Position.
-			gameobject.sprite->setPosition(
-				_level->tileCoordinateToPosition(gameobject.sprite->getContentSize(), gameobject.position));
+			gameobject.GetSprite()->setPosition(
+				_level->tileCoordinateToPosition(gameobject.GetSprite()->getContentSize(), gameobject.position));
 		}
 	}
 }
@@ -92,19 +92,20 @@ void DefaultLayer::UpdateScene(float timeDelta)
 {
 	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
-		(*gameObject)->onUpdate(timeDelta, _heldKeys);
+		(*gameObject)->OnUpdate(timeDelta, _heldKeys, _releasedKeys);
+		_releasedKeys.clear();
 	}
 }
 
 void DefaultLayer::AddGameObject(unique_ptr<GameObject> gameObject)
 {
-	if (gameObject->sprite == nullptr)
+	if (gameObject->GetSprite() == nullptr)
 	{
 		this->addChild(gameObject.get());
 	}
 	else
 	{
-		this->addChild(gameObject->sprite);
+		this->addChild(gameObject->GetSprite());
 	}
 
 	gameObject->retain();
@@ -112,7 +113,7 @@ void DefaultLayer::AddGameObject(unique_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(std::move(gameObject));
 }
 
-void DefaultLayer::LoadLevel(string filename, float scaleFactor)
+void DefaultLayer::LoadTileMap(string filename, float scaleFactor)
 {
 	_level = make_unique<Level>();
 	_level->loadMap("level1.tmx");
@@ -122,7 +123,8 @@ void DefaultLayer::LoadLevel(string filename, float scaleFactor)
 
 	this->addChild(_level->getMap());
 }
-const vector<unique_ptr<GameObject>>& DefaultLayer::GetGameObjects() const
+
+const vector<unique_ptr<GameObject>>& DefaultLayer::GetGameObjects() const noexcept
 {
 	return _gameObjects;
 }
@@ -137,6 +139,7 @@ void DefaultLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 void DefaultLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	_heldKeys.erase(std::remove(_heldKeys.begin(), _heldKeys.end(), keyCode), _heldKeys.end());
+	_releasedKeys.push_back(keyCode);
 }
 
 string DefaultLayer::readJson(const char* filename)
