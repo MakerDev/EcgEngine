@@ -7,7 +7,7 @@ class RuntimeJumpByFunctor : public ActionFunctor
 public:
 	static void RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject);
 	RuntimeJumpByFunctor(GameObject* target, float duration, int height);
-	virtual void Execute() override;
+	virtual void Execute(float delta) override;
 
 private:
 	unique_ptr<Action> _jumpBy;

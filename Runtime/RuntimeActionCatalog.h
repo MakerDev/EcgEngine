@@ -3,6 +3,8 @@
 
 #include "RuntimeJumpByFunctor.h"
 #include "MoveXFunctor.h"
+#include "PlayAnimationFunctor.h"
+#include "SetSpriteFrameFunctor.h"
 
 #define REGISTER_FUNC_TYPE function<void(RuntimeAction*, GameObject*, const rapidjson::Value&)>
 

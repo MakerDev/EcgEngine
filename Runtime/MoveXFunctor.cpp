@@ -2,7 +2,7 @@
 #include "RuntimeActionTemplates.h"
 #include "ActionArgument.h"
 
-void MoveXFunctor::Execute()
+void MoveXFunctor::Execute(float delta)
 {
 	_flipFunction();
 	_moveFunction();

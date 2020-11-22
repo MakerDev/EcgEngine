@@ -5,11 +5,11 @@ RuntimeAction::RuntimeAction(unique_ptr<Trigger> trigger) noexcept
 {
 }
 
-void RuntimeAction::Execute()
+void RuntimeAction::Execute(float delta)
 {
 	for (auto& functor : _functors)
 	{
-		functor->Execute();
+		functor->Execute(delta);
 	}
 }
 

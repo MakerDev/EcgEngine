@@ -19,7 +19,7 @@ void Runtime::initialize(int parent)
 	char* pstrBuffer = NULL;
 
 	pstrBuffer = getcwd(strBuffer, _MAX_PATH);
-	
+
 
 	AppDelegate app;
 	cocos2d::Application::getInstance()->run();
@@ -68,15 +68,19 @@ void Runtime::CreateScene(int speed)
 
 	auto director = Director::getInstance();
 	director->replaceScene(newScene);
-	director->pause();
+
+	director->stopAnimation();
+	_isAnimationStopped = true;
 }
 
 void Runtime::Run()
 {
 	auto director = Director::getInstance();
-	if (director->isPaused())
+
+	if (_isAnimationStopped)
 	{
-		director->resume();
+		director->startAnimation();
+		_isAnimationStopped = false;
 	}
 }
 

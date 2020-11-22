@@ -12,7 +12,7 @@ class RuntimeAction
 public:
 	RuntimeAction(unique_ptr<Trigger> trigger) noexcept;
 
-	void Execute();
+	void Execute(float delta);
 	void PushFunctor(unique_ptr<ActionFunctor> functor);
 	const Trigger& GetTrigger() const noexcept;
 

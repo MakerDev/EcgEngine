@@ -5,6 +5,6 @@
 class ActionFunctor
 {
 public:
-	virtual void Execute() = 0;
+	virtual void Execute(float delta) = 0;
 };
 

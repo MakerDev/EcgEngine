@@ -3,15 +3,17 @@
 #include "RuntimeAction.h"
 #include "GameObject.h"
 
-class MoveXFunctor: public ActionFunctor
+class PlayAnimationFunctor : public ActionFunctor
 {
 public:
 	void static RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue);
 	virtual void Execute(float delta) override;
 
-	MoveXFunctor(function<void(void)> flipFuction, function<void(void)> moveFunction);
+	PlayAnimationFunctor(const string& animationName);
+
 private:
-	function<void(void)> _flipFunction;
-	function<void(void)> _moveFunction;
+	VisualComponent* _visualComponent;
+	string _animationName;
 };
+
 

@@ -14,4 +14,5 @@ public:
 	void Run();
 private:
 	int _currentScene = 0;
+	bool _isAnimationStopped = false;
 };

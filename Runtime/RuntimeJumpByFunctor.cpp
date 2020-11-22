@@ -3,6 +3,9 @@
 
 void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
+	assert(runtimeAction != nullptr && "Param runtimeAction cannot be null");
+	assert(targetGameObject != nullptr && "Param targetGameObject cannot be null");
+
 	const auto& arguments = actionValueObject["Arguments"].GetArray();
 
 	//Arg1 : Duration
@@ -25,16 +28,15 @@ RuntimeJumpByFunctor::RuntimeJumpByFunctor(GameObject* target, float duration, i
 	this->_jumpBy->retain();
 }
 
-void RuntimeJumpByFunctor::Execute()
+void RuntimeJumpByFunctor::Execute(float delta)
 {
 	auto sprite = _target->GetSprite();
 
 	assert(sprite != nullptr);
 
-  	if (_isFirstJump || _jumpBy->isDone())
+	if (_isFirstJump || _jumpBy->isDone())
 	{
 		sprite->runAction(_jumpBy.get());
-		CCLOG("executed");
 		_isFirstJump = false;
 	}
 }
