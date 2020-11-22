@@ -12,19 +12,18 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 	auto gameObject = make_unique<GameObject>();
 
 	//TODO: Extract these infomation from json file.
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
-	AnimationCache::getInstance()->addAnimationsWithFile("solbrain-animations.plist");
-
-	//TODO: Encapsulate them
-	gameObject->sprite = Sprite::createWithSpriteFrameName("idle");
-	gameObject->sprite->setFlippedX(true);
+	gameObject->_visualComponent = make_unique<VisualComponent>("solbrain.plist", "solbrain-animations.plist", "idle");
+	
+	//TODO : Extract this from json
+	gameObject->_visualComponent->RegisterAnimation("walk", 0.5);
+	gameObject->GetSprite()->setFlippedX(true);
 
 	const int scaleFactor = value["ScaleFactor"].GetInt();
 	gameObject->SetScaleFactor(scaleFactor);
 
 	auto& position = value["Position"];
 	gameObject->position = Point(position["X"].GetInt(), position["Y"].GetInt());
-	gameObject->size = gameObject->sprite->getContentSize();
+	gameObject->size = gameObject->GetSprite()->getContentSize();
 
 	auto& scriptComponents = value["ScriptComponents"];
 
@@ -44,36 +43,65 @@ float GameObject::GetScaleFactor() const noexcept
 void GameObject::SetScaleFactor(float scaleFactor)
 {
 	_scaleFactor = scaleFactor;
-	this->sprite->setScale(_scaleFactor);
+	this->GetSprite()->setScale(_scaleFactor);
 }
 
 Point GameObject::GetPosition() const
 {
-	return sprite->getPosition();
+	return this->GetSprite()->getPosition();
 }
 
-void GameObject::onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys)
+void GameObject::OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys, const vector<EventKeyboard::KeyCode>& releasedKeys)
 {
 	//TODO: 만약 timeDelta가 필요한 액션이면 placeholder에 delta값을 채워넘기기
-
-	//1. handle key events
-	for (auto i = _keyboardTriggeredActions.begin(); i != _keyboardTriggeredActions.end(); i++)
+	for (auto& keyTriggeredAction : _keyboardTriggeredActions)
 	{
-		for (auto j = heldKeys.begin(); j != heldKeys.end(); j++)
+		//Process keyDown events
+		for (auto& pressedKey : heldKeys)
 		{
-			const auto context = EventContext(KeyEventType::Down, *j);
+			const auto context = EventContext(KeyEventType::Down, pressedKey);
 
-			if ((*i)->GetTrigger().IsMatched(context))
+			if (keyTriggeredAction->GetTrigger().IsMatched(context))
 			{
-				(*i)->Execute();
+				keyTriggeredAction->Execute(delta);
+
+				//If the trigger was matched with KeyDownEvent, it will never math KeyUpEvent.
+				continue;
+			}
+		}
+
+		//Process keyUp events
+		for (auto& releasedKey : releasedKeys)
+		{
+			const auto context = EventContext(KeyEventType::Released, releasedKey);
+
+			if (keyTriggeredAction->GetTrigger().IsMatched(context))
+			{
+				keyTriggeredAction->Execute(delta);
 			}
 		}
 	}
 }
 
+VisualComponent* GameObject::GetVisual()
+{
+	assert(_visualComponent != nullptr && "VisualComponent is null");
+
+	return _visualComponent.get();
+}
+
+VisualComponent* GameObject::GetVisualConst() const
+{
+	assert(_visualComponent != nullptr && "VisualComponent is null");
+
+	return _visualComponent.get();
+}
+
 Sprite* GameObject::GetSprite() const
 {
-	return sprite;
+	assert(_visualComponent != nullptr && "Couldn't get sprite from null visual component");
+
+	return _visualComponent->GetSprite();
 }
 
 /// <summary>
@@ -97,7 +125,6 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 		for (auto& actionValue : actionValueList.GetArray())
 		{
 			string actionName = actionValue["Name"].GetString();
-
 			RuntimeActionCatalog::AddAction(actionName, runtimeAction.get(), this, actionValue);
 		}
 

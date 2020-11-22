@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "RuntimeAction.h"
+#include "VisualComponent.h"
 
 using namespace std;
 using namespace cocos2d;
@@ -15,15 +16,14 @@ public:
 	float GetScaleFactor() const noexcept;
 	void SetScaleFactor(float scaleFactor);
 	Point GetPosition() const;
-	virtual void onUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys);
+	virtual void OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys, const vector<EventKeyboard::KeyCode>& releasedKeys);
+	VisualComponent* GetVisual();
+	VisualComponent* GetVisualConst() const;
 	Sprite* GetSprite() const;
 
 public:
 	Point position;
 	Size size;
-
-	//TODO: Encapsulate all sprite and animation related fields to seperate component ex) Visual
-	Sprite* sprite;
 
 private:
 	//TODO : this is temporal
@@ -32,8 +32,8 @@ private:
 private:
 	//TODO: 적절한 key를 선택하고 map으로 구조를 바꿔효율 높이기
 	//TODO : change to smart pointers
+	unique_ptr<VisualComponent> _visualComponent;
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
-
 	float _scaleFactor = 1.0F;
 };
 

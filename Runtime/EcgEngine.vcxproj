@@ -175,6 +175,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="MoveXFunctor.cpp" />
+    <ClCompile Include="PlayAnimationFunctor.cpp" />
     <ClCompile Include="Runtime.cpp" />
     <ClCompile Include="RuntimeActionCatalog.cpp" />
     <ClCompile Include="RuntimeActionTemplates.cpp" />
@@ -182,12 +183,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="RuntimeAction.cpp" />
     <ClCompile Include="RuntimeJumpBy.cpp" />
     <ClCompile Include="RuntimeJumpByFunctor.cpp" />
+    <ClCompile Include="SetSpriteFrameFunctor.cpp" />
     <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="ActionFunctor.h" />
     <ClInclude Include="MoveXFunctor.h" />
+    <ClInclude Include="PlayAnimationFunctor.h" />
     <ClInclude Include="RuntimeActionCatalog.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
@@ -206,8 +210,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="RuntimeActionTemplates.h" />
     <ClInclude Include="RuntimeJumpBy.h" />
     <ClInclude Include="RuntimeJumpByFunctor.h" />
+    <ClInclude Include="SetSpriteFrameFunctor.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="TriggerTypes.h" />
+    <ClInclude Include="VisualComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

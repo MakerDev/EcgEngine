@@ -90,6 +90,15 @@
     <ClCompile Include="RuntimeActionCatalog.cpp">
       <Filter>src\VisualScript</Filter>
     </ClCompile>
+    <ClCompile Include="VisualComponent.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayAnimationFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSpriteFrameFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -160,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="RuntimeActionCatalog.h">
       <Filter>src\VisualScript</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualComponent.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayAnimationFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSpriteFrameFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
