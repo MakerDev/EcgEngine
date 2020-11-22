@@ -3,7 +3,9 @@ using EcgEngine.Module.ActionEditors.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using System;
 using System.Linq;
+using System.Reflection;
 
 namespace EcgEngine.Module.ActionEditors
 {
@@ -33,7 +35,6 @@ namespace EcgEngine.Module.ActionEditors
                 ViewModelLocationProvider.Register(actionEditorView.ToString(), actionEditorViewModels[$"{actionEditorView.Name}ViewModel"]);
                 containerRegistry.RegisterForNavigation(actionEditorView, actionEditorView.Name);
             }
-
         }
     }
 }

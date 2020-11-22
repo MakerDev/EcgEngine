@@ -15,6 +15,7 @@ namespace EcgEngine.Module.ActionEditors.Views
         }
 
         //TODO : Probabily better to extract this to seperate class or use attribute or default interface to reduce code duplication
+        //TODO : Create ActionEditorViewBase, ActionEditorViewModelBase
         public Action GetAction()
         {
             var vm = DataContext as IActionEditorViewModel;

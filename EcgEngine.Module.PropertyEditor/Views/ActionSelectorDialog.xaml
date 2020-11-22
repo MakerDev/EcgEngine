@@ -26,6 +26,20 @@
                         CommandParameter="JumpByEditor"
                         />
             </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="PlayAnimation" 
+                        Width="150" Height="30"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="PlayAnimationEditor"
+                        />
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="SetSpriteFrame" 
+                        Width="150" Height="30"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="SetSpriteFrameEditor"
+                        />
+            </ListBoxItem>
         </ListBox>
         
         <StackPanel

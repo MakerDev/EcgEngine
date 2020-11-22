@@ -1,10 +1,13 @@
 ﻿using EcgEngine.Core;
+using EcgEngine.Core.Dialogs;
 using EcgEngine.Models;
 using EcgEngine.Models.VisualScript;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -12,8 +15,8 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
     public class ScriptEditorViewModel : BindableBase, INavigationAware
     {
-        private readonly IRegionManager _regionManager;
         private readonly IContainerExtension _containerExtension;
+        private readonly IDialogService _dialogService;
 
         public GameObject GameObject { get; set; }
 
@@ -42,8 +45,24 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             set
             {
                 SetProperty(ref _selectedTriggerItemIndex, value);
+
+                if (_selectedTriggerItemIndex == -1)
+                {
+                    ScopedRegionManager.Regions[RegionNames.ACTION_LIST_REGION].RemoveAll();
+                }
+
+                RaisePropertyChanged(nameof(CanDeleteScript));
             }
         }
+
+        public bool CanDeleteScript
+        {
+            get
+            {
+                return SelectedTriggerItemIndex >= 0;
+            }
+        }
+
 
         private IRegionManager _scopedRegionManager;
         public IRegionManager ScopedRegionManager
@@ -54,11 +73,12 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         public DelegateCommand ItemSelectedCommand { get; set; }
         public DelegateCommand CreateNewScriptCommand { get; set; }
+        public DelegateCommand DeleteScriptCommand { get; set; }
 
-        public ScriptEditorViewModel(IRegionManager regionManager, IContainerExtension containerExtension)
+        public ScriptEditorViewModel(IRegionManager regionManager, IContainerExtension containerExtension, IDialogService dialogService)
         {
-            _regionManager = regionManager;
             _containerExtension = containerExtension;
+            _dialogService = dialogService;
 
             ScopedRegionManager = regionManager.CreateRegionManager();
 
@@ -75,6 +95,24 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             });
 
             CreateNewScriptCommand = new DelegateCommand(CreateNewScript);
+            DeleteScriptCommand = new DelegateCommand(DeleteScript).ObservesCanExecute(() => CanDeleteScript);
+        }
+
+        private void DeleteScript()
+        {
+            var dialogParams = new DialogParameters();
+            dialogParams.Add("Message", "Are you sure to delete this?");
+            _dialogService.ShowDialog(DialogNames.CONFIRMATION_DIALOG, dialogParams, (result) =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    var scriptToDeleteIndex = SelectedTriggerItemIndex;
+                    SelectedTriggerItemIndex = -1;
+
+                    ScriptComponents.RemoveAt(scriptToDeleteIndex);
+                    RefreshTriggerItems();
+                }
+            });
         }
 
         public void CreateNewScript()

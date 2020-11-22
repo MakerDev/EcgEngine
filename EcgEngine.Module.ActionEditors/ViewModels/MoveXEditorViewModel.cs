@@ -59,6 +59,12 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             }
 
             var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
+
+            if (action.Name != "MoveX")
+            {
+                return;
+            }
+
             Speed = int.Parse(action.Arguments.FirstOrDefault(x => x.Name == "Speed").Value);
             IsDirectionLeft = action.Arguments.FirstOrDefault(x => x.Name == "Direction").Value == "Left";
         }

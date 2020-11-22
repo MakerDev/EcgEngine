@@ -9,26 +9,25 @@ using System.Linq;
 
 namespace EcgEngine.Module.ActionEditors.ViewModels
 {
-    public class JumpByEditorViewModel : BindableBase, IActionEditorViewModel
+    public class SetSpriteFrameEditorViewModel : BindableBase, IActionEditorViewModel
     {
-        private int _height;
-        public int Height
+        private string _spriteName;
+        public string SpriteName
         {
-            get { return _height; }
-            set { SetProperty(ref _height, value); }
+            get { return _spriteName; }
+            set { SetProperty(ref _spriteName, value); }
         }
-
-        private float _duration;
-        public float Duration
+        public SetSpriteFrameEditorViewModel()
         {
-            get { return _duration; }
-            set { SetProperty(ref _duration, value); }
-        }
 
+        }
         public Models.VisualScript.Action GetAction()
         {
-            return new JumpBy(Duration, Height);
+            Models.VisualScript.Action action = new SetSpriteFrame(SpriteName);
+            
+            return action;
         }
+
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             if (navigationContext.Parameters["OriginalAction"] == null)
@@ -38,15 +37,13 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
 
             var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
 
-            if (action.Name != "JumpBy") 
+            if (action.Name != nameof(SetSpriteFrame))
             {
                 return;
             }
 
-            Height = int.Parse(action.Arguments.FirstOrDefault(x=>x.Name == "Height").Value);
-            Duration = float.Parse(action.Arguments.FirstOrDefault(x => x.Name == "Duration").Value);
+            SpriteName = action.Arguments.FirstOrDefault(x => x.Name == "SpriteName").Value;
         }
-
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
