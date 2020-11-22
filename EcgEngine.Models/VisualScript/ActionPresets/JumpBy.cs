@@ -6,29 +6,29 @@ namespace EcgEngine.Models.VisualScript.ActionPresets
 {
     public class JumpBy: Action
     {
-        public int Speed { get; private set; }
+        public int Height { get; private set; }
         public float Duration { get; private set; }
 
-
-        public JumpBy(float duration, int speed)
+        public JumpBy(float duration, int height)
         {
             Name = nameof(JumpBy);
+
             Arguments.Add(new ActionArgument()
             {
-                Name = "Duration",
+                Name = nameof(Duration),
                 Type = "float",
                 Value = duration.ToString(),
             });
 
             Arguments.Add(new ActionArgument()
             {
-                Name = "Speed",
+                Name = nameof(Height),
                 Type = "int",
-                Value = speed.ToString(),
+                Value = height.ToString(),
             });
 
             Duration = duration;
-            Speed = speed;
+            Height = height;
         }
     }
 }
