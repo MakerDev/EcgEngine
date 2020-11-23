@@ -31,6 +31,9 @@
     <Filter Include="src\VisualScript\CustomCocosActions">
       <UniqueIdentifier>{5c7bcf1b-9af3-4dcd-aa8c-102ec181967d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Managers">
+      <UniqueIdentifier>{9a2378d7-ea85-45c6-b0f2-609df82ff90b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
@@ -98,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="SetSpriteFrameFunctor.cpp">
       <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineManager.cpp">
+      <Filter>src\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableEngine.cpp">
+      <Filter>src\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EcgVariable.cpp">
+      <Filter>src\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="SetSpriteFrameFunctor.h">
       <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineManager.h">
+      <Filter>src\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableEngine.h">
+      <Filter>src\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EcgVariable.h">
+      <Filter>src\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
