@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 #include "KeyEventTrigger.h"
-#include "KeyEventTypes.h"
+#include "KeyEventType.h"
 #include "ActionArgument.h"
 #include "RuntimeActionCatalog.h"
 
@@ -104,6 +104,16 @@ Sprite* GameObject::GetSprite() const
 	return _visualComponent->GetSprite();
 }
 
+VariableEngine* GameObject::GetLocalVariableEngine()
+{
+	return _localVariableEngine.get();
+}
+
+GameObject::GameObject()
+{
+	_localVariableEngine = make_unique<VariableEngine>();
+}
+
 /// <summary>
 /// Add action from json 'ScriptComponent' Value
 /// </summary>
@@ -137,7 +147,9 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 	case TriggerType::InteractionEvent:
 		break;
 	case TriggerType::VariableEvent:
+		
 		break;
+
 	default:
 		break;
 	}

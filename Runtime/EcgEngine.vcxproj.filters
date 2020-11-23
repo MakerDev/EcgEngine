@@ -34,6 +34,9 @@
     <Filter Include="src\Managers">
       <UniqueIdentifier>{9a2378d7-ea85-45c6-b0f2-609df82ff90b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\VisualScript\Actions\VariableActions">
+      <UniqueIdentifier>{e36c678a-b530-4f0f-9963-ccf14b3696a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
@@ -111,6 +114,12 @@
     <ClCompile Include="EcgVariable.cpp">
       <Filter>src\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="VariableEventTrigger.cpp">
+      <Filter>src\VisualScript\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVariableValueFunctor.cpp">
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -145,12 +154,6 @@
     </ClInclude>
     <ClInclude Include="RuntimeAction.h">
       <Filter>src\VisualScript</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerTypes.h">
-      <Filter>src\VisualScript\Types</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventTypes.h">
-      <Filter>src\VisualScript\Types</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
       <Filter>src\VisualScript\Triggers</Filter>
@@ -199,6 +202,21 @@
     </ClInclude>
     <ClInclude Include="EcgVariable.h">
       <Filter>src\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableEventTrigger.h">
+      <Filter>src\VisualScript\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableEventType.h">
+      <Filter>src\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerType.h">
+      <Filter>src\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventType.h">
+      <Filter>src\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVariableValueFunctor.h">
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

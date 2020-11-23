@@ -4,7 +4,7 @@
 
 std::unique_ptr<VariableEngine> VariableEngine::_instance = nullptr;
 
-VariableEngine* VariableEngine::GetInstance()
+VariableEngine* VariableEngine::GetGlobalInstance()
 {
 	if (_instance == nullptr)
 	{
@@ -14,17 +14,49 @@ VariableEngine* VariableEngine::GetInstance()
 	return _instance.get();
 }
 
-
 void VariableEngine::CreateNewVariableWithName(const std::string& name)
 {
-	assert(_varableTable.count(name) <= 0 && ("Variable " + name + "already exists").c_str());
+	assert(_variableTable.count(name) <= 0 && ("Variable " + name + "already exists").c_str());
 
-	_varableTable.insert(std::make_pair(name, std::make_unique<EcgVariable>()));
+	_variableTable.insert(std::make_pair(name, std::make_unique<EcgVariable>()));
 }
 
 EcgVariable* VariableEngine::GetVariableWithName(const std::string& name)
 {
-	assert(_varableTable.count(name) > 0 && ("Variable " + name + "doesn't exits").c_str());
+	if (_variableTable.count(name) <= 0)
+	{
+		return nullptr;
+	}
 
-	return _varableTable[name].get();
+	return _variableTable[name].get();
+}
+
+void VariableEngine::SetFloatValueWithName(const string& variableName, float value)
+{
+	_variableTable[variableName]->SetFloatValue(value);
+}
+
+void VariableEngine::SetIntegerValueWithName(const string& variableName, int value)
+{
+	_variableTable[variableName]->SetIntegerValue(value);
+}
+
+void VariableEngine::SetStringValueWithName(const string& variableName, const std::string& value)
+{
+	_variableTable[variableName]->SetStringValue(value);
+}
+
+float VariableEngine::GetFloatValueWithName(const string& variableName) const
+{
+	return _variableTable.at(variableName)->GetFloatValue();
+}
+
+int VariableEngine::GetIntegerValueWithName(const string& variableName) const
+{
+	return _variableTable.at(variableName)->GetIntegerValue();
+}
+
+const std::string& VariableEngine::GetStringValueWithName(const string& variableName) const
+{
+	return _variableTable.at(variableName)->GetStringValue();
 }
