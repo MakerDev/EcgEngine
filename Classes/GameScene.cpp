@@ -69,26 +69,61 @@ bool GameScene::init()
 
 	player_sprite = Sprite::createWithSpriteFrameName("idle");
 	player_sprite->setScale(SCALE_FACTOR);
+	player_sprite->setAnchorPoint(Point(0, 0));
+
 	player_sprite->setFlippedX(true);
 
 	Point point = Point(10, 2);
-	Size size = player_sprite->getContentSize();
 
-	player_sprite->setPosition(_level->positionForTileCoordinate(size, point));
+	//Size size = player_sprite->getContentSize();
+
+	player_sprite->setPosition(_level->tileCoordinateToPosition(point));
 
 	_player = new Player();
 	_player->retain();
 	_player->state = Player::State::Standing;
+	_player->position = player_sprite->getPosition();
+	_player->player_size.width = player_sprite->getBoundingBox().size.width;
+	_player->player_size.height = player_sprite->getBoundingBox().size.height;
+	
+
+	//CAMERA
+	Point origin = Director::getInstance()->getVisibleOrigin();
+	Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
+	Point* center = new Point(wsize.width / 2 + origin.x, wsize.height / 2 + origin.y);
+
+	cameraTarget = Sprite::create();
+	cameraTarget->setPositionX(player_sprite->getPosition().x); // set to players x
+	cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
+
+	cameraTarget->retain();
+
+	//CAMERA
+
 	this->setupAnimations();
-
 	this->addChild(player_sprite);
-	this->schedule(CC_SCHEDULE_SELECTOR(GameScene::updateScene));
+	this->schedule(schedule_selector(GameScene::updateScene));
+	//this->schedule(CC_SCHEDULE_SELECTOR(GameScene::updateScene));
+	
+	this->addChild(cameraTarget);
 
-	auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
-	listener->onKeyReleased = CC_CALLBACK_2(GameScene::onKeyReleased, this);
+	rectWithBorder = DrawNode::create();
+	Vec2 vertices[] =
+	{
+		Vec2(0, player_sprite->getBoundingBox().size.height),
+		Vec2(player_sprite->getBoundingBox().size.width, player_sprite->getBoundingBox().size.height),
+		Vec2(player_sprite->getBoundingBox().size.width, 0),
+		Vec2(0,0)
+	};
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	rectWithBorder->drawPolygon(vertices, 4, Color4F(0.0f, 0.3f, 0.3f, 1), 0, Color4F(0.0f, 0.2f, 0.0f, 1));
+
+	addChild(rectWithBorder);
+
+	camera = Follow::create(cameraTarget, Rect::ZERO);
+	camera->retain();
+
+	this->runAction(camera);
 
 	return true;
 }
@@ -98,6 +133,7 @@ void GameScene::setupAnimations() {
 	AnimationCache* cache = AnimationCache::getInstance();
 	Animation* animation = cache->getAnimation("walk");
 	Animate* animate = Animate::create(animation);
+
 	animate->getAnimation()->setRestoreOriginalFrame(true);
 	animate->setDuration(0.80f);
 	animate->setTarget(player_sprite);
@@ -113,7 +149,7 @@ void GameScene::movePlayerForTest(int x)
 }
 
 void GameScene::updateScene(float delta) {
-
+	cameraTarget->setPositionX(player_sprite->getPosition().x);
 	this->updatePlayer(delta);
 }
 
@@ -137,26 +173,107 @@ void GameScene::updatePlayer(float delta) {
 		}
 		_player->facingRight = false;
 	}
-	// clamp the velocity to the maximum, x-axis only
-	if (std::abs(_player->velocity.x) > PLAYER_MAX_VELOCITY) {
-		_player->velocity.x = signum(_player->velocity.x) * PLAYER_MAX_VELOCITY;
-	}
-	// clamp the velocity to 0 if it's < 1, and set the state to standing
-	if (std::abs(_player->velocity.x) < 1) {
-		_player->velocity.x = 0;
-		if (_player->grounded) {
-			_player->state = Player::State::Standing;
+
+	if (std::find(heldKeys.begin(), heldKeys.end(), UP_ARROW) != heldKeys.end()) {
+		if (_player->grounded && _player->velocity.y <= 0) {
+			_player->velocity.y = PLAYER_JUMP_VELOCITY;
+			_player->state = Player::State::Jumping;
+			_player->grounded = false;
 		}
+
+	}
+	
+	_player->velocity -= Point(0, GRAVITY);
+	stutteringFix = 1;
+
+	Rect player_rect = player_sprite->getTextureRect();
+
+	Point tmp;
+	vector<Rect> tiles;
+	tiles.clear();
+
+	tmp = _level->positionToTileCoordinate(Point(_player->position.x + _player->player_size.width * 0.5f,
+		_player->position.y + _player->player_size.height * 0.5f));
+
+	if (_player->velocity.x > 0) {
+		tiles = _level->getCollisionTilesX(tmp, 1);
+	}
+	else {
+		tiles = _level->getCollisionTilesX(tmp, -1);
+	}
+
+	player_rect.setRect(
+		player_sprite->getBoundingBox().getMinX() + _player->velocity.x,
+		player_sprite->getBoundingBox().getMinY() + 2.0f, // dont let the rectangle touch the ground otherwise, will count as collision
+		_player->player_size.width,
+		_player->player_size.height
+	);
+
+	for (Rect tile : tiles) {
+		if (player_rect.intersectsRect(tile)) {
+			_player->velocity.x = 0;
+			break;
+		}
+	}
+
+	tiles.clear();
+
+	if (_player->velocity.y > 0) {
+		tiles = _level->getCollisionTilesY(tmp, 1);
+	}
+	else {
+		tiles = _level->getCollisionTilesY(tmp, -1);
+	}
+
+	player_rect.setRect(
+		player_sprite->getBoundingBox().getMinX(),
+		player_sprite->getBoundingBox().getMinY(),
+		_player->player_size.width,
+		_player->player_size.height
+	);
+
+
+	for (Rect tile : tiles) {
+		if (tile.intersectsRect(player_rect)) {
+			if (_player->velocity.y > 0) {
+				_player->position.y = tile.getMinY() - _player->player_size.height;
+			}
+			else {
+				_player->position.y = tile.getMaxY();
+				// if we hit the ground, mark us as grounded so we can jump
+				_player->grounded = true;
+				stutteringFix = 0;
+			}
+			_player->velocity.y = 0;
+			break;
+		}
+		_player->grounded = false;
 	}
 
 	// unscale the velocity by the inverse delta time and set
 	// the latest position
-	_player->velocity = _player->velocity * delta;
-	_player->position = _player->position + _player->velocity;
-	_player->velocity = _player->velocity * 1 / delta;
+	/*_player->velocity = _player->velocity * delta;
+	_player->position += _player->velocity;
+	_player->velocity = _player->velocity * 1 / delta;*/
+	_player->position.x = _player->position.x + _player->velocity.x;
+	_player->position.y = _player->position.y + _player->velocity.y;
 
-	_player->velocity.x *= DAMPING;
+	CCLOG("speid %f", _player->velocity.y);
+	
 	this->updatePlayerSprite(delta);
+	//_player->velocity.x *= DAMPING;
+	//_player->velocity.y *= DAMPING;
+	
+
+	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) == heldKeys.end() && _player->grounded) {
+		_player->velocity.x = 0;
+		_player->state = Player::State::Standing;
+	}
+
+	if (std::find(heldKeys.begin(), heldKeys.end(), LEFT_ARROW) == heldKeys.end() && _player->grounded) {
+		_player->velocity.x = 0;
+		_player->state = Player::State::Standing;
+	}
 }
 
 void GameScene::updatePlayerSprite(float delta) {
@@ -178,13 +295,22 @@ void GameScene::updatePlayerSprite(float delta) {
 
 	}
 	else if (_player->state == Player::State::Jumping) {
-
+		player_sprite->setSpriteFrame(Sprite::createWithSpriteFrameName("jump")->getSpriteFrame());
+		if (_player->facingRight) {
+			player_sprite->setFlippedX(true);
+		}
+		else {
+			player_sprite->setFlippedX(false);
+		}
 	}
 	else {
 		player_sprite->setSpriteFrame(Sprite::createWithSpriteFrameName("idle")->getSpriteFrame());
 	}
 
-	player_sprite->setPositionX(player_sprite->getPositionX() + _player->velocity.x);
+	player_sprite->setPositionX(_player->position.x);
+	if (stutteringFix != 0) {
+		player_sprite->setPositionY(_player->position.y);
+	}
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
@@ -192,8 +318,7 @@ void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	if (std::find(heldKeys.begin(), heldKeys.end(), keyCode) == heldKeys.end()) {
 		heldKeys.push_back(keyCode);
 	}
-
-	printf("pressed\n");
+	//printf("pressed\n");
 }
 
 void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
@@ -213,11 +338,29 @@ int GameScene::signum(float x)
 
 void GameScene::menuCloseCallback(Ref* pSender)
 {
-	//Close the cocos2d-x game scene and quit the application
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+	return;
+#endif
+
 	Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#endif
+	//Close the cocos2d-x game scene and quit the application
+	//Director::getInstance()->end();
 
 	/*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
 
 	//EventCustom customEndEvent("game_scene_close_event");
 	//_eventDispatcher->dispatchEvent(&customEndEvent);
+}
+
+GameScene::GameScene(void)
+{
+	setKeyboardEnabled(true);
+	collidesX = false;
+}
+GameScene::~GameScene(void)
+{
 }

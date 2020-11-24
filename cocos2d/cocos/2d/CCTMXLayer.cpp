@@ -348,7 +348,7 @@ Sprite* TMXLayer::reusedTileWithRect(const Rect& rect)
 // TMXLayer - obtaining tiles/gids
 Sprite * TMXLayer::getTileAt(const Vec2& pos)
 {
-    CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
+    //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
     CCASSERT(_tiles && _atlasIndexArray, "TMXLayer: the tiles map has been released");
 
     Sprite *tile = nullptr;
@@ -383,7 +383,7 @@ Sprite * TMXLayer::getTileAt(const Vec2& pos)
 
 uint32_t TMXLayer::getTileGIDAt(const Vec2& pos, TMXTileFlags* flags/* = nullptr*/)
 {
-    CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
+    //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
     CCASSERT(_tiles && _atlasIndexArray, "TMXLayer: the tiles map has been released");
 
     ssize_t idx = static_cast<int>(((int) pos.x + (int) pos.y * _layerSize.width));
@@ -543,7 +543,7 @@ ssize_t TMXLayer::atlasIndexForExistantZ(int z)
     int key=z;
     int *item = (int*)bsearch((void*)&key, (void*)&_atlasIndexArray->arr[0], _atlasIndexArray->num, sizeof(void*), compareInts);
 
-    CCASSERT(item, "TMX atlas index not found. Shall not happen");
+    //CCASSERT(item, "TMX atlas index not found. Shall not happen");
 
     ssize_t index = ((size_t)item - (size_t)_atlasIndexArray->arr) / sizeof(void*);
     return index;
@@ -573,7 +573,7 @@ void TMXLayer::setTileGID(uint32_t gid, const Vec2& pos)
 
 void TMXLayer::setTileGID(uint32_t gid, const Vec2& pos, TMXTileFlags flags)
 {
-    CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
+    //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
     CCASSERT(_tiles && _atlasIndexArray, "TMXLayer: the tiles map has been released");
     CCASSERT(gid == 0 || (int)gid >= _tileSet->_firstGid, "TMXLayer: invalid gid" );
 
@@ -644,7 +644,7 @@ void TMXLayer::removeChild(Node* node, bool cleanup)
 
 void TMXLayer::removeTileAt(const Vec2& pos)
 {
-    CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
+    //CCASSERT(pos.x < _layerSize.width && pos.y < _layerSize.height && pos.x >=0 && pos.y >=0, "TMXLayer: invalid position");
     CCASSERT(_tiles && _atlasIndexArray, "TMXLayer: the tiles map has been released");
 
     int gid = getTileGIDAt(pos);

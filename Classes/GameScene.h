@@ -33,6 +33,7 @@
 #include <string>
 
 using namespace std;
+USING_NS_CC;
 
 class GameScene : public cocos2d::Layer
 {
@@ -40,10 +41,17 @@ public:
     Level* _level;
     Player* _player;
     Sprite* player_sprite;
+    Sprite* cameraTarget;
 
     Animate* walkRight;
     Animate* jumping;
     Animate* falling;
+
+    Follow* camera;
+
+    boolean collidesX;
+    float stutteringFix;
+    DrawNode* rectWithBorder;
 
     vector<EventKeyboard::KeyCode> heldKeys;
 
@@ -51,8 +59,10 @@ public:
     virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;
 
     void updateScene(float interval);
+
     void updatePlayer(float interval);
     void updatePlayerSprite(float interval);
+
     void setupAnimations();
     void movePlayerForTest(int x);  
 
@@ -64,9 +74,10 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
+    GameScene(void);
+    virtual ~GameScene(void);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
