@@ -22,3 +22,8 @@ const Trigger& RuntimeAction::GetTrigger() const noexcept
 {
 	return *_trigger;
 }
+
+Trigger& RuntimeAction::GetTrigger() noexcept
+{
+	return *_trigger;
+}

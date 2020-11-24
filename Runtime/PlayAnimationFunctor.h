@@ -9,9 +9,13 @@ public:
 	void static RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue);
 	virtual void Execute(float delta) override;
 
-	PlayAnimationFunctor(const string& animationName);
+	PlayAnimationFunctor(GameObject* target, const string& animationName);
+	
+private:
+	void SetToIdle(bool result);
 
 private:
+	GameObject* _target;
 	VisualComponent* _visualComponent;
 	string _animationName;
 };

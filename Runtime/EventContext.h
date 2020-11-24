@@ -2,8 +2,8 @@
 #include <vector>
 
 #include "cocos2d.h"
-#include "TriggerTypes.h"
-#include "KeyEventTypes.h"
+#include "TriggerType.h"
+#include "KeyEventType.h"
 
 //This class is aggregator of all posible event context infomation
 class EventContext
