@@ -15,8 +15,10 @@ public:
 	void Execute(float delta);
 	void PushFunctor(unique_ptr<ActionFunctor> functor);
 	const Trigger& GetTrigger() const noexcept;
+	Trigger& GetTrigger() noexcept;
 
 private:
+	//TODO : Conditional execution needs to be added
 	unique_ptr<Trigger> _trigger;
 	std::vector<unique_ptr<ActionFunctor>> _functors;
 };

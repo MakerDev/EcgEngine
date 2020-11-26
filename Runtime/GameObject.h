@@ -5,6 +5,7 @@
 #include "cocos2d.h"
 #include "RuntimeAction.h"
 #include "VisualComponent.h"
+#include "VariableEngine.h"
 
 using namespace std;
 using namespace cocos2d;
@@ -20,16 +21,22 @@ public:
 	VisualComponent* GetVisual();
 	VisualComponent* GetVisualConst() const;
 	Sprite* GetSprite() const;
+	VariableEngine* GetLocalVariableEngine();
+
+	GameObject();
 
 public:
 	Point position;
 	Size size;
 
 private:
+
 	//TODO : this is temporal
 	void addActionFromJsonValue(const rapidjson::Value& value);
 
 private:
+	unique_ptr< VariableEngine> _localVariableEngine;
+
 	//TODO: 적절한 key를 선택하고 map으로 구조를 바꿔효율 높이기
 	//TODO : change to smart pointers
 	unique_ptr<VisualComponent> _visualComponent;

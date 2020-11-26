@@ -168,6 +168,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="ActionArgument.cpp" />
     <ClCompile Include="ActionFunctor.cpp" />
     <ClCompile Include="DefaultLayer.cpp" />
+    <ClCompile Include="EcgVariable.cpp" />
+    <ClCompile Include="EngineManager.cpp" />
     <ClCompile Include="EventContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -184,18 +186,23 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="RuntimeJumpBy.cpp" />
     <ClCompile Include="RuntimeJumpByFunctor.cpp" />
     <ClCompile Include="SetSpriteFrameFunctor.cpp" />
+    <ClCompile Include="SetVariableValueFunctor.cpp" />
     <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="VariableEngine.cpp" />
+    <ClCompile Include="VariableEventTrigger.cpp" />
     <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="ActionFunctor.h" />
+    <ClInclude Include="EcgVariable.h" />
+    <ClInclude Include="EngineManager.h" />
     <ClInclude Include="MoveXFunctor.h" />
     <ClInclude Include="PlayAnimationFunctor.h" />
     <ClInclude Include="RuntimeActionCatalog.h" />
     <ClInclude Include="EventContext.h" />
     <ClInclude Include="KeyEventTrigger.h" />
-    <ClInclude Include="KeyEventTypes.h" />
+    <ClInclude Include="KeyEventType.h" />
     <ClInclude Include="RuntimeAction.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="DefaultLayer.h" />
@@ -211,8 +218,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="RuntimeJumpBy.h" />
     <ClInclude Include="RuntimeJumpByFunctor.h" />
     <ClInclude Include="SetSpriteFrameFunctor.h" />
+    <ClInclude Include="SetVariableValueFunctor.h" />
     <ClInclude Include="Trigger.h" />
-    <ClInclude Include="TriggerTypes.h" />
+    <ClInclude Include="TriggerType.h" />
+    <ClInclude Include="VariableEngine.h" />
+    <ClInclude Include="VariableEventTrigger.h" />
+    <ClInclude Include="VariableEventType.h" />
     <ClInclude Include="VisualComponent.h" />
   </ItemGroup>
   <ItemGroup>

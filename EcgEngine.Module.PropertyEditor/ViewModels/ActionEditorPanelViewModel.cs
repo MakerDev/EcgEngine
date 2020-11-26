@@ -1,4 +1,5 @@
-﻿using EcgEngine.Models.VisualScript;
+﻿using EcgEngine.Core.Dialogs;
+using EcgEngine.Models.VisualScript;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -38,12 +39,21 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             set
             {
                 SetProperty(ref _selectedTriggerItemIndex, value);
+                RaisePropertyChanged(nameof(CanDeleteAction));
+            }
+        }
+        public bool CanDeleteAction
+        {
+            get
+            {
+                return SelectedActionItemIndex >= 0;
             }
         }
 
         public DelegateCommand ItemSelectedCommand { get; set; }
         public DelegateCommand AddNewActionCommand { get; set; }
         public DelegateCommand EditActionCommand { get; set; }
+        public DelegateCommand DeleteCommand { get; set; }
 
         public ActionEditorPanelViewModel(IContainerExtension containerExtension, IDialogService dialogService)
         {
@@ -52,6 +62,24 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
             AddNewActionCommand = new DelegateCommand(AddNewAction);
             EditActionCommand = new DelegateCommand(EditAction);
+            DeleteCommand = new DelegateCommand(DeleteScript).ObservesCanExecute(() => CanDeleteAction);
+        }
+
+        private void DeleteScript()
+        {
+            var dialogParams = new DialogParameters();
+            dialogParams.Add("Message", "Are you sure to delete this?");
+            _dialogService.ShowDialog(DialogNames.CONFIRMATION_DIALOG, dialogParams, (result) =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    var scriptToDeleteIndex = SelectedActionItemIndex;
+                    SelectedActionItemIndex = -1;
+
+                    ScriptComponent.Actions.RemoveAt(scriptToDeleteIndex);
+                    RefreshActionItems();
+                }
+            });
         }
 
         private void EditAction()
@@ -74,18 +102,16 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         public void AddNewAction()
         {
             Models.VisualScript.Action action = null;
-            //Select new object from selector
 
             _dialogService.ShowDialog("ActionSelectorDialog", null, result =>
             {
                 if (result.Result == ButtonResult.OK)
                 {
                     action = result.Parameters.GetValue<Models.VisualScript.Action>("Action");
+                    ScriptComponent.Actions.Add(action);
+                    RefreshActionItems();
                 }
             });
-
-            ScriptComponent.Actions.Add(action);
-            RefreshActionItems();
         }
 
 

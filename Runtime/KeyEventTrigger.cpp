@@ -15,17 +15,38 @@ KeyEventTrigger::KeyEventTrigger(KeyEventType keyEventType, EventKeyboard::KeyCo
 {
 }
 
-bool KeyEventTrigger::IsMatched(const EventContext& context) const noexcept
+bool KeyEventTrigger::IsMatched(const EventContext& context)
 {
-	if (context.TriggerType != TriggerType::KeyboardEvent)
+	if (context.TriggerType != TriggerType::KeyboardEvent || context.KeyCode != _keyCode)
 	{
 		return false;
 	}
 
-	if (context.KeyCode == this->_keyCode && context.KeyEventType == this->_type)
+	bool result = false;
+
+	if (_type == KeyEventType::Down)
 	{
-		return true;
+		if (context.KeyEventType == KeyEventType::Down)
+		{			
+			result = true;
+		}
+		else if (context.KeyEventType != KeyEventType::Released)
+		{
+			result = false;
+		}
 	}
 
-	return false;
+	SetLastMatchResult(result);
+
+	return result;
+}
+
+KeyEventType KeyEventTrigger::GetKeyEventType() const
+{
+	return _type;
+}
+
+TriggerType KeyEventTrigger::GetType() const
+{
+	return TriggerType::KeyboardEvent;
 }
