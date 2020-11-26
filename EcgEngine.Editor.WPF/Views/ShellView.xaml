@@ -10,38 +10,89 @@
             d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"            
             prism:ViewModelLocator.AutoWireViewModel="True"
             Width="1200" Height="815">
+
     <DockPanel 
         LastChildFill="True"
         Height="780">
 
-        <StackPanel 
-                x:Name="_menubar" DockPanel.Dock="Top"
-                Orientation="Horizontal" Height="30">
-            <Button 
-                Content="Save" Command="{Binding SaveCommand}" />
-            <Button 
-                Margin="10 0 0 0"
-                Content="Load" Command="{Binding LoadCommand}" />
-            <Button 
-                Content="Edit Scene" Margin="10 0"/>
-            <Button 
-                Content="Edit GameObjects " />
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File(F)">
+                <MenuItem Header="Load"
+                          Command="{Binding LoadCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save"
+                          Command="{Binding SaveCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Edit(E)">
+                <MenuItem Header="Scene">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\scene.png" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="New Scene">
+                        
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Game Object">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="New Game Object">
+                        
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_View(V)">
+                <MenuItem Header="Scene Priview">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel x:Name="_menubar"
+                    DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Height="25"
+                    Background="GhostWhite">
+            <Button Style="{StaticResource BtnMenubar}"
+                        Command="{Binding SaveCommand}"
+                        ToolTip="Save">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
+            </Button>
+            <Button Style="{StaticResource BtnMenubar}"
+                        Command="{Binding LoadCommand}"
+                        ToolTip="Load">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
+            </Button>
+            <Button Style="{StaticResource BtnMenubar}"
+                        ToolTip="Scene Preview">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
+            </Button>
+            <Button Style="{StaticResource BtnMenubar}"
+                        Command="{Binding PlayCommand}"
+                        ToolTip="Play">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
+            </Button>
         </StackPanel>
 
         <StackPanel 
                 x:Name="_testingPanel" Orientation="Horizontal"
                 DockPanel.Dock="Bottom"
                 Height="50" Width="1200">
-            <Button 
-                Command="{Binding PlayCommand}"
-                Width="150" Height="50" Content="Play" />
         </StackPanel>
 
-        <DockPanel            
+        <DockPanel 
             x:Name="_gameObjectListPanel"
             Width="200"
-            LastChildFill="False"
-            >
+            LastChildFill="False">
             <ContentControl 
                 prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.GAMEOBJECT_LIST_REGION}"

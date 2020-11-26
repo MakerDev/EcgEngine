@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>AnyCPU;x86</Platforms>
@@ -21,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include ="Styles\" />
   </ItemGroup>
 
 </Project>
