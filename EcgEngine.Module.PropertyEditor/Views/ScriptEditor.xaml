@@ -11,17 +11,35 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ScriptEditorViewModel}"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Width="700">
+             Width="500">
     <StackPanel Orientation="Horizontal">
-        <DockPanel
-            LastChildFill="False"
-            >
-            <ListBox
-                DockPanel.Dock="Top"
-                x:Name="_triggerList"
-                Width="300"
-                SelectedIndex="{Binding SelectedTriggerItemIndex}"
-                ItemsSource="{Binding TriggerItemViewModels}">
+        <DockPanel LastChildFill="False">
+
+            <ToolBarTray DockPanel.Dock="Top"
+                     VerticalAlignment="Top"
+                     Orientation="Horizontal">
+                <ToolBar>
+                    <Button Style="{StaticResource BtnToolbar}"
+                        Command="{Binding CreateNewScriptCommand}"
+                        ToolTip="Create new trigger">
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\add_trigger.png"
+                           Style="{StaticResource Icon16px}" />
+                    </Button>
+                    <Button Style="{StaticResource BtnToolbar}"
+                        Command="{Binding DeleteScriptCommand}"
+                        ToolTip="Delete trigger">
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
+                           Style="{StaticResource Icon16px}" />
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+            <ListBox DockPanel.Dock="Top"
+                     x:Name="_triggerList"
+                     Width="250"
+                     Background="Black"
+                     SelectedIndex="{Binding SelectedTriggerItemIndex}"
+                     ItemsSource="{Binding TriggerItemViewModels}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <prism:InvokeCommandAction 
@@ -34,23 +52,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-            <StackPanel>
-                <Button 
-                    DockPanel.Dock="Bottom"
-                    Width="300" Height="35"
-                    Command="{Binding CreateNewScriptCommand}"
-                    Content="Create new trigger" />
-                <Button 
-                    DockPanel.Dock="Bottom"
-                    Width="300" Height="35"
-                    Command="{Binding DeleteScriptCommand}"
-                    Content="Delete" />
-            </StackPanel>
         </DockPanel>
 
         <ContentControl 
-            Width="400"
+            Width="250"
             prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
             prism:RegionManager.RegionName="{x:Static core:RegionNames.ACTION_LIST_REGION}" />
     </StackPanel>

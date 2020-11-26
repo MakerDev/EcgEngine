@@ -10,15 +10,33 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionEditorPanelViewModel}"             
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <DockPanel
-            LastChildFill="False"
-            >
-        <ListBox
-                DockPanel.Dock="Top"
-                x:Name="_actionList"
-                Width="300"
-                SelectedIndex="{Binding SelectedActionItemIndex}"
-                ItemsSource="{Binding ActionItemViewModels}">
+    <DockPanel LastChildFill="False">
+
+        <ToolBarTray DockPanel.Dock="Top"
+                     VerticalAlignment="Top"
+                     Orientation="Horizontal">
+            <ToolBar>
+                <Button Style="{StaticResource BtnToolbar}"
+                        Command="{Binding AddNewActionCommand}"
+                        ToolTip="Add new action">
+                    <Image Source="C:\Dev\EcgEngine\Resources\icons\add_action.png"
+                           Style="{StaticResource Icon16px}" />
+                </Button>
+                <Button Style="{StaticResource BtnToolbar}"
+                        Command="{Binding DeleteCommand}"
+                        ToolTip="Delete action">
+                    <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
+                           Style="{StaticResource Icon16px}" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <ListBox DockPanel.Dock="Top"
+                 x:Name="_actionList"
+                 Width="250"
+                 Background="Black"
+                 SelectedIndex="{Binding SelectedActionItemIndex}"
+                 ItemsSource="{Binding ActionItemViewModels}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction 
@@ -32,18 +50,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
-        <StackPanel 
-            DockPanel.Dock="Bottom"
-            >
-            <Button 
-                Width="300" Height="35"
-                Command="{Binding AddNewActionCommand}"
-                Content="Add new action" />
-            <Button 
-                Width="300" Height="35"
-                Command="{Binding DeleteCommand}"
-                Content="Delete" />
-        </StackPanel>
     </DockPanel>
 </UserControl>
