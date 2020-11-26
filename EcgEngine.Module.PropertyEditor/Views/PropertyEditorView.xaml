@@ -11,53 +11,107 @@
              mc:Ignorable="d"
              d:Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <DockPanel 
-        Height="600"
-        Width="1000">
-        <StackPanel 
-            x:Name="_information"
-            DockPanel.Dock="Left"
-            Width="300">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock 
-                    Width="100" Height="35"     
-                    FontSize="28"
-                    Text="이름 :" />
-                <TextBox Width="200" Height="35"
-                         Text="{Binding Name, 
-                                UpdateSourceTrigger=PropertyChanged}"                         
-                         />
-            </StackPanel>
+    <DockPanel Height="600"
+               Width="910">
+        
+        <StackPanel x:Name="_information"
+                    DockPanel.Dock="Left"
+                    Width="250">
+            
+            <Grid DockPanel.Dock="Left"
+                  Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel HorizontalAlignment="Center">
-                <TextBlock 
-                    HorizontalAlignment="Center"                    
-                    FontSize="25"
-                    Text="Scale factor: " Height="30" />
-                <TextBox Text="{Binding GameObject.ScaleFactor,
-                    Converter={StaticResource StringToFloatConverter}}" 
-                         Width="150" Height="35"
-                         />
-            </StackPanel>
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="Object name"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0" />
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                         Width="140"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         HorizontalContentAlignment="Center" />
 
-            <StackPanel HorizontalAlignment="Center">
-                <TextBlock 
-                    HorizontalAlignment="Center"
-                    Text="Position"  FontSize="25"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox 
-                        Text="{Binding PosX,
-                            Converter={StaticResource IntegerToStringConverter}}"
-                        Width="100" Height="30" Margin="0 0 10 0" />
-                    <TextBox 
-                        Text="{Binding PosY,
-                            Converter={StaticResource IntegerToStringConverter}}"
-                        Width="100" Height="30" />
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Scale factor"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0" />
+                <StackPanel Grid.Row="1" Grid.Column="1"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 2 0 2">
+                    <TextBox x:Name="gameobjScaleFactor"
+                             Text="{Binding GameObject.ScaleFactor,
+                                Converter={StaticResource StringToFloatConverter}}"
+                             Width="50"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Margin="30 0 30 5" />
+                    <Slider Width="140"
+                            Minimum="1" Maximum="10"
+                            SmallChange="0.1" LargeChange="1"
+                            TickPlacement="BottomRight" TickFrequency="0.5"
+                            Value="{Binding ElementName=gameobjScaleFactor, Path=Text}" />
                 </StackPanel>
-            </StackPanel>
+
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Text="Position"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0" />
+                <StackPanel Grid.Row="2" Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="X: "
+                               VerticalAlignment="Center" />
+                    <TextBox Text="{Binding PosX,
+                                Converter={StaticResource IntegerToStringConverter}}"
+                             Width="35"
+                             VerticalAlignment="Center"
+                             HorizontalContentAlignment="Center" />
+                    <TextBlock Text=" , Y: "
+                               VerticalAlignment="Center" />
+                    <TextBox Text="{Binding PosY,
+                                Converter={StaticResource IntegerToStringConverter}}"
+                             Width="35"
+                             VerticalAlignment="Center"
+                             HorizontalContentAlignment="Center" />
+                </StackPanel>
+
+                <TextBlock Grid.Row="3" Grid.Column="0"
+                           Text="Gravity"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Margin="0 0 10 0" />
+                <StackPanel Grid.Row="3" Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="5">
+                    <RadioButton Content="On"
+                                 IsChecked="True"
+                                 Margin="0 0 30 0" />
+                    <RadioButton Content="Off" />
+                </StackPanel>
+            </Grid>
         </StackPanel>
+        
         <ContentControl 
-            Width="700"
+            Width="650"
             DockPanel.Dock="Right"
             prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.SCRIPT_EDITOR_REGION}" />

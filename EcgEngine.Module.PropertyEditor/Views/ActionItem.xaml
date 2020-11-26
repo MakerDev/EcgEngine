@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionItemViewModel}"     
              mc:Ignorable="d"       
-             d:Width="400" Height="35"
+             d:Width="250" Height="30"
              >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="PreviewMouseDoubleClick">
@@ -16,10 +16,11 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <StackPanel 
-        Width="400">
+        Width="250">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Action}" 
-                       FontSize="12" Width="400" />
+            <TextBlock Text="{Binding Action}"
+                       Width="250"
+                       Style="{StaticResource ActionlistTxt}" />
         </StackPanel>
         
     </StackPanel>

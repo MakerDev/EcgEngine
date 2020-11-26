@@ -6,6 +6,13 @@
              xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/BtnStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/IconStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/LstboxStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TxtblockStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converter:StringToFloatConverter x:Key="StringToFloatConverter" />
             <converter:IntegerToStringConverter x:Key="IntegerToStringConverter" />

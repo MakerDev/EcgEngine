@@ -8,53 +8,49 @@
              xmlns:core="clr-namespace:EcgEngine.Core;assembly=EcgEngine.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionSelectorDialogViewModel}"             
              mc:Ignorable="d"
-             Width="800" Height="450"
+             Width="415" Height="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel Orientation="Horizontal">
-        <ListBox>
+        <ListBox Background="WhiteSmoke">
             <ListBoxItem>
-                <Button Content="MoveX" 
-                        Width="150" Height="30"
+                <Button Content="MoveX"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="MoveXEditor"
-                        />
+                        Style="{StaticResource BtnActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
-                <Button Content="JumpBy" 
-                        Width="150" Height="30"
+                <Button Content="JumpBy"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="JumpByEditor"
-                        />
+                        Style="{StaticResource BtnActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
-                <Button Content="PlayAnimation" 
-                        Width="150" Height="30"
+                <Button Content="PlayAnimation"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="PlayAnimationEditor"
-                        />
+                        Style="{StaticResource BtnActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
-                <Button Content="SetSpriteFrame" 
-                        Width="150" Height="30"
+                <Button Content="SetSpriteFrame"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="SetSpriteFrameEditor"
-                        />
+                        Style="{StaticResource BtnActionSelect}" />
             </ListBoxItem>
         </ListBox>
-        
-        <StackPanel
-            Width="450"
-            HorizontalAlignment="Center">
-            <ContentControl 
-                Height="350"
-                prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
-                prism:RegionManager.RegionName
-                    ="{x:Static core:RegionNames.ACTION_SELECTOR_EDITOR_REGION}"/>
 
-            <Button 
-                Margin="0 20 0 0"
-                Content="Ok" 
-                Command="{Binding CloseDialogCommand}" Width="120" Height="30" />
+        <StackPanel Width="280"
+                    HorizontalAlignment="Center">
+            <ContentControl Height="250"
+                            prism:RegionManager.RegionManager
+                                ="{Binding ScopedRegionManager}"
+                            prism:RegionManager.RegionName
+                                ="{x:Static core:RegionNames.ACTION_SELECTOR_EDITOR_REGION}"/>
+
+            <Button Margin="5 10 0 0"
+                    Content="Apply"
+                    Command="{Binding CloseDialogCommand}"
+                    Width="80" Height="25"
+                    Style="{StaticResource BtnDefault}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
