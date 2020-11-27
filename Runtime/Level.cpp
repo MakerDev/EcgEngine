@@ -12,13 +12,132 @@ TMXTiledMap* Level::getMap() {
 	return _map;
 }
 
-Point Level::positionForTileCoordinate(Size s, Point point)
-{
-	float x = floor(s.width / 2 * SCALE_FACTOR + point.x * _map->getTileSize().width * SCALE_FACTOR);
-	float y = floor(s.height / 2 * SCALE_FACTOR + point.y * _map->getTileSize().height * SCALE_FACTOR);
+Point Level::tileCoordinateToPosition(Point point) {
+
+	float x = floor(point.x * _map->getTileSize().width * SCALE_FACTOR);
+	float y = floor(point.y * _map->getTileSize().height * SCALE_FACTOR);
 
 	return Point(x, y);
+
 }
+
+//Point Level::positionForTileCoordinate(Size s, Point point)
+//{
+//	float x = floor(s.width / 2 * SCALE_FACTOR + point.x * _map->getTileSize().width * SCALE_FACTOR);
+//	float y = floor(s.height / 2 * SCALE_FACTOR + point.y * _map->getTileSize().height * SCALE_FACTOR);
+//
+//	return Point((int)x, (int)y);
+//}
+
+Point Level::positionToTileCoordinate(Point point) {
+
+	float x = floor(point.x / (_map->getTileSize().width * SCALE_FACTOR));
+	float y = floor(point.y / (_map->getTileSize().height * SCALE_FACTOR));
+
+	return Point((int)x, (int)y);
+}
+
+vector<Rect> Level::getCollisionTilesX(Point point, int direction) {
+
+	vector<Rect> list;
+
+	TMXLayer* walls = _map->getLayer("walls");
+
+	int mapheight = (int)_map->getMapSize().height - 1;
+
+	for (int b = -1; b < 2; b++) {
+
+		Sprite* tile = walls->getTileAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
+
+		if (tile != NULL) {
+
+			Rect tileRect = Rect();
+
+			Point tmp = walls->positionAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
+			tileRect.setRect(tmp.x * SCALE_FACTOR, tmp.y * SCALE_FACTOR, _map->getTileSize().width * SCALE_FACTOR, _map->getTileSize().height * SCALE_FACTOR);
+
+			list.push_back(tileRect);
+		}
+
+	}
+
+	return list;
+}
+
+vector<Rect> Level::getCollisionTilesY(Point point, int direction) {
+
+	vector<Rect> list;
+
+	TMXLayer* walls = _map->getLayer("walls");
+
+	int mapheight = (int)_map->getMapSize().height - 1;
+
+	for (int b = -1; b < 2; b++) {
+
+		Sprite* tile = walls->getTileAt(Point((int)point.x + b, mapheight - ((int)point.y + direction)));
+
+		if (tile != NULL) {
+
+			Rect tileRect = Rect();
+
+			Point tmp = walls->positionAt(Point((int)point.x + b, mapheight - ((int)point.y + direction)));
+			tileRect.setRect(tmp.x * SCALE_FACTOR, tmp.y * SCALE_FACTOR, _map->getTileSize().width * SCALE_FACTOR, _map->getTileSize().height * SCALE_FACTOR);
+
+			list.push_back(tileRect);
+		}
+
+	}
+
+	return list;
+
+}
+
+//vector<Rect> Level::getCollisionTiles(Point point, int fromX, int fromY) {
+//
+//	vector<Rect> list;
+//	TMXLayer* walls = _map->getLayer("walls");
+//	int mapheight = (int)_map->getMapSize().height - 1;
+//
+//	for (int a = fromX; a < 2; a++) {
+//
+//		for (int b = fromY; b < 2; b++) {
+//
+//			if (!(a == 10 && b == 10)) {
+//
+//				Sprite* tile = walls->getTileAt(Point((int)point.x + a, mapheight - ((int)point.y + b)));
+//
+//				if (tile != NULL) {
+//
+//					//CCLOG("%d %d",(int)point.x + a, mapheight - ((int)point.y + b));
+//					DrawNode* rectWithBorder = DrawNode::create();
+//
+//					Vec2 vertices[] =
+//					{
+//						Vec2(0, _map->getTileSize().height * SCALE_FACTOR),
+//						Vec2(_map->getTileSize().width * SCALE_FACTOR, _map->getTileSize().height * SCALE_FACTOR),
+//						Vec2(_map->getTileSize().width * SCALE_FACTOR, 0),
+//						Vec2(0,0)
+//					};
+//
+//					Point tmp = walls->positionAt(Point((int)point.x + a, mapheight - ((int)point.y + b)));
+//					rectWithBorder->setPosition(tmp.x * SCALE_FACTOR, tmp.y * SCALE_FACTOR);
+//
+//					Rect tileRect = rectWithBorder->getBoundingBox();
+//
+//					tileRect.setRect(rectWithBorder->getBoundingBox().getMinX(),
+//						rectWithBorder->getBoundingBox().getMinY(),
+//						_map->getTileSize().width * SCALE_FACTOR,
+//						_map->getTileSize().height * SCALE_FACTOR);
+//
+//					list.push_back(tileRect);
+//				}
+//			}
+//		}
+//	}
+//
+//	return list;
+//
+//}
 
 Level::Level(void)
 {

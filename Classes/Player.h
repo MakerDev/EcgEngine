@@ -16,6 +16,8 @@ public:
 	bool grounded;
 	float stateTime;
 
+	Size player_size;
+
 	Point position;
 	Point velocity;
 

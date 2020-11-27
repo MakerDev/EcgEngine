@@ -48,7 +48,7 @@ void DefaultLayer::SetInitialPositions()
 
 			//TODO Choose whether to use World Position or just to use TileCoordination Position.
 			gameobject.sprite->setPosition(
-				_level->positionForTileCoordinate(gameobject.size, gameobject.position));
+				_level->positionToTileCoordinate(gameobject.position));
 		}
 	}
 }
