@@ -1,10 +1,10 @@
 #pragma once
-
-#include "cocos2d.h"
 #include <vector>
+#include "cocos2d.h"
 
-using namespace cocos2d;
 using namespace std;
+using namespace cocos2d;
+
 
 class Level : public Node
 {

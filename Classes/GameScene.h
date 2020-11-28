@@ -38,8 +38,8 @@ USING_NS_CC;
 class GameScene : public cocos2d::Layer
 {
 public:
-    Level* _level;
-    Player* _player;
+    Level* level;
+    Player* player;
     Sprite* player_sprite;
     Sprite* cameraTarget;
 
@@ -74,6 +74,7 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
+    Action* _jumpAction;
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
     GameScene(void);

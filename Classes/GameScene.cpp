@@ -27,6 +27,8 @@
 
 USING_NS_CC;
 
+#define CAMERA_SPRITE_OFFSET_X 100
+
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
@@ -55,14 +57,14 @@ bool GameScene::init()
 		return false;
 	}
 
-	_level = new Level();
-	_level->loadMap("level1.tmx");
-	_level->retain();
+	level = new Level();
+	level->loadMap("level1.tmx");
+	level->retain();
 
 	auto director = Director::getInstance();
-	_level->getMap()->setScale(SCALE_FACTOR);
+	level->getMap()->setScale(SCALE_FACTOR);
 
-	this->addChild(_level->getMap());
+	this->addChild(level->getMap());
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
 	AnimationCache::getInstance()->addAnimationsWithFile("solbrain-animations.plist");
@@ -77,17 +79,15 @@ bool GameScene::init()
 
 	//Size size = player_sprite->getContentSize();
 
-	player_sprite->setPosition(_level->tileCoordinateToPosition(point));
+	player_sprite->setPosition(level->tileCoordinateToPosition(point));
 
-	_player = new Player();
-	_player->retain();
-	_player->state = Player::State::Standing;
-	_player->position = player_sprite->getPosition();
-	_player->player_size.width = player_sprite->getBoundingBox().size.width;
-	_player->player_size.height = player_sprite->getBoundingBox().size.height;
+	player = new Player();
+	player->retain();
+	player->state = Player::State::Standing;
+	player->position = player_sprite->getPosition();
+	player->player_size.width = player_sprite->getBoundingBox().size.width;
+	player->player_size.height = player_sprite->getBoundingBox().size.height;
 	
-
-	//CAMERA
 	Point origin = Director::getInstance()->getVisibleOrigin();
 	Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
 	Point* center = new Point(wsize.width / 2 + origin.x, wsize.height / 2 + origin.y);
@@ -98,12 +98,9 @@ bool GameScene::init()
 
 	cameraTarget->retain();
 
-	//CAMERA
-
 	this->setupAnimations();
 	this->addChild(player_sprite);
 	this->schedule(schedule_selector(GameScene::updateScene));
-	//this->schedule(CC_SCHEDULE_SELECTOR(GameScene::updateScene));
 	
 	this->addChild(cameraTarget);
 
@@ -144,12 +141,12 @@ void GameScene::setupAnimations() {
 
 void GameScene::movePlayerForTest(int x)
 {
-	_player->setPositionX(_player->getPositionX() + x);
+	player->setPositionX(player->getPositionX() + x);
 	player_sprite->setPositionX(player_sprite->getPositionX() + x);
 }
 
 void GameScene::updateScene(float delta) {
-	cameraTarget->setPositionX(player_sprite->getPosition().x);
+	cameraTarget->setPositionX(player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X);
 	this->updatePlayer(delta);
 }
 
@@ -157,33 +154,33 @@ void GameScene::updatePlayer(float delta) {
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) != heldKeys.end()) {
 
-		_player->velocity.x = PLAYER_MAX_VELOCITY;
+		player->velocity.x = PLAYER_MAX_VELOCITY;
 
-		if (_player->grounded) {
-			_player->state = Player::State::Walking;
+		if (player->grounded) {
+			player->state = Player::State::Walking;
 		}
 
-		_player->facingRight = true;
+		player->facingRight = true;
 	}
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), LEFT_ARROW) != heldKeys.end()) {
-		_player->velocity.x = -PLAYER_MAX_VELOCITY;
-		if (_player->grounded) {
-			_player->state = Player::State::Walking;
+		player->velocity.x = -PLAYER_MAX_VELOCITY;
+		if (player->grounded) {
+			player->state = Player::State::Walking;
 		}
-		_player->facingRight = false;
+		player->facingRight = false;
 	}
 
 	if (std::find(heldKeys.begin(), heldKeys.end(), UP_ARROW) != heldKeys.end()) {
-		if (_player->grounded && _player->velocity.y <= 0) {
-			_player->velocity.y = PLAYER_JUMP_VELOCITY;
-			_player->state = Player::State::Jumping;
-			_player->grounded = false;
+		if (player->grounded && player->velocity.y <= 0) {
+			player->velocity.y = PLAYER_JUMP_VELOCITY;
+			player->state = Player::State::Jumping;
+			player->grounded = false;
 		}
 
 	}
 	
-	_player->velocity -= Point(0, GRAVITY);
+	player->velocity -= Point(0, GRAVITY);
 	stutteringFix = 1;
 
 	Rect player_rect = player_sprite->getTextureRect();
@@ -192,93 +189,86 @@ void GameScene::updatePlayer(float delta) {
 	vector<Rect> tiles;
 	tiles.clear();
 
-	tmp = _level->positionToTileCoordinate(Point(_player->position.x + _player->player_size.width * 0.5f,
-		_player->position.y + _player->player_size.height * 0.5f));
+	tmp = level->positionToTileCoordinate(Point(player->position.x + player->player_size.width * 0.5f,
+		player->position.y + player->player_size.height * 0.5f));
 
-	if (_player->velocity.x > 0) {
-		tiles = _level->getCollisionTilesX(tmp, 1);
+	if (player->velocity.x > 0) {
+		tiles = level->getCollisionTilesX(tmp, 1);
 	}
 	else {
-		tiles = _level->getCollisionTilesX(tmp, -1);
+		tiles = level->getCollisionTilesX(tmp, -1);
 	}
 
 	player_rect.setRect(
-		player_sprite->getBoundingBox().getMinX() + _player->velocity.x,
+		player_sprite->getBoundingBox().getMinX() + player->velocity.x,
 		player_sprite->getBoundingBox().getMinY() + 2.0f, // dont let the rectangle touch the ground otherwise, will count as collision
-		_player->player_size.width,
-		_player->player_size.height
+		player->player_size.width,
+		player->player_size.height
 	);
 
 	for (Rect tile : tiles) {
 		if (player_rect.intersectsRect(tile)) {
-			_player->velocity.x = 0;
+			player->velocity.x = 0;
 			break;
 		}
 	}
 
 	tiles.clear();
 
-	if (_player->velocity.y > 0) {
-		tiles = _level->getCollisionTilesY(tmp, 1);
+	if (player->velocity.y > 0) {
+		tiles = level->getCollisionTilesY(tmp, 1);
 	}
 	else {
-		tiles = _level->getCollisionTilesY(tmp, -1);
+		tiles = level->getCollisionTilesY(tmp, -1);
 	}
 
 	player_rect.setRect(
 		player_sprite->getBoundingBox().getMinX(),
 		player_sprite->getBoundingBox().getMinY(),
-		_player->player_size.width,
-		_player->player_size.height
+		player->player_size.width,
+		player->player_size.height
 	);
 
 
 	for (Rect tile : tiles) {
 		if (tile.intersectsRect(player_rect)) {
-			if (_player->velocity.y > 0) {
-				_player->position.y = tile.getMinY() - _player->player_size.height;
+			if (player->velocity.y > 0) {
+				player->position.y = tile.getMinY() - player->player_size.height;
 			}
 			else {
-				_player->position.y = tile.getMaxY();
+				player->position.y = tile.getMaxY();
 				// if we hit the ground, mark us as grounded so we can jump
-				_player->grounded = true;
+				player->grounded = true;
 				stutteringFix = 0;
 			}
-			_player->velocity.y = 0;
+			player->velocity.y = 0;
 			break;
 		}
-		_player->grounded = false;
+		player->grounded = false;
 	}
 
 	// unscale the velocity by the inverse delta time and set
 	// the latest position
-	/*_player->velocity = _player->velocity * delta;
-	_player->position += _player->velocity;
-	_player->velocity = _player->velocity * 1 / delta;*/
-	_player->position.x = _player->position.x + _player->velocity.x;
-	_player->position.y = _player->position.y + _player->velocity.y;
-
-	CCLOG("speid %f", _player->velocity.y);
+	player->position.x = player->position.x + player->velocity.x;
+	player->position.y = player->position.y + player->velocity.y;
 	
 	this->updatePlayerSprite(delta);
-	//_player->velocity.x *= DAMPING;
-	//_player->velocity.y *= DAMPING;
 	
 
-	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) == heldKeys.end() && _player->grounded) {
-		_player->velocity.x = 0;
-		_player->state = Player::State::Standing;
+	if (std::find(heldKeys.begin(), heldKeys.end(), RIGHT_ARROW) == heldKeys.end() && player->grounded) {
+		player->velocity.x = 0;
+		player->state = Player::State::Standing;
 	}
 
-	if (std::find(heldKeys.begin(), heldKeys.end(), LEFT_ARROW) == heldKeys.end() && _player->grounded) {
-		_player->velocity.x = 0;
-		_player->state = Player::State::Standing;
+	if (std::find(heldKeys.begin(), heldKeys.end(), LEFT_ARROW) == heldKeys.end() && player->grounded) {
+		player->velocity.x = 0;
+		player->state = Player::State::Standing;
 	}
 }
 
 void GameScene::updatePlayerSprite(float delta) {
 
-	if (_player->state == Player::State::Walking) {
+	if (player->state == Player::State::Walking) {
 
 		if (walkRight->isDone()) {
 			walkRight->startWithTarget(player_sprite);
@@ -286,7 +276,7 @@ void GameScene::updatePlayerSprite(float delta) {
 
 		walkRight->step(delta);
 
-		if (_player->facingRight) {
+		if (player->facingRight) {
 			player_sprite->setFlippedX(true);
 		}
 		else {
@@ -294,9 +284,9 @@ void GameScene::updatePlayerSprite(float delta) {
 		}
 
 	}
-	else if (_player->state == Player::State::Jumping) {
+	else if (player->state == Player::State::Jumping) {
 		player_sprite->setSpriteFrame(Sprite::createWithSpriteFrameName("jump")->getSpriteFrame());
-		if (_player->facingRight) {
+		if (player->facingRight) {
 			player_sprite->setFlippedX(true);
 		}
 		else {
@@ -307,9 +297,9 @@ void GameScene::updatePlayerSprite(float delta) {
 		player_sprite->setSpriteFrame(Sprite::createWithSpriteFrameName("idle")->getSpriteFrame());
 	}
 
-	player_sprite->setPositionX(_player->position.x);
+	player_sprite->setPositionX(player->position.x);
 	if (stutteringFix != 0) {
-		player_sprite->setPositionY(_player->position.y);
+		player_sprite->setPositionY(player->position.y);
 	}
 }
 
