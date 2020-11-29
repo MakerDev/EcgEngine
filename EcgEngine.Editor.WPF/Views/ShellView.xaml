@@ -62,21 +62,21 @@
                     Orientation="Horizontal"
                     Height="25"
                     Background="GhostWhite">
-            <Button Style="{StaticResource BtnMenubar}"
+            <Button Style="{StaticResource ButtonMenubar}"
                         Command="{Binding SaveCommand}"
                         ToolTip="Save">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
             </Button>
-            <Button Style="{StaticResource BtnMenubar}"
+            <Button Style="{StaticResource ButtonMenubar}"
                         Command="{Binding LoadCommand}"
                         ToolTip="Load">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
             </Button>
-            <Button Style="{StaticResource BtnMenubar}"
+            <Button Style="{StaticResource ButtonMenubar}"
                         ToolTip="Scene Preview">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
             </Button>
-            <Button Style="{StaticResource BtnMenubar}"
+            <Button Style="{StaticResource ButtonMenubar}"
                         Command="{Binding PlayCommand}"
                         ToolTip="Play">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />

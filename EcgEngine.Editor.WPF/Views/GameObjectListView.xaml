@@ -14,12 +14,12 @@
                      VerticalAlignment="Top"
                      Orientation="Horizontal">
             <ToolBar>
-                <Button Style="{StaticResource BtnToolbar}"
+                <Button Style="{StaticResource ButtonToolbar}"
                         ToolTip="New Scene">
                     <Image Source="C:\Dev\EcgEngine\Resources\icons\scene.png"
                            Style="{StaticResource Icon16px}" />
                 </Button>
-                <Button Style="{StaticResource BtnToolbar}"
+                <Button Style="{StaticResource ButtonToolbar}"
                         Command="{Binding AddNewObjectCommand}"
                         ToolTip="New Game Object">
                     <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png"
@@ -44,13 +44,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal"
-                                Style="{StaticResource GameobjLstItem}"
+                                Style="{StaticResource GameObjectListBoxItem}"
                                 ToolTip="Game Object Item">
                         <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png"
                                Style="{StaticResource Icon16px}"
                                Margin="5 0 5 0" />
                         <TextBlock Text="{Binding Name}"
-                                   Style="{StaticResource GameobjlistTxt}"/>
+                                   Style="{StaticResource GameObjectListBoxText}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
