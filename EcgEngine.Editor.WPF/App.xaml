@@ -7,10 +7,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/BtnStyle.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/IconStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/LstboxStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TxtblockStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/IconStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/ListBoxStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TextBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
