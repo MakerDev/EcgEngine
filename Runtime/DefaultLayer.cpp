@@ -25,9 +25,11 @@ DefaultLayer* DefaultLayer::CreateDefaultLayer()
 DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 {
 	auto defaultLayer = DefaultLayer::CreateDefaultLayer();
-	
+
+	assert(defaultLayer != nullptr && "Failed to create DefaultLayer");
+
 	auto jsonContent = readJson(filename);
-		
+
 	Document document;
 	document.Parse(jsonContent.c_str());
 
@@ -38,7 +40,7 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 	const rapidjson::Value& gameobjects = document["GameObjects"];
 
 	for (auto& gameObject : gameobjects.GetArray())
-	{		
+	{
 		auto player = GameObject::CreateFromJsonValue(gameObject);
 		defaultLayer->AddGameObject(std::move(player));
 	}
@@ -116,7 +118,7 @@ void DefaultLayer::AddGameObject(unique_ptr<GameObject> gameObject)
 void DefaultLayer::LoadTileMap(string filename, float scaleFactor)
 {
 	_level = make_unique<Level>();
-	_level->loadMap("level1.tmx");
+	_level->loadMap(filename.c_str());
 	_level->retain();
 
 	_level->getMap()->setScale(scaleFactor);
@@ -155,7 +157,7 @@ string DefaultLayer::readJson(const char* filename)
 	const int size = jsonFile.tellg();
 	jsonContent.resize(size);
 	jsonFile.seekg(0, std::ios::beg);
-	jsonFile.read(&jsonContent[0], size);
+	jsonFile.read(&jsonContent.at(0), size);
 
 	return jsonContent;
 }
