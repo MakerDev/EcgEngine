@@ -46,15 +46,18 @@ if(APPLE OR WINDOWS)
     cocos_mark_multi_resources(common_res_files RES_TO "Resources" FOLDERS ${GAME_RES_FOLDER})
 endif()
 
+file (GLOB_RECURSE MY_SOURCES
+        Runtime/*.cpp
+	    Classes/*.cpp
+	)
+file(GLOB_RECURSE MY_HEADERS
+        Runtime/*.h
+	    Classes/*.h
+	)
+
 # add cross-platforms source files and header files 
-list(APPEND GAME_SOURCE
-     Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
-     )
-list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
-     )
+list(APPEND GAME_SOURCE {MY_SOURCES})
+list(APPEND GAME_HEADER {MY_HEADERS})
 
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
