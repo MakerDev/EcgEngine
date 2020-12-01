@@ -164,6 +164,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\AndroidLauncherScene.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="ActionArgument.cpp" />
     <ClCompile Include="ActionFunctor.cpp" />
@@ -193,6 +194,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\AndroidLauncherScene.h" />
     <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="ActionFunctor.h" />
     <ClInclude Include="EcgVariable.h" />

@@ -20,7 +20,6 @@ void Runtime::initialize(int parent)
 
 	pstrBuffer = getcwd(strBuffer, _MAX_PATH);
 
-
 	AppDelegate app;
 	cocos2d::Application::getInstance()->run();
 }
@@ -58,7 +57,7 @@ void Runtime::CreateScene()
 void Runtime::CreateScene(int speed)
 {
 	//TODO : Enable to make custom sized Scene;
-	Scene* newScene = Scene::createWithSize(Size(640, 640));
+	Scene* newScene = Scene::createWithSize(Size(320, 320));
 
 	assert(newScene != nullptr && "Failed to create new scene");
 

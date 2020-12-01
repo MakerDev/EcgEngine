@@ -29,31 +29,97 @@ USING_NS_CC;
 
 #define CAMERA_SPRITE_OFFSET_X 100
 
-Scene* GameScene::createScene()
+void GameScene::AddButtonLayer(Scene* scene, GameScene* gameLayer)
 {
+	auto buttonLayer = Layer::create();
+
+	const auto screenSize = Director::getInstance()->getVisibleSize();
+
+	constexpr int buttonXOffset = 100;
+	constexpr int buttonYPos = 50;
+	constexpr int opacity = 200;
+	constexpr float arrowButtonScale = 0.4F;
+
+	auto rightArrowButton = ui::Button::create("rightArrowButton.png");
+	rightArrowButton->setOpacity(opacity);
+	rightArrowButton->setScale(arrowButtonScale);
+	rightArrowButton->setPosition(Vec2(screenSize.width - buttonXOffset, buttonYPos));
+	rightArrowButton->addTouchEventListener([=](Ref* sender, ui::Widget::TouchEventType type) {
+		GameScene::ButtonEventHandler(gameLayer, EventKeyboard::KeyCode::KEY_RIGHT_ARROW, type);
+		}
+	);
+
+	auto leftArrowButton = ui::Button::create("rightArrowButton.png");
+	leftArrowButton->setFlippedX(true);
+	leftArrowButton->setOpacity(opacity);
+	leftArrowButton->setScale(arrowButtonScale);
+	leftArrowButton->setPosition(Vec2(buttonXOffset, buttonYPos));
+	leftArrowButton->addTouchEventListener([=](Ref* sender, ui::Widget::TouchEventType type) {
+		GameScene::ButtonEventHandler(gameLayer, EventKeyboard::KeyCode::KEY_LEFT_ARROW, type);
+		}
+	);
+
+	auto spaceButton = ui::Button::create("spacebarButton.png");
+	spaceButton->setOpacity(opacity);
+	spaceButton->setScale(0.5f);
+	spaceButton->setScaleX(1.4f);
+	spaceButton->setPosition(Vec2(screenSize.width / 2, buttonYPos));
+	spaceButton->addTouchEventListener([=](Ref* sender, ui::Widget::TouchEventType type) {
+		GameScene::ButtonEventHandler(gameLayer, EventKeyboard::KeyCode::KEY_SPACE, type);
+		}
+	);
+
+	buttonLayer->addChild(leftArrowButton);
+	buttonLayer->addChild(rightArrowButton);
+	buttonLayer->addChild(spaceButton);
+	scene->addChild(buttonLayer, 5);
+}
+
+void GameScene::ButtonEventHandler(GameScene* gameScene, EventKeyboard::KeyCode keyCode, ui::Widget::TouchEventType touchEventType)
+{
+	switch (touchEventType) {
+	case ui::Widget::TouchEventType::BEGAN:
+		gameScene->onKeyPressed(keyCode, nullptr);
+		break;
+	case ui::Widget::TouchEventType::ENDED:
+		gameScene->onKeyReleased(keyCode, nullptr);
+		break;
+	case ui::Widget::TouchEventType::CANCELED:
+		gameScene->onKeyReleased(keyCode, nullptr);
+		break;
+
+	default:
+		break;
+	}
+}
+
+
+
+Scene* GameScene::createScene() {
 	auto scene = Scene::create();
 
 	auto layer = GameScene::create();
-
 	scene->addChild(layer);
+
+#ifdef BUILD_ANDROID
+	AddButtonLayer(scene, layer);
+#endif // BUILD_ANDROID
+
 
 	return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
-static void problemLoading(const char* filename)
-{
+static void problemLoading(const char* filename) {
 	printf("Error while loading: %s\n", filename);
 	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
 // on "init" you need to initialize your instance
-bool GameScene::init()
-{
+bool GameScene::init() {
 	//////////////////////////////
 	// 1. super init first
-	if (!Layer::init())
-	{
+	if (!Layer::init()) {
 		return false;
 	}
 
@@ -87,7 +153,8 @@ bool GameScene::init()
 	Point* center = new Point(wsize.width / 2 + origin.x, wsize.height / 2 + origin.y);
 
 	cameraTarget = Sprite::create();
-	cameraTarget->setPositionX(player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X); // set to players x
+	cameraTarget->setPositionX(
+		player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X); // set to players x
 	cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
 	cameraTarget->retain();
 
@@ -110,6 +177,8 @@ bool GameScene::init()
 	_jumpAction = JumpBy::create(0.4f, Point(0, 0), 120, 1);
 	_jumpAction->retain();
 
+
+
 	return true;
 }
 
@@ -126,14 +195,12 @@ void GameScene::setupAnimations() {
 	this->walkRight->retain();
 }
 
-void GameScene::movePlayerForTest(int x)
-{
+void GameScene::movePlayerForTest(int x) {
 	player->setPositionX(player->getPositionX() + x);
 	player_sprite->setPositionX(player_sprite->getPositionX() + x);
 }
 
-void GameScene::updateScene(float delta)
-{
+void GameScene::updateScene(float delta) {
 	this->cameraTarget->setPositionX(player_sprite->getPosition().x + CAMERA_SPRITE_OFFSET_X);
 	this->updatePlayer(delta);
 }
@@ -143,10 +210,10 @@ static bool isJumping = false;
 void GameScene::updatePlayer(float delta) {
 
 	//Jump
-	if (std::find(heldKeys.begin(), heldKeys.end(), EventKeyboard::KeyCode::KEY_SPACE) != heldKeys.end()) {
+	if (std::find(heldKeys.begin(), heldKeys.end(), EventKeyboard::KeyCode::KEY_SPACE) !=
+		heldKeys.end()) {
 
-		if (_jumpAction->isDone() || !isJumping)
-		{
+		if (_jumpAction->isDone() || !isJumping) {
 			player_sprite->runAction(_jumpAction);
 			isJumping = true;
 		}
@@ -226,8 +293,7 @@ void GameScene::updatePlayerSprite(float delta) {
 	player_sprite->setPositionX(player_sprite->getPositionX() + player->velocity.x);
 }
 
-void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
-{
+void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) {
 	if (std::find(heldKeys.begin(), heldKeys.end(), keyCode) == heldKeys.end()) {
 		heldKeys.push_back(keyCode);
 	}
@@ -235,13 +301,11 @@ void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	printf("pressed\n");
 }
 
-void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
-{
+void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
 	heldKeys.erase(std::remove(heldKeys.begin(), heldKeys.end(), keyCode), heldKeys.end());
 }
 
-int GameScene::signum(float x)
-{
+int GameScene::signum(float x) {
 	if (x > 0.0L)
 		return 1.0L;
 	else if (x < 0.0L)
@@ -250,8 +314,7 @@ int GameScene::signum(float x)
 		return 0.0L;
 }
 
-void GameScene::menuCloseCallback(Ref* pSender)
-{
+void GameScene::menuCloseCallback(Ref* pSender) {
 	//Close the cocos2d-x game scene and quit the application
 	Director::getInstance()->end();
 
