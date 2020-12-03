@@ -10,7 +10,7 @@ public:
 	void switchScene();
 	void destroy();
 	void CreateScene();
-	void CreateScene(int speed);
+	void CreateScene(const std::string& filename);
 	void Run();
 private:
 	int _currentScene = 0;

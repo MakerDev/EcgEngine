@@ -51,7 +51,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
             CreateSceneCommand = new DelegateCommand(() =>
             {
-                _ecgRuntime.CreateNewScene();
+                _ecgRuntime.CreateNewScene("ecgsave1.json");
             });
 
             ScopedRegionManager = regionManager.CreateRegionManager();

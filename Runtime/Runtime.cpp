@@ -56,11 +56,10 @@ void Runtime::destroy()
 
 void Runtime::CreateScene()
 {
-	this->CreateScene(2.0F);
+	CreateScene("ecgsave1.json");
 }
 
-//TODO : Create시에는 director pause하고, Run 누르면 resume하기
-void Runtime::CreateScene(int speed)
+void Runtime::CreateScene(const std::string& filename)
 {
 	//TODO : Enable to make custom sized Scene;
 	Scene* newScene = Scene::createWithSize(Size(320, 320));
