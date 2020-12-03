@@ -9,9 +9,8 @@ const EventKeyboard::KeyCode DOWN_ARROW = EventKeyboard::KeyCode::KEY_DOWN_ARROW
 const EventKeyboard::KeyCode LEFT_ARROW = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
 const EventKeyboard::KeyCode RIGHT_ARROW = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 
-#define BUILD_ANDROID
 
-#ifdef BUILD_ANDROID
+#ifndef _WIN32
     const float SCALE_FACTOR = 3.0f;
 #else
     const float SCALE_FACTOR = 2.0f;

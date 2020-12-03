@@ -62,6 +62,9 @@ list(APPEND GAME_HEADER {MY_HEADERS})
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
     set(APP_NAME MyGame)
+    set (CMAKE_CXX_STANDARD 14) 
+    set (CMAKE_CXX_STANDARD_REQUIRED ON) 
+    set (CMAKE_CXX_EXTENSIONS OFF)
     list(APPEND GAME_SOURCE
          proj.android/app/jni/hellocpp/main.cpp
          )

@@ -25,6 +25,10 @@
 #include "GameScene.h"
 #include "globals.h"
 
+#ifndef _WIN32
+#include "CCFileUtils-android.h"
+#endif
+
 USING_NS_CC;
 
 #define CAMERA_SPRITE_OFFSET_X 100
@@ -34,6 +38,12 @@ void GameScene::AddButtonLayer(Scene* scene, GameScene* gameLayer)
 	auto buttonLayer = Layer::create();
 
 	const auto screenSize = Director::getInstance()->getVisibleSize();
+
+//	auto name = CCFileUtils::getInstance()->getNewFilename("HelloWorld.png");
+//    printf("FileName : %s\n", name.c_str());
+//    auto label = Label::createWithSystemFont(name.c_str(), "Arial", 34);
+//    label->setPosition(Vec2(300, 300));
+//    buttonLayer->addChild(label);
 
 	constexpr int buttonXOffset = 100;
 	constexpr int buttonYPos = 50;
@@ -101,9 +111,9 @@ Scene* GameScene::createScene() {
 	auto layer = GameScene::create();
 	scene->addChild(layer);
 
-#ifdef BUILD_ANDROID
+#ifndef _WIN32
 	AddButtonLayer(scene, layer);
-#endif // BUILD_ANDROID
+#endif // _WIN32
 
 
 	return scene;

@@ -2,6 +2,7 @@
 
 //Static variable init
 std::unique_ptr<EngineManager> EngineManager::_instance = nullptr;
+std::shared_ptr<DefaultLayer> EngineManager::_defaultLayer = nullptr;
 
 EngineManager* EngineManager::GetInstance()
 {

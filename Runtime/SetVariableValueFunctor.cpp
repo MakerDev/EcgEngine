@@ -57,3 +57,7 @@ SetVariableValueFunctor::SetVariableValueFunctor(GameObject* target, const strin
 		variableEngine = _target->GetLocalVariableEngine();
 	}	
 }
+
+void SetVariableValueFunctor::Execute(float delta)
+{
+}
