@@ -25,7 +25,7 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
 #include "globals.h"
-
+#include "AndroidLauncherScene.h"
  // #define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
@@ -38,7 +38,7 @@ USING_NS_CC;
 //static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
 
 #ifndef _WIN32
-static cocos2d::Size designResolutionSize = cocos2d::Size(1920,1080);
+static cocos2d::Size designResolutionSize = cocos2d::Size(1920, 1080);
 #else
 static cocos2d::Size designResolutionSize = cocos2d::Size(960, 640);
 #endif
@@ -104,7 +104,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	if (frameSize.height > mediumResolutionSize.height)
 	{
 		director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
-	}
+}
 	// if the frame's height is larger than the height of small size.
 	else if (frameSize.height > smallResolutionSize.height)
 	{
@@ -119,7 +119,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	register_all_packages();
 
 	// create a scene. it's an autorelease object
+#ifndef _WIN32
+	auto scene = AndroidLauncherScene::createScene();
+#else
 	auto scene = GameScene::createScene();
+#endif
 
 	// run
 	director->runWithScene(scene);
