@@ -39,12 +39,6 @@ void GameScene::AddButtonLayer(Scene* scene, GameScene* gameLayer)
 
 	const auto screenSize = Director::getInstance()->getVisibleSize();
 
-//	auto name = CCFileUtils::getInstance()->getNewFilename("HelloWorld.png");
-//    printf("FileName : %s\n", name.c_str());
-//    auto label = Label::createWithSystemFont(name.c_str(), "Arial", 34);
-//    label->setPosition(Vec2(300, 300));
-//    buttonLayer->addChild(label);
-
 	constexpr int buttonXOffset = 100;
 	constexpr int buttonYPos = 50;
 	constexpr int opacity = 200;
@@ -102,8 +96,6 @@ void GameScene::ButtonEventHandler(GameScene* gameScene, EventKeyboard::KeyCode 
 		break;
 	}
 }
-
-
 
 Scene* GameScene::createScene() {
 	auto scene = Scene::create();
