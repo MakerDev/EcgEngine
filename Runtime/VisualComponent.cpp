@@ -1,4 +1,5 @@
 #include "VisualComponent.h"
+#include "FileHelper.h"
 
 VisualComponent::VisualComponent()
 {
@@ -11,8 +12,8 @@ VisualComponent::VisualComponent(
 	const std::string& animationFileName,
 	const string& initialFrameName)
 {
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(spriteFrameFilename);
-	AnimationCache::getInstance()->addAnimationsWithFile(animationFileName);
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileHelper::GetPackageRelativePath(spriteFrameFilename));
+	AnimationCache::getInstance()->addAnimationsWithFile(FileHelper::GetPackageRelativePath(animationFileName));
 
 	_sprite = unique_ptr<Sprite>(Sprite::createWithSpriteFrameName(initialFrameName));
 }

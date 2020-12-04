@@ -4,7 +4,6 @@
 #include <direct.h>
 #endif
 
-
 #include "AppDelegate.h"
 #include "Runtime.h"
 #include "HelloWorldScene.h"
@@ -12,6 +11,7 @@
 #include "Level.h"
 #include "GameObject.h"
 #include "DefaultLayer.h"
+#include "EngineManager.h"
 
 using namespace cocos2d;
 
@@ -66,7 +66,12 @@ void Runtime::CreateScene(const std::string& filename)
 
 	assert(newScene != nullptr && "Failed to create new scene");
 
-	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson("ecgsave1.json");
+	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson(filename.c_str());
+
+#ifndef _WIN32
+	gameObjectsLayer->AddButtonLayer(newScene, gameObjectsLayer);
+#endif // !_WIN32
+
 
 	newScene->addChild(gameObjectsLayer);
 
@@ -75,6 +80,11 @@ void Runtime::CreateScene(const std::string& filename)
 
 	director->stopAnimation();
 	_isAnimationStopped = true;
+}
+
+void Runtime::CreateScene(const std::string& packagename, const std::string& jsonFileName)
+{
+
 }
 
 void Runtime::Run()
