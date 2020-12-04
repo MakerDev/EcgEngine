@@ -23,3 +23,8 @@ DefaultLayer* EngineManager::GetDefaultLayer()
 {
 	return _defaultLayer.get();
 }
+
+const string& EngineManager::GetPackageName() const
+{
+	return pacakgeName;
+}
