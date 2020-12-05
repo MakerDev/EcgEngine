@@ -9,7 +9,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel Width="1200">
+    <StackPanel Width="1300">
         <StackPanel Orientation="Horizontal">
             <StackPanel
                 Width="960" Height="690"
@@ -20,7 +20,7 @@
             </StackPanel>
             <ContentControl                
                 x:Name="_sceneEditorPanel" 
-                Width="240"
+                Width="340"
                 prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
                 prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.SCENE_EDITOR_PANEL_REGION}"
@@ -32,14 +32,6 @@
                     Focusable="False"
                     Margin="0 0 0 15"
                     HorizontalAlignment="Center">
-            <Button Width="80" Height="30" 
-                    Content="Next Scene" Focusable="False"/>
-            <Button Content="Speed + 5" Margin="10 0"
-                    Width="80" Height="30"
-                    Focusable="False" Tag="5"/>
-            <Button Content="Speed -5" 
-                    Width="80" Height="30"
-                    Focusable="False" Tag="-5"/>
             <Button Margin="10 0"  
                     Visibility="Visible"
                     Width="80" Height="30" 
@@ -50,6 +42,11 @@
                     Width="80" Height="30" 
                     Command="{Binding RunGameCommand}"
                     Content="Play" Focusable="False"/>
+            <Button Visibility="Visible"
+                    Width="120" Height="30" 
+                    Margin="10 0 0 0"
+                    Command="{Binding CreateAndRunCommand}"
+                    Content="Create and Run" Focusable="False"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

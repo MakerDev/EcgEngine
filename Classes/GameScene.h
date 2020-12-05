@@ -25,17 +25,22 @@
 #ifndef __GAMESCENE_H__
 #define __GAMESCENE_H__
 
-#include "cocos2d.h"
-#include "Level.h"
-#include "Player.h"
 #include <algorithm>
 #include <vector>
 #include <string>
+
+#include "cocos2d.h"
+#include "Level.h"
+#include "Player.h"
+#include "ui/CocosGUI.h"
 
 using namespace std;
 
 class GameScene : public cocos2d::Layer
 {
+public:
+    static void AddButtonLayer(Scene* layer, GameScene* gameLayer);
+
 public:
     Level* level;
     Player* player;
@@ -70,6 +75,10 @@ public:
     Action* _jumpAction;
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
+
+
+private:
+    static void ButtonEventHandler(GameScene* gameScene, EventKeyboard::KeyCode keyCode, ui::Widget::TouchEventType touchEventType);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -10,7 +10,8 @@ public:
 	void switchScene();
 	void destroy();
 	void CreateScene();
-	void CreateScene(int speed);
+	void CreateScene(const std::string& filename);
+	void CreateScene(const std::string& packagename, const std::string& jsonFileName);
 	void Run();
 private:
 	int _currentScene = 0;

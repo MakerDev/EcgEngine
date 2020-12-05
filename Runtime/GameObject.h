@@ -37,7 +37,7 @@ private:
 private:
 	unique_ptr< VariableEngine> _localVariableEngine;
 
-	//TODO: ÀûÀıÇÑ key¸¦ ¼±ÅÃÇÏ°í mapÀ¸·Î ±¸Á¶¸¦ ¹Ù²ãÈ¿À² ³ôÀÌ±â
+	//TODO: ì ì ˆí•œ keyë¥¼ ì„ íƒí•˜ê³  mapìœ¼ë¡œ êµ¬ì¡°ë¥¼ ë°”ê¿”íš¨ìœ¨ ë†’ì´ê¸°
 	//TODO : change to smart pointers
 	unique_ptr<VisualComponent> _visualComponent;
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;

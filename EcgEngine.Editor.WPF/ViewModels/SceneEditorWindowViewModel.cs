@@ -17,6 +17,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public DelegateCommand RunGameCommand { get; set; }
         public DelegateCommand CreateSceneCommand { get; set; }
+        public DelegateCommand CreateAndRunCommand { get; set; }
 
         private IRegionManager _scopedRegionManager;
         public IRegionManager ScopedRegionManager
@@ -44,14 +45,20 @@ namespace EcgEngine.Editor.WPF.ViewModels
         {
             _ecgRuntime = ecgRuntime;
 
+            CreateSceneCommand = new DelegateCommand(() =>
+            {
+                _ecgRuntime.CreateNewScene("ecgsave1.json");
+            });
+
             RunGameCommand = new DelegateCommand(() =>
             {
                 _ecgRuntime.Run();
             });
 
-            CreateSceneCommand = new DelegateCommand(() =>
+            CreateAndRunCommand = new DelegateCommand(() =>
             {
-                _ecgRuntime.CreateNewScene();
+                CreateSceneCommand.Execute();
+                RunGameCommand.Execute();
             });
 
             ScopedRegionManager = regionManager.CreateRegionManager();

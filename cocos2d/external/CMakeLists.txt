@@ -22,6 +22,7 @@ add_subdirectory(edtaa3func)
 add_subdirectory(ConvertUTF)
 add_subdirectory(poly2tri)
 add_subdirectory(md5)
+add_subdirectory(rapidjson)
 
 target_link_libraries(external
     ext_box2d

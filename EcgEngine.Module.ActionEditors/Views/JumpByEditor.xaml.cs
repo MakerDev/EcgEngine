@@ -7,7 +7,7 @@ namespace EcgEngine.Module.ActionEditors.Views
     /// <summary>
     /// Interaction logic for JumpByEditor
     /// </summary>
-    public partial class JumpByEditor : UserControl, IActionEditorView
+    public partial class JumpByEditor : ActionEditorViewBase
     {
         public JumpByEditor()
         {
@@ -16,11 +16,6 @@ namespace EcgEngine.Module.ActionEditors.Views
 
         //TODO : Probabily better to extract this to seperate class or use attribute or default interface to reduce code duplication
         //TODO : Create ActionEditorViewBase, ActionEditorViewModelBase
-        public Action GetAction()
-        {
-            var vm = DataContext as IActionEditorViewModel;
-
-            return vm.GetAction();
-        }
+        
     }
 }

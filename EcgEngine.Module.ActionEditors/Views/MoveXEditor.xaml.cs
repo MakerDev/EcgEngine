@@ -7,18 +7,12 @@ namespace EcgEngine.Module.ActionEditors.Views
     /// <summary>
     /// Interaction logic for MoveXEditor
     /// </summary>
-    public partial class MoveXEditor : UserControl, IActionEditorView
+    public partial class MoveXEditor : ActionEditorViewBase
     {
         public MoveXEditor()
         {
             InitializeComponent();
         }
 
-        public Action GetAction()
-        {
-            var viewModel = DataContext as IActionEditorViewModel;
-
-            return viewModel.GetAction();
-        }
     }
 }

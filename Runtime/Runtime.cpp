@@ -1,5 +1,8 @@
 #include <iostream>
+
+#ifdef _WIN32
 #include <direct.h>
+#endif
 
 #include "AppDelegate.h"
 #include "Runtime.h"
@@ -8,18 +11,20 @@
 #include "Level.h"
 #include "GameObject.h"
 #include "DefaultLayer.h"
+#include "EngineManager.h"
 
 using namespace cocos2d;
 
 //TODO : 오직 parent를 세팅하는 용도로만 사용하도록 변경
 void Runtime::initialize(int parent)
 {
+#ifdef _WIN32
 	cocos2d::GLViewImpl::SetParent((HWND)parent);
 	char strBuffer[_MAX_PATH] = { 0, };
 	char* pstrBuffer = NULL;
 
 	pstrBuffer = getcwd(strBuffer, _MAX_PATH);
-
+#endif
 
 	AppDelegate app;
 	cocos2d::Application::getInstance()->run();
@@ -51,18 +56,22 @@ void Runtime::destroy()
 
 void Runtime::CreateScene()
 {
-	this->CreateScene(2.0F);
+	CreateScene("ecgsave1.json");
 }
 
-//TODO : Create시에는 director pause하고, Run 누르면 resume하기
-void Runtime::CreateScene(int speed)
+void Runtime::CreateScene(const std::string& filename)
 {
 	//TODO : Enable to make custom sized Scene;
-	Scene* newScene = Scene::createWithSize(Size(640, 640));
+	Scene* newScene = Scene::createWithSize(Size(320, 320));
 
 	assert(newScene != nullptr && "Failed to create new scene");
 
-	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson("ecgsave1.json");
+	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson(filename.c_str());
+
+#ifndef _WIN32
+	gameObjectsLayer->AddButtonLayer(newScene, gameObjectsLayer);
+#endif // !_WIN32
+
 
 	newScene->addChild(gameObjectsLayer);
 
@@ -71,6 +80,12 @@ void Runtime::CreateScene(int speed)
 
 	director->stopAnimation();
 	_isAnimationStopped = true;
+}
+
+void Runtime::CreateScene(const std::string& packagename, const std::string& jsonFileName)
+{
+	EngineManager::GetInstance()->SetPackageName(packagename);
+	CreateScene(jsonFileName);
 }
 
 void Runtime::Run()

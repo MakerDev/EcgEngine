@@ -22,9 +22,9 @@ namespace EcgEngine.Module.ActionEditors
                 .GetTypes();
 
             var actionEditorViews = types
-                .Where(t => t.GetInterfaces()
-                             .FirstOrDefault(i => i.Name == nameof(IActionEditorView)) != null)
+                .Where(t => t.BaseType == typeof(ActionEditorViewBase))
                 .ToList();
+
             var actionEditorViewModels = types
                 .Where(t => t.GetInterfaces()
                              .FirstOrDefault(i => i.Name == nameof(IActionEditorViewModel)) != null)

@@ -36,7 +36,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcgEngine.Module.PropertyEd
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcgEngine.Module.SceneEditor", "EcgEngine.Module.SceneEditor\EcgEngine.Module.SceneEditor.csproj", "{EDBBD54C-96D5-4939-82CC-11749D59BDC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcgEngine.Module.ActionEditors", "EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj", "{4DDA35B1-2C30-499D-B700-D956A3800BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcgEngine.Module.ActionEditors", "EcgEngine.Module.ActionEditors\EcgEngine.Module.ActionEditors.csproj", "{4DDA35B1-2C30-499D-B700-D956A3800BE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PulishingServer", "PulishingServer", "{7CBAB74A-CBC6-4C8A-8689-E06B193A0CDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcgEnginePackageServer", "EcgEnginePackageServer\EcgEnginePackageServer.csproj", "{52A51BDF-24AC-4653-AC54-0D8ACA496844}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -174,6 +178,18 @@ Global
 		{4DDA35B1-2C30-499D-B700-D956A3800BE8}.Release|Win32.Build.0 = Release|Any CPU
 		{4DDA35B1-2C30-499D-B700-D956A3800BE8}.Release|x64.ActiveCfg = Release|Any CPU
 		{4DDA35B1-2C30-499D-B700-D956A3800BE8}.Release|x64.Build.0 = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|Win32.Build.0 = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Debug|x64.Build.0 = Debug|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|Win32.ActiveCfg = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|Win32.Build.0 = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|x64.ActiveCfg = Release|Any CPU
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +209,7 @@ Global
 		{CA893229-11D9-4AE9-9F1C-BEAECD389083} = {1788E33A-10F1-48F3-AFEB-7D2273BC2F80}
 		{EDBBD54C-96D5-4939-82CC-11749D59BDC7} = {1788E33A-10F1-48F3-AFEB-7D2273BC2F80}
 		{4DDA35B1-2C30-499D-B700-D956A3800BE8} = {1788E33A-10F1-48F3-AFEB-7D2273BC2F80}
+		{52A51BDF-24AC-4653-AC54-0D8ACA496844} = {7CBAB74A-CBC6-4C8A-8689-E06B193A0CDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60AA7E6D-DFB4-46AD-8006-FA2073E9F5EC}

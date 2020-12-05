@@ -24,6 +24,7 @@ namespace EcgEngine.Core
 
             containerRegistry.RegisterDialog<ConfirmationDialog, ConfirmationDialogViewModel>();
             containerRegistry.RegisterDialog<MessageDialog, MessageDialogViewModel>();
+            containerRegistry.RegisterDialog<TextInputDialog, TextInputDialogViewModel>();
         }
 
         private void ConfigureDialogViewModelLocator()

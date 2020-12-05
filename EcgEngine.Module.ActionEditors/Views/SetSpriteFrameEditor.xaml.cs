@@ -7,18 +7,11 @@ namespace EcgEngine.Module.ActionEditors.Views
     /// <summary>
     /// Interaction logic for SetSpriteFrameEditor
     /// </summary>
-    public partial class SetSpriteFrameEditor : UserControl, IActionEditorView
+    public partial class SetSpriteFrameEditor : ActionEditorViewBase
     {
         public SetSpriteFrameEditor()
         {
             InitializeComponent();
-        }
-
-        public Action GetAction()
-        {
-            var viewModel = DataContext as IActionEditorViewModel;
-
-            return viewModel.GetAction();
         }
     }
 }

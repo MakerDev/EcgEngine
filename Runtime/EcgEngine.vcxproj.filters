@@ -37,6 +37,9 @@
     <Filter Include="src\VisualScript\Actions\VariableActions">
       <UniqueIdentifier>{e36c678a-b530-4f0f-9963-ccf14b3696a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Helpers">
+      <UniqueIdentifier>{8f39e6a3-a5cc-4c4a-8b16-2169dba2ed4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
@@ -119,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="SetVariableValueFunctor.cpp">
       <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AndroidLauncherScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHelper.cpp">
+      <Filter>src\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="SetVariableValueFunctor.h">
       <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AndroidLauncherScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHelper.h">
+      <Filter>src\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

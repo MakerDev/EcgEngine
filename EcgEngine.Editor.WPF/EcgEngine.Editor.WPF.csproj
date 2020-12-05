@@ -34,8 +34,4 @@
     <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
     <ProjectReference Include="..\Runtime\EcgEngine.vcxproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Styles\" />
-  </ItemGroup>
 </Project>

@@ -8,23 +8,22 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:MessageDialogViewModel}"             
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid 
+    <StackPanel 
         Width="350" Height="200">
         <TextBlock 
-            Margin="30 30"
+            Margin="30 10"
             d:Text="This is Message"
             HorizontalAlignment="Center"          
             TextWrapping="Wrap" TextAlignment="Center"
-            Text="{Binding Message}" FontSize="28"  />
+            Text="{Binding Message}" FontSize="28" Height="122" Width="344"  />
 
 
         <StackPanel 
-            Margin="0 100 0 0"
             Orientation="Horizontal"
             HorizontalAlignment="Center">
             <Button
                 Command="{Binding CloseCommand}"
                 Content="Ok" Width="100" Height="25" />
         </StackPanel>
-    </Grid>
+    </StackPanel>
 </UserControl>

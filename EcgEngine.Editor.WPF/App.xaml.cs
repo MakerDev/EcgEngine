@@ -27,12 +27,14 @@ namespace EcgEngine.Editor.WPF
         {
             containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
 
-            containerRegistry.RegisterSingleton<GameManager>();
+            containerRegistry.RegisterSingleton<IGameManager, GameManager>();
             containerRegistry.RegisterSingleton<EcgRuntime.EcgRuntime>();
+            containerRegistry.RegisterSingleton<IBlobStorageFileManager, BlobStorageFileManager>();
 
             containerRegistry.RegisterDialog<SceneEditorWindow, SceneEditorWindowViewModel>();
 
             containerRegistry.Register<IAsyncJsonSavefileManager, AsyncJsonSavefileManager>();
+            containerRegistry.Register<IPackageManager, PackageManager>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

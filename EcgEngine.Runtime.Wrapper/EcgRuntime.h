@@ -15,9 +15,12 @@ namespace EcgRuntime
 		void SwitchScene();
 		void Destroy();
 		void CreateNewScene();
-		void CreateNewScene(int speed);
+		void CreateNewScene(String^ filename);
 		void Run();
 		bool IsLoaded();
+
+	private:
+		void marshalToString(String^ s, std::string* outString);
 
 	private:
 		::Runtime* _runtimeNative;

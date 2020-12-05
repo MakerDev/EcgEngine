@@ -9,7 +9,8 @@ namespace EcgEngine.Services
     public class GameData
     {
         public string SavefilePath { get; set; } = Directory.GetCurrentDirectory();
-        public string SavefileName { get; set; } = @"ecgsave1.json";
+        public string PackageName { get; set; } = "ecgsave1";
+        public string SavefileName { get; set; } = "ecgsave1.json";
 
         //TODO : Make multiple layer avaliable
         public Layer DefaultLayer { get; set; } = new Layer();

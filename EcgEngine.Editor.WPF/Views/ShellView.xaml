@@ -63,22 +63,27 @@
                     Height="25"
                     Background="GhostWhite">
             <Button Style="{StaticResource BtnMenubar}"
-                        Command="{Binding SaveCommand}"
-                        ToolTip="Save">
+                    Command="{Binding SaveCommand}"
+                    ToolTip="Save">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
             </Button>
             <Button Style="{StaticResource BtnMenubar}"
                         Command="{Binding LoadCommand}"
                         ToolTip="Load">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
+            </Button>            
+            <Button Style="{StaticResource BtnMenubar}"
+                    Command="{Binding PublishCommand}"
+                    ToolTip="Publish">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
             </Button>
             <Button Style="{StaticResource BtnMenubar}"
-                        ToolTip="Scene Preview">
+                    ToolTip="Scene Preview">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
             </Button>
             <Button Style="{StaticResource BtnMenubar}"
-                        Command="{Binding PlayCommand}"
-                        ToolTip="Play">
+                    Command="{Binding PlayCommand}"
+                    ToolTip="Play">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
             </Button>
         </StackPanel>

@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetZip" Version="1.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
   </ItemGroup>

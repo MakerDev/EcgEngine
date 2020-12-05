@@ -25,7 +25,10 @@
 #ifndef  _APP_DELEGATE_H_
 #define  _APP_DELEGATE_H_
 
+#include <functional>
+
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 
 /**
 @brief    The cocos2d Application.

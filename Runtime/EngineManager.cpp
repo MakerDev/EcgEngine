@@ -2,6 +2,7 @@
 
 //Static variable init
 std::unique_ptr<EngineManager> EngineManager::_instance = nullptr;
+std::shared_ptr<DefaultLayer> EngineManager::_defaultLayer = nullptr;
 
 EngineManager* EngineManager::GetInstance()
 {
@@ -21,4 +22,14 @@ void EngineManager::SetDefaultLayer(shared_ptr<DefaultLayer> defaultLayer)
 DefaultLayer* EngineManager::GetDefaultLayer()
 {
 	return _defaultLayer.get();
+}
+
+const string& EngineManager::GetPackageName() const
+{
+	return _packageName;
+}
+
+void EngineManager::SetPackageName(const string& packageName)
+{
+	_packageName = packageName;
 }
