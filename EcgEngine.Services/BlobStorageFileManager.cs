@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
-using Azure.Storage.Blobs;
 using System.IO;
-using Azure.Storage.Blobs.Models;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace EcgEngine.Services
 {
@@ -25,8 +19,8 @@ namespace EcgEngine.Services
         {
             PropertyNameCaseInsensitive = true,
         };
-        //private const string API_ENDPOINT = "https://ecgenginepackageserver.azurewebsites.net/";
-        private const string API_ENDPOINT = "https://localhost:44301/";
+        
+        private const string API_ENDPOINT = "https://ecgenginepackageserver.azurewebsites.net/";
 
         public BlobStorageFileManager()
         {

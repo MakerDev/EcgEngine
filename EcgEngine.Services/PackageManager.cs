@@ -1,5 +1,4 @@
-﻿using Aspose.Zip;
-using Aspose.Zip.Saving;
+﻿using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,27 +28,25 @@ namespace EcgEngine.Services
         {
             _gameManager.GameData.PackageName = packageName;
 
-            using (FileStream zipFile = File.Open(packageName + ".zip", FileMode.Create))
+            var zipFilePath = Path.Combine(packageDirectory, packageName) + ".zip";
+
+            var directory = new DirectoryInfo(packageDirectory);
+            var saveFile = directory
+                .GetFiles().FirstOrDefault(x => x.Extension == ".json");
+
+            using (var zip = new ZipFile(Encoding.UTF8))
             {
-                var directory = new DirectoryInfo(packageDirectory);
-                var saveFile = directory
-                    .GetFiles().FirstOrDefault(x => x.Extension == ".json");
+                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
+                zip.AddFile(saveFile.FullName, "");
 
-                using (var archive = new Archive(new ArchiveEntrySettings()))
+                foreach (var subDir in directory.GetDirectories())
                 {
-                    archive.CreateEntry(saveFile.Name, saveFile);
-
-                    foreach (var dir in directory.GetDirectories())
-                    {
-                        archive.CreateEntries(dir);
-                    }
-                    
-                    archive.Save(zipFile, new ArchiveSaveOptions
-                    {
-                        Encoding = Encoding.UTF8,
-                    });
+                    zip.AddDirectory(subDir.FullName, subDir.Name);
                 }
+
+                zip.Save(zipFilePath);
             }
+
         }
     }
 }
