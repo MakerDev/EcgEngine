@@ -7,7 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DataContext="{d:DesignInstance Type=viewmodels:TextInputDialogViewModel}" 
              mc:Ignorable="d"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True" 
+             Height="250">
     <StackPanel>
         <TextBlock Text="{Binding Message}" 
                    d:Text="Please enter package name"
@@ -15,7 +16,7 @@
                    TextAlignment="Center"
                    FontSize="28" 
                    Width="450" 
-                   Height="150" 
+                   Height="120" 
                    TextWrapping="Wrap" />
 
         <TextBox Text="{Binding UserInput}" 
