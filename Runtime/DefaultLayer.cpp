@@ -115,10 +115,10 @@ void DefaultLayer::AddGameObject(unique_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(std::move(gameObject));
 }
 
-void DefaultLayer::LoadTileMap(string filename, float scaleFactor)
+void DefaultLayer::LoadTileMap(string packageRelativeFilePath, float scaleFactor)
 {
 	_level = make_unique<Level>();
-	_level->loadMap(filename.c_str());
+	_level->loadMap(packageRelativeFilePath.c_str());
 	_level->retain();
 
 	_level->getMap()->setScale(scaleFactor);
@@ -166,7 +166,7 @@ string DefaultLayer::readJson(const char* filename)
 	jsonFile.seekg(0, std::ios::beg);
 	jsonFile.read(&jsonContent.at(0), size);
 #else
-	string fullPath = FileUtils::getInstance()->fullPathForFilename(filename);
+	string fullPath = FileUtils::getInstance()->fullPathForFilename(FileHelper::GetPackageRelativePath(filename));
 	jsonContent = FileUtils::getInstance()->getStringFromFile(fullPath);
 #endif // _WIN32
 

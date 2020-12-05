@@ -26,5 +26,10 @@ DefaultLayer* EngineManager::GetDefaultLayer()
 
 const string& EngineManager::GetPackageName() const
 {
-	return pacakgeName;
+	return _packageName;
+}
+
+void EngineManager::SetPackageName(const string& packageName)
+{
+	_packageName = packageName;
 }

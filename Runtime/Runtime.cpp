@@ -19,7 +19,7 @@ using namespace cocos2d;
 void Runtime::initialize(int parent)
 {
 #ifdef _WIN32
-    cocos2d::GLViewImpl::SetParent((HWND)parent);
+	cocos2d::GLViewImpl::SetParent((HWND)parent);
 	char strBuffer[_MAX_PATH] = { 0, };
 	char* pstrBuffer = NULL;
 
@@ -84,7 +84,8 @@ void Runtime::CreateScene(const std::string& filename)
 
 void Runtime::CreateScene(const std::string& packagename, const std::string& jsonFileName)
 {
-
+	EngineManager::GetInstance()->SetPackageName(packagename);
+	CreateScene(jsonFileName);
 }
 
 void Runtime::Run()
