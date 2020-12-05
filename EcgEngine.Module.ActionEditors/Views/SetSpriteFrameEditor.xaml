@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="EcgEngine.Module.ActionEditors.Views.SetSpriteFrameEditor"
+﻿<views:ActionEditorViewBase x:Class="EcgEngine.Module.ActionEditors.Views.SetSpriteFrameEditor"
+             xmlns:views="clr-namespace:EcgEngine.Module.ActionEditors.Views"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/" 
@@ -26,4 +27,4 @@
                 FontSize="16"
                 Text="{Binding SpriteName}" Width="100" Height="28"/>
     </StackPanel>
-</UserControl>
+</views:ActionEditorViewBase>
