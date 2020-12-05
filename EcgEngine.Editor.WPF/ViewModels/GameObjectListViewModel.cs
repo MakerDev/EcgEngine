@@ -15,7 +15,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
     public class GameObjectListViewModel : BindableBase
     {
-        private readonly GameManager _gameManager;
+        private readonly IGameManager _gameManager;
         private readonly IRegionManager _regionManager;
         private readonly IContainerExtension _containerExtension;
 
@@ -47,7 +47,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
 
         public DelegateCommand ObjectSelectedCommand { get; set; }
         public DelegateCommand AddNewObjectCommand { get; set; }
-        public GameObjectListViewModel(GameManager gameManager,
+        public GameObjectListViewModel(IGameManager gameManager,
                                        IRegionManager regionManager,
                                        IEventAggregator eventAggregator,
                                        IContainerExtension containerExtension)
