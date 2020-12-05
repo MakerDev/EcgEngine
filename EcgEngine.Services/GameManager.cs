@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EcgEngine.Services
 {
-    public class GameManager
+    public class GameManager : IGameManager
     {
         private readonly IAsyncJsonSavefileManager _jsonSavefileManager;
 
