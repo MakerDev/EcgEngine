@@ -1,6 +1,6 @@
 using System;
 
-namespace EcgEnginePackageStore.Data
+namespace EcgEnginePackageServer
 {
     public class WeatherForecast
     {
