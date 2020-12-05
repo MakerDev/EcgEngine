@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 #include <string>
+
+#include "ui/CocosGUI.h"
 #include "cocos2d.h"
 #include "network/CCDownloader.h"
 #include "Runtime.h"
@@ -20,19 +22,23 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(AndroidLauncherScene);
 
-
 private:
-    std::unique_ptr<Runtime> _ecgRuntime;
-    void DownloadAndUnzipPackage(const std::string& packageName);
-    void RunPackage(const std::string& packageName);
+    void downloadAndUnzipPackage(const std::string& packageName);
+    void runPackage();
     void onHttpRequestCompleted(HttpClient* sender, HttpResponse* response);
-    bool UnzipPackage(const std::string& packageName);
+    const std::string& getPackageName();
+
 
 private:
     const std::string PACKAGE_SERVER_URL = "https://ecgenginestorage.blob.core.windows.net/packagecontainer";
+    
+    std::unique_ptr<Runtime> _ecgRuntime;    
+    std::string _packageName = "";
+    
     cocos2d::Label* _infoLabel;
+    cocos2d::ui::TextField* _packageNameField;
+    
     bool _unziping = false;
     bool _downloadRunning = false;
-    std::string _packageName;
 };
 

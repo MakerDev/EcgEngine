@@ -1,5 +1,4 @@
 #include "AndroidLauncherScene.h"
-#include "ui/CocosGUI.h"
 #include "FileHelper.h"
 
 using namespace cocos2d;
@@ -24,31 +23,28 @@ bool AndroidLauncherScene::init()
 
 	auto infoLabel = Label::createWithSystemFont("FileName:", "Arial", 60);
 	infoLabel->setPosition(viewSize.width / 2, viewSize.height / 2 + 100);
-	this->addChild(infoLabel);
+    _infoLabel = infoLabel;
+    this->addChild(infoLabel);
 
-	auto textField = ui::TextField::create("Click here to enter the package name", "Arial", 45);
-	textField->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+	_packageNameField = ui::TextField::create("Click here to enter the package name", "Arial", 45);
+	_packageNameField->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
 
 		});
-	textField->setPosition(Vec2(viewSize.width / 2, viewSize.height / 2));
+	_packageNameField->setPosition(Vec2(viewSize.width / 2, viewSize.height / 2));
 
-	this->addChild(textField);
+	this->addChild(_packageNameField);
 
 	auto debugLabel = Label::createWithSystemFont("Debug label", "Arial", 30);
 	debugLabel->setPosition(viewSize.width / 2, viewSize.height - 100);
-	_infoLabel = infoLabel;
-	this->addChild(infoLabel);
+	this->addChild(debugLabel);
 
 	auto fetchButton = Button::create("HelloWorld.png");
-	fetchButton->addTouchEventListener([this, debugLabel, textField](Ref* sender, ui::Widget::TouchEventType type) {
-		_packageName = textField->getString();
-		debugLabel->setString(_packageName);
-		if (_packageName.empty())
-		{
-			_packageName = "ecgpackagetest";
-		}
-		CCLOG("PACKAGE NAME IS : %s\n", _packageName.c_str());
-		DownloadAndUnzipPackage(_packageName);
+	fetchButton->addTouchEventListener([this, debugLabel](Ref* sender, ui::Widget::TouchEventType type) {
+		auto& packageName = getPackageName();
+
+        debugLabel->setString(packageName);
+        CCLOG("PACKAGE NAME IS : %s\n", packageName.c_str());
+		downloadAndUnzipPackage(packageName);
 		});
 	fetchButton->setPosition(Vec2(viewSize.width / 2, 100));
 
@@ -61,7 +57,7 @@ bool AndroidLauncherScene::init()
 			return;
 		}
 
-		RunPackage(_packageName);
+		runPackage();
 		});
 	playButton->setPosition(Vec2(viewSize.width / 2 + 500, 100));
 	this->addChild(playButton);
@@ -69,11 +65,16 @@ bool AndroidLauncherScene::init()
 	return true;
 }
 
-void AndroidLauncherScene::DownloadAndUnzipPackage(const std::string& packageName)
+void AndroidLauncherScene::downloadAndUnzipPackage(const std::string& packageName)
 {
+	if (packageName.empty())
+	{
+		_infoLabel->setString("Invalid PackageName");
+		return;
+	}
+
 	const std::string fileName = packageName + ".zip";
 	const std::string packageUrl = PACKAGE_SERVER_URL + "/" + fileName;
-	std::string filePath = FileUtils::getInstance()->getWritablePath() + fileName;
 
 	_downloadRunning = true;
 
@@ -82,23 +83,12 @@ void AndroidLauncherScene::DownloadAndUnzipPackage(const std::string& packageNam
 	request->setRequestType(network::HttpRequest::Type::GET);
 	request->setResponseCallback(CC_CALLBACK_2(AndroidLauncherScene::onHttpRequestCompleted, this));
 
-	_packageName = packageName;
-
 	network::HttpClient::getInstance()->sendImmediate(request);
 
 	request->release();
 
 	_infoLabel->setString("Downloading...");
 	CCLOG("download started");
-}
-
-void AndroidLauncherScene::RunPackage(const std::string& packageName)
-{
-	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getWritablePath());
-
-	//TODO: change file name
-	_ecgRuntime->CreateScene(packageName, "ecgsave1.json");
-	_ecgRuntime->Run();
 }
 
 void AndroidLauncherScene::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
@@ -109,19 +99,26 @@ void AndroidLauncherScene::onHttpRequestCompleted(HttpClient* sender, HttpRespon
 
 		return;
 	}
+
 	_downloadRunning = false;
 	_infoLabel->setString("Download completed!");
 	_unziping = true;
 
-	// Dump the data
-	std::vector<char>* buffer = response->getResponseData();
+	int code = response->getResponseCode();
 
+	if (code == 404)
+    {
+	    _infoLabel->setString("Error during downloading");
+	    return;
+    }
+    // Dump the data
+	std::vector<char>* buffer = response->getResponseData();
 	auto zipfile = cocos2d::ZipFile::createWithBuffer(&buffer->front(), buffer->size());
 	auto contentFileName = zipfile->getFirstFilename();
 	std::string filename = contentFileName;
 
 	std::string directoryName =
-		cocos2d::FileUtils::getInstance()->getWritablePath() + _packageName + "/";
+		cocos2d::FileUtils::getInstance()->getWritablePath() + getPackageName() + "/";
 
 	if (!cocos2d::FileUtils::getInstance()->isDirectoryExist(directoryName)) {
 		cocos2d::FileUtils::getInstance()->createDirectory(directoryName);
@@ -159,46 +156,26 @@ void AndroidLauncherScene::onHttpRequestCompleted(HttpClient* sender, HttpRespon
 	CCLOG("Unzip completed");
 }
 
-bool AndroidLauncherScene::UnzipPackage(const std::string& packageName)
+void AndroidLauncherScene::runPackage()
 {
-	string zipFilePath = FileUtils::getInstance()->fullPathForFilename(packageName + ".zip");
-	auto zipData = FileUtils::getInstance()->getDataFromFile(zipFilePath);
-	ssize_t t = 0;
-	auto dataFromZip = FileUtils::getInstance()->getFileDataFromZip(zipFilePath, "ecgsave1.json", &t);
+	auto& packageName = getPackageName();
 
-	auto zipfile = cocos2d::ZipFile::createWithBuffer(zipData.getBytes(), zipData.getSize());
-	auto contentFileName = zipfile->getFirstFilename();
-	std::string filename = contentFileName;
-
-	std::string directoryName =
-		cocos2d::FileUtils::getInstance()->getWritablePath() + packageName + "/";
-
-	if (!cocos2d::FileUtils::getInstance()->isDirectoryExist(directoryName)) {
-		cocos2d::FileUtils::getInstance()->createDirectory(directoryName);
+	if (packageName.empty())
+	{
+		_infoLabel->setString("Invalid Package Name");
+		return;
 	}
 
-	ssize_t dataSize = 0;
-	unsigned char* data = zipfile->getFileData(contentFileName, &dataSize);
+	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getWritablePath());
 
-	while (data != nullptr) {
-		std::string fullFileName = directoryName + filename;
+	//TODO: change file name
+	_ecgRuntime->CreateScene(getPackageName(), "ecgsave1.json");
+	_ecgRuntime->Run();
+}
 
-		CCLOG("%s\n", fullFileName.c_str());
+const std::string& AndroidLauncherScene::getPackageName()
+{
+	_packageName = _packageNameField->getString();
 
-		FILE* fp = fopen(fullFileName.c_str(), "wb");
-
-		if (fp) {
-			fwrite(data, 1, dataSize, fp);
-			fclose(fp);
-		}
-
-		free(data);
-
-		contentFileName = zipfile->getNextFilename();
-		filename = contentFileName;
-
-		data = zipfile->getFileData(contentFileName, &dataSize);
-	}
-
-	return true;
+	return _packageName;
 }
