@@ -8,51 +8,46 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:TriggerEditorWindowViewModel}"             
              mc:Ignorable="d"
-             Height="250"
+             Height="240"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel 
-        Width="250"
-        HorizontalAlignment="Center">
-        <TextBlock 
-            FontSize="20" HorizontalAlignment="Center"
-            Text="KeyboardTrigger"  />
-        <TextBlock 
-            HorizontalAlignment="Center"
-            FontSize="18"
-            Margin="0 10"
-            Text="Key Event Type" />
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <RadioButton                     
-               IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
-                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
-                    ConverterParameter=0}"                
-                Content="Down" Margin="10 0" />
-            <RadioButton 
+    <StackPanel Width="250"
+                HorizontalAlignment="Center">
+        <TextBlock Text="KeyboardTrigger"
+                   Style="{StaticResource EditorTitleText}" />
+        <TextBlock Text="Key Event Type"
+                   Style="{StaticResource EditorInformationText}" />
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <RadioButton
                 IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
-                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
+                    ConverterParameter=0}"
+                Content="Down"
+                Margin="5 0 5 5" />
+            <RadioButton
+                IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
                     ConverterParameter=1}"
-                Content="Press" />
-
-            <RadioButton 
+                Content="Press"
+                Margin="5 0 5 5" />
+            <RadioButton
                 IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
-                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter},
+                    Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
                     ConverterParameter=2}"
-                Content="Up" />
+                Content="Up"
+                Margin="5 0 5 5" />
         </StackPanel>
 
-        <TextBox 
-            Margin="0 10"
-            Width="150" Height="30" 
-            Text="{Binding KeyCode}"
-            PreviewKeyDown="TextBox_PreviewKeyDown"
-            >
-        </TextBox>
+        <TextBox Text="{Binding KeyCode}"
+                 Width="150" Height="20"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 Margin="0 10"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" />
 
-        <Button 
-            Margin="0 10 0 0"
-            Content="Ok" 
-            Command="{Binding CloseCommand}" Width="120" Height="30" />
+        <Button Command="{Binding CloseCommand}"
+                Content="Apply"
+                Style="{StaticResource ButtonDefault}"
+                Margin="90 25 90 0"/>
     </StackPanel>
 </UserControl>

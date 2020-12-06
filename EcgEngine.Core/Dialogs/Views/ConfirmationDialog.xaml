@@ -40,12 +40,12 @@
                     CommandParameter="Yes"
                     Content="Yes"
                     Width="75" Height="20"
-                    Style="{StaticResource BtnDefault}"/>
+                    Style="{StaticResource ButtonDefault}"/>
             <Button Command="{Binding CloseDialogCommand}"
                     CommandParameter="No"
                     Content="No"
                     Width="75" Height="20"
-                    Style="{StaticResource BtnDefault}"/>
+                    Style="{StaticResource ButtonDefault}"/>
 
         </StackPanel>
     </Grid>

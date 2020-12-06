@@ -9,32 +9,25 @@
              d:DataContext="{d:DesignInstance Type=actioneditorviewmodels:MoveXEditorViewModel}"             
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel
-            Width="450"
-            Height="250"
-            HorizontalAlignment="Center">
-        <TextBlock 
-                FontSize="24" HorizontalAlignment="Center"
-                Text="MoveX"  />
-        <TextBlock 
-                Margin="0 30 0 0"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Text="Direction" />
-        <StackPanel 
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-            <RadioButton 
-                IsChecked="{Binding IsDirectionRight}"
-                Content="Right" />
-            <RadioButton 
-                IsChecked="{Binding IsDirectionLeft}"
-                Content="Left" />
+    <StackPanel Width="280"
+                Height="250"
+                HorizontalAlignment="Center">
+        <TextBlock Text="MoveX"
+                   Style="{StaticResource EditorTitleText}" />
+        <TextBlock Text="Direction"
+                   Style="{StaticResource EditorInformationText}" />
+        <StackPanel HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <RadioButton IsChecked="{Binding IsDirectionRight}"
+                         Content="Right"
+                         Margin="0 0 10 5" />
+            <RadioButton IsChecked="{Binding IsDirectionLeft}"
+                         Content="Left"
+                         Margin="0 0 0 5" />
         </StackPanel>
-        <TextBlock Text="Speed" FontSize="18" HorizontalAlignment="Center"/>
-        <TextBox 
-                HorizontalContentAlignment="Center"
-                FontSize="16"
-                Text="{Binding Speed, FallbackValue=2}" Width="100" Height="28"/>
+        <TextBlock Text="Speed"
+                   Style="{StaticResource EditorInformationText}"/>
+        <TextBox Text="{Binding Speed, FallbackValue=2}"
+                 Style="{StaticResource ActionEditorTextBox}" />
     </StackPanel>
 </views:ActionEditorViewBase>

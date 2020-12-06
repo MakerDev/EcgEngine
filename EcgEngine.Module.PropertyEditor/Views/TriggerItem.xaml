@@ -17,6 +17,6 @@
         <TextBlock Text="{Binding Trigger}" 
                    Width="250" Height="30"
                    TextWrapping="Wrap"
-                   Style="{StaticResource TriggerlistTxt}" />
+                   Style="{StaticResource TriggerListBoxText}" />
     </StackPanel>
 </UserControl>

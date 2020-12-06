@@ -16,13 +16,13 @@
                      VerticalAlignment="Top"
                      Orientation="Horizontal">
             <ToolBar>
-                <Button Style="{StaticResource BtnToolbar}"
+                <Button Style="{StaticResource ButtonToolbar}"
                         Command="{Binding AddNewActionCommand}"
                         ToolTip="Add new action">
                     <Image Source="C:\Dev\EcgEngine\Resources\icons\add_action.png"
                            Style="{StaticResource Icon16px}" />
                 </Button>
-                <Button Style="{StaticResource BtnToolbar}"
+                <Button Style="{StaticResource ButtonToolbar}"
                         Command="{Binding DeleteCommand}"
                         ToolTip="Delete action">
                     <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
