@@ -11,26 +11,18 @@
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel
-            Width="450"
+            Width="280"
             Height="250"
             HorizontalAlignment="Center">
-        <TextBlock 
-                FontSize="24" HorizontalAlignment="Center"
-                Text="JumpBy"  />
-        <TextBlock 
-                Margin="0 30 0 15"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Text="Duration" />
-        <TextBox 
-                HorizontalContentAlignment="Center"
-                FontSize="16"
-                Text="{Binding Duration, FallbackValue=2}" Width="100" Height="28"/>
-        <TextBlock 
-            Text="Height" FontSize="18" HorizontalAlignment="Center"/>
-        <TextBox 
-                HorizontalContentAlignment="Center"
-                FontSize="16"
-                Text="{Binding Height, FallbackValue=2}" Width="100" Height="28"/>
+        <TextBlock Text="JumpBy"
+                   Style="{StaticResource EditorTitleText}" />
+        <TextBlock Text="Duration"
+                   Style="{StaticResource EditorInformationText}" />
+        <TextBox Text="{Binding Duration, FallbackValue=2}"
+                 Style="{StaticResource ActionEditorTextBox}" />
+        <TextBlock Text="Height"
+                   Style="{StaticResource EditorInformationText}" />
+        <TextBox Text="{Binding Height, FallbackValue=2}"
+                 Style="{StaticResource ActionEditorTextBox}" />
     </StackPanel>
 </views:ActionEditorViewBase>

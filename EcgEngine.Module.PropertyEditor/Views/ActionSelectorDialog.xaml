@@ -16,25 +16,25 @@
                 <Button Content="MoveX"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="MoveXEditor"
-                        Style="{StaticResource BtnActionSelect}" />
+                        Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
                 <Button Content="JumpBy"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="JumpByEditor"
-                        Style="{StaticResource BtnActionSelect}" />
+                        Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
                 <Button Content="PlayAnimation"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="PlayAnimationEditor"
-                        Style="{StaticResource BtnActionSelect}" />
+                        Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
             <ListBoxItem>
                 <Button Content="SetSpriteFrame"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="SetSpriteFrameEditor"
-                        Style="{StaticResource BtnActionSelect}" />
+                        Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
         </ListBox>
 
@@ -50,7 +50,7 @@
                     Content="Apply"
                     Command="{Binding CloseDialogCommand}"
                     Width="80" Height="25"
-                    Style="{StaticResource BtnDefault}"/>
+                    Style="{StaticResource ButtonDefault}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

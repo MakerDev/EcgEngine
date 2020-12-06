@@ -19,13 +19,13 @@
                      VerticalAlignment="Top"
                      Orientation="Horizontal">
                 <ToolBar>
-                    <Button Style="{StaticResource BtnToolbar}"
+                    <Button Style="{StaticResource ButtonToolbar}"
                         Command="{Binding CreateNewScriptCommand}"
                         ToolTip="Create new trigger">
                         <Image Source="C:\Dev\EcgEngine\Resources\icons\add_trigger.png"
                            Style="{StaticResource Icon16px}" />
                     </Button>
-                    <Button Style="{StaticResource BtnToolbar}"
+                    <Button Style="{StaticResource ButtonToolbar}"
                         Command="{Binding DeleteScriptCommand}"
                         ToolTip="Delete trigger">
                         <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"

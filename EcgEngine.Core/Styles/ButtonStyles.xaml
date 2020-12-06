@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:EcgEngine.Editor.WPF.Styles">
 
-    <Style x:Key="BtnDefault" TargetType="Button">
+    <Style x:Key="ButtonDefault" TargetType="Button">
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Background" Value="LightGray" />
         <Setter Property="Foreground" Value="Black" />
@@ -15,7 +15,7 @@
         <Setter Property="Padding" Value="0 2 0 2" />
     </Style>
 
-    <Style x:Key="BtnMenubar" TargetType="Button">
+    <Style x:Key="ButtonMenubar" TargetType="Button">
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
@@ -28,7 +28,7 @@
         <Setter Property="Margin" Value="2 0 0 2" />
     </Style>
 
-    <Style x:Key="BtnToolbar" TargetType="Button">
+    <Style x:Key="ButtonToolbar" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
@@ -41,7 +41,7 @@
         <Setter Property="Margin" Value="1 0 0 1" />
     </Style>
 
-    <Style x:Key="BtnActionSelect" TargetType="Button">
+    <Style x:Key="ButtonActionSelect" TargetType="Button">
         <Setter Property="Width" Value="120" />
         <Setter Property="Height" Value="25" />
         <Setter Property="Cursor" Value="Arrow" />
