@@ -73,6 +73,11 @@
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
             </Button>
             <Button Style="{StaticResource ButtonMenubar}"
+                        Command="{Binding PublishCommand}"
+                        ToolTip="Publish">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
+            </Button>
+            <Button Style="{StaticResource ButtonMenubar}"
                         ToolTip="Scene Preview">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
             </Button>
