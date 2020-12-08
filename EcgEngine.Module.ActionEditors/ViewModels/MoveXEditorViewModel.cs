@@ -7,6 +7,7 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace EcgEngine.Module.ActionEditors.ViewModels
 {
@@ -58,15 +59,9 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 return;
             }
 
-            var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
-
-            if (action.Name != "MoveX")
-            {
-                return;
-            }
-
-            Speed = int.Parse(action.Arguments.FirstOrDefault(x => x.Name == "Speed").Value);
-            IsDirectionLeft = action.Arguments.FirstOrDefault(x => x.Name == "Direction").Value == "Left";
+            var action = navigationContext.Parameters["OriginalAction"] as MoveX;
+            Speed = action.Speed;
+            IsDirectionLeft = action.Direction == "Left";
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {

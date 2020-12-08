@@ -24,7 +24,7 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
         public Models.VisualScript.Action GetAction()
         {
             Models.VisualScript.Action action = new SetSpriteFrame(SpriteName);
-            
+
             return action;
         }
 
@@ -35,14 +35,9 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 return;
             }
 
-            var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
+            var action = navigationContext.Parameters["OriginalAction"] as SetSpriteFrame;
 
-            if (action.Name != nameof(SetSpriteFrame))
-            {
-                return;
-            }
-
-            SpriteName = action.Arguments.FirstOrDefault(x => x.Name == "SpriteName").Value;
+            SpriteName = action.SpriteName;
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {

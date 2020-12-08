@@ -19,7 +19,7 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
         }
 
         public Models.VisualScript.Action GetAction()
-        {            
+        {
             Models.VisualScript.Action action = new PlayAnimation(AnimationName);
 
             return action;
@@ -32,14 +32,9 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 return;
             }
 
-            var action = navigationContext.Parameters["OriginalAction"] as Models.VisualScript.Action;
+            var action = navigationContext.Parameters["OriginalAction"] as PlayAnimation;
 
-            if (action.Name != "PlayAnimation")
-            {
-                return;
-            }
-
-            AnimationName = action.Arguments.FirstOrDefault(x => x.Name == "AnimationName").Value;
+            AnimationName = action.AnimationName;
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
