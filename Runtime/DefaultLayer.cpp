@@ -5,6 +5,7 @@
 #include "DefaultLayer.h"
 #include "Level.h"
 #include "FileHelper.h"
+#include "JsonHelper.h"
 
 using namespace rapidjson;
 
@@ -40,7 +41,8 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 
 	const rapidjson::Value& gameobjects = document["GameObjects"];
 
-	for (auto& gameObject : gameobjects.GetArray())
+	
+	for (auto& gameObject : JsonHelper::GetConstArray(gameobjects))
 	{
 		auto player = GameObject::CreateFromJsonValue(gameObject);
 		defaultLayer->AddGameObject(std::move(player));

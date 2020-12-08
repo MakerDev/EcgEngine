@@ -1,9 +1,10 @@
 #include "ActionArgument.h"
 #include "SetVariableValueFunctor.h"
+#include "JsonHelper.h"
 
 void SetVariableValueFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
-	const auto& arguments = actionValueObject["Arguments"].GetArray();
+	const auto& arguments = JsonHelper::GetConstArray(actionValueObject["Arguments"]);
 
 	//Arg1 : VarableName
 	const ActionArgument arg1(arguments[0]);

@@ -1,12 +1,12 @@
 #include "PlayAnimationFunctor.h"
 #include "ActionArgument.h"
 #include "KeyEventTrigger.h"
-
+#include "JsonHelper.h"
 void PlayAnimationFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
 {
 	assert(runtimeAction != nullptr);
 
-	const auto& arguments = actionObjectValue["Arguments"].GetArray();
+	const auto& arguments = JsonHelper::GetConstArray(actionObjectValue["Arguments"]);
 
 	//Arg1 : animation name
 	const ActionArgument arg1(arguments[0]);

@@ -1,9 +1,10 @@
 #include "SetSpriteFrameFunctor.h"
 #include "ActionArgument.h"
+#include "JsonHelper.h"
 
 void SetSpriteFrameFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
 {
-	const auto& arguments = actionObjectValue["Arguments"].GetArray();
+	const auto& arguments = JsonHelper::GetConstArray(actionObjectValue["Arguments"]);
 
 	//Arg1 : animation name
 	const ActionArgument arg1(arguments[0]);

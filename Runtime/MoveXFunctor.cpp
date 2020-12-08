@@ -1,6 +1,7 @@
 #include "MoveXFunctor.h"
 #include "RuntimeActionTemplates.h"
 #include "ActionArgument.h"
+#include "JsonHelper.h"
 
 void MoveXFunctor::Execute(float delta)
 {
@@ -16,7 +17,8 @@ MoveXFunctor::MoveXFunctor(function<void(void)> flipFuction, function<void(void)
 //TODO : Make this non static so that ActionFunctor can be abstract
 void MoveXFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
 {
-	const auto& arguments = actionObjectValue["Arguments"].GetArray();
+	const auto& arguments = JsonHelper::GetConstArray(actionObjectValue["Arguments"]);
+
 
 	//Arg1 : Direction
 	const ActionArgument arg1(arguments[0]);

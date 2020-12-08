@@ -5,6 +5,7 @@
 #include "KeyEventTrigger.h"
 #include "KeyEventType.h"
 #include "ActionArgument.h"
+#include "JsonHelper.h"
 #include "RuntimeActionCatalog.h"
 
 unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& value)
@@ -13,21 +14,22 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 
 	//TODO: Extract these infomation from json file.
 	gameObject->_visualComponent = make_unique<VisualComponent>("solbrain.plist", "solbrain-animations.plist", "idle");
-	
+
 	//TODO : Extract this from json
 	gameObject->_visualComponent->RegisterAnimation("walk", 0.5);
 	gameObject->GetSprite()->setFlippedX(true);
 
-	const int scaleFactor = value["ScaleFactor"].GetInt();
+	const float scaleFactor = value["ScaleFactor"].GetFloat();
 	gameObject->SetScaleFactor(scaleFactor);
 
 	auto& position = value["Position"];
+
 	gameObject->position = Point(position["X"].GetInt(), position["Y"].GetInt());
 	gameObject->size = gameObject->GetSprite()->getContentSize();
 
 	auto& scriptComponents = value["ScriptComponents"];
 
-	for (auto& scriptComponent : scriptComponents.GetArray())
+	for (auto& scriptComponent : JsonHelper::GetConstArray(scriptComponents))
 	{
 		gameObject->addActionFromJsonValue(scriptComponent);
 	}
@@ -132,7 +134,7 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 
 		auto runtimeAction = make_shared<RuntimeAction>(std::move(trigger));
 
-		for (auto& actionValue : actionValueList.GetArray())
+		for (auto& actionValue : JsonHelper::GetConstArray(actionValueList))
 		{
 			string actionName = actionValue["Name"].GetString();
 			RuntimeActionCatalog::AddAction(actionName, runtimeAction.get(), this, actionValue);
@@ -147,7 +149,7 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 	case TriggerType::InteractionEvent:
 		break;
 	case TriggerType::VariableEvent:
-		
+
 		break;
 
 	default:

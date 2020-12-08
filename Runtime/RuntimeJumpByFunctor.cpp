@@ -1,12 +1,13 @@
 #include "RuntimeJumpByFunctor.h"
 #include "ActionArgument.h"
+#include "JsonHelper.h"
 
 void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
 	assert(runtimeAction != nullptr && "Param runtimeAction cannot be null");
 	assert(targetGameObject != nullptr && "Param targetGameObject cannot be null");
 
-	const auto& arguments = actionValueObject["Arguments"].GetArray();
+	const auto& arguments = JsonHelper::GetConstArray(actionValueObject["Arguments"]);
 
 	//Arg1 : Duration
 	const ActionArgument durationArg(arguments[0]);
