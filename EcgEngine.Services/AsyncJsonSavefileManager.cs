@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace EcgEngine.Services
@@ -11,6 +10,12 @@ namespace EcgEngine.Services
     {
         public static string SavefileFolder { get; private set; }
             = Path.Combine(Environment.CurrentDirectory, "savefiles");
+
+        private JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All,
+            NullValueHandling = NullValueHandling.Ignore,
+        };
 
         public AsyncJsonSavefileManager()
         {
@@ -45,7 +50,7 @@ namespace EcgEngine.Services
                 return Task.FromResult<T>(null);
 
             string jsonString = File.ReadAllText(path);
-            T instance = JsonSerializer.Deserialize<T>(jsonString);
+            T instance = JsonConvert.DeserializeObject<T>(jsonString, _jsonSettings);
 
             return Task.FromResult(instance);
         }
@@ -57,12 +62,7 @@ namespace EcgEngine.Services
             if (appendExtenstion)
                 path += ".json";
 
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
-
-            string jsonString = JsonSerializer.Serialize(instance, options);
+            string jsonString = JsonConvert.SerializeObject(instance, Formatting.Indented, _jsonSettings);
             File.WriteAllText(path, jsonString);
 
             return Task.CompletedTask;
