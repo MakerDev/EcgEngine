@@ -129,6 +129,9 @@
     <ClCompile Include="FileHelper.cpp">
       <Filter>src\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="JsonHelper.cpp">
+      <Filter>src\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -231,6 +234,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="FileHelper.h">
+      <Filter>src\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonHelper.h">
       <Filter>src\Helpers</Filter>
     </ClInclude>
   </ItemGroup>

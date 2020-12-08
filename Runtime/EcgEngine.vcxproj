@@ -176,6 +176,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="JsonHelper.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="MoveXFunctor.cpp" />
@@ -201,6 +202,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="EcgVariable.h" />
     <ClInclude Include="EngineManager.h" />
     <ClInclude Include="FileHelper.h" />
+    <ClInclude Include="JsonHelper.h" />
     <ClInclude Include="MoveXFunctor.h" />
     <ClInclude Include="PlayAnimationFunctor.h" />
     <ClInclude Include="RuntimeActionCatalog.h" />
