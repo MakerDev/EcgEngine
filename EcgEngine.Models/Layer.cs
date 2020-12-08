@@ -11,7 +11,7 @@ namespace EcgEngine.Models
         /// <summary>
         /// Layer width and heigth
         /// </summary>
-        public Point Size { get; set; }
+        public EcgPoint Size { get; set; } = new EcgPoint();
         /// <summary>
         /// Scale factor for map
         /// </summary>

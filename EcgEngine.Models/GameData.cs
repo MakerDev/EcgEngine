@@ -15,6 +15,6 @@ namespace EcgEngine.Services
         //TODO : Make multiple layer avaliable
         public Layer DefaultLayer { get; set; } = new Layer();
 
-        public List<GameObject> GameObjects { get; set; } = new List<GameObject>();
+        public List<GameObject> GameObjects { get; set; } = new List<GameObject>();        
     }
 }

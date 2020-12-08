@@ -48,7 +48,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
             set
             {
-                GameObject.Position = new System.Drawing.Point(value, PosY);
+                GameObject.Position = new EcgPoint(value, PosY);
                 SetProperty(ref _posX, value);
             }
         }
@@ -62,7 +62,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
             set
             {
-                GameObject.Position = new System.Drawing.Point(PosX, value);
+                GameObject.Position = new EcgPoint(PosX, value);
                 SetProperty(ref _posY, value);
             }
         }
