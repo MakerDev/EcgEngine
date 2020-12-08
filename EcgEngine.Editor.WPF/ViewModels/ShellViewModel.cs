@@ -49,7 +49,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
             _packageManager = packageManager;
         }
 
-        private async void PublishPackage()
+        private void PublishPackage()
         {
             var gameData = _gameManager.GameData;
 
