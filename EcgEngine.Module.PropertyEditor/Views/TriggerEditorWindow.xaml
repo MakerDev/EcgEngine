@@ -8,29 +8,33 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:TriggerEditorWindowViewModel}"             
              mc:Ignorable="d"
+             d:Background="#101820"
+             d:Foreground="#FFFFFF"
+             d:FontWeight="Light"
              Height="240"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel Width="250"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Center"
+                Background="#101820">
         <TextBlock Text="KeyboardTrigger"
                    Style="{StaticResource EditorTitleText}" />
         <TextBlock Text="Key Event Type"
                    Style="{StaticResource EditorInformationText}" />
         <StackPanel HorizontalAlignment="Center"
                     Orientation="Horizontal">
-            <RadioButton
+            <RadioButton Foreground="White"
                 IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
                     Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
                     ConverterParameter=0}"
                 Content="Down"
                 Margin="5 0 5 5" />
-            <RadioButton
+            <RadioButton Foreground="White"
                 IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
                     Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
                     ConverterParameter=1}"
                 Content="Press"
                 Margin="5 0 5 5" />
-            <RadioButton
+            <RadioButton Foreground="White"
                 IsChecked="{Binding Trigger.KeyEventTrigger.KeyEventType, 
                     Converter={StaticResource KeyEventTypeToRadioButtonStateConverter}, 
                     ConverterParameter=2}"
@@ -39,9 +43,8 @@
         </StackPanel>
 
         <TextBox Text="{Binding KeyCode}"
+                 Style="{StaticResource TextBoxDefault}"
                  Width="150" Height="20"
-                 HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Center"
                  Margin="0 10"
                  PreviewKeyDown="TextBox_PreviewKeyDown" />
 
