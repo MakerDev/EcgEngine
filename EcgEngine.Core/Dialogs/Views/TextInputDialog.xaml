@@ -8,24 +8,20 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:TextInputDialogViewModel}" 
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True" 
-             Height="250">
-    <StackPanel>
-        <TextBlock Text="{Binding Message}" 
-                   d:Text="Please enter package name"
-                   HorizontalAlignment="Center"
-                   TextAlignment="Center"
-                   FontSize="28" 
-                   Width="450" 
-                   Height="120" 
-                   TextWrapping="Wrap" />
-
-        <TextBox Text="{Binding UserInput}" 
-                 Width="250" Height="40" FontSize="22" 
+             Width="250" Height="180">
+    <StackPanel Background="#101820">
+        <TextBlock Text="{Binding Message}"
+                   d:Text="Enter package name :"
+                   Style="{StaticResource EditorTitleText}"/>
+        <TextBox Text="{Binding UserInput}"
+                 Style="{StaticResource TextBoxDefault}"
+                 Width="200" Height="30" FontSize="20" 
                  d:Text="Package2"
                  TextAlignment="Center"/>
 
-        <Button Content="Ok" Margin="0 15 0 0" 
-                Width="150" Height="35" HorizontalAlignment="Center"
-                Command="{Binding CloseDialogCommand}" />
+        <Button Content="Publish" Margin="0 25 0 0" 
+                Width="100" Height="25" HorizontalAlignment="Center"
+                Command="{Binding CloseDialogCommand}"
+                Style="{StaticResource ButtonDefault}"/>
     </StackPanel>
 </UserControl>
