@@ -17,10 +17,12 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             get { return _spriteName; }
             set { SetProperty(ref _spriteName, value); }
         }
+
         public SetSpriteFrameEditorViewModel()
         {
 
         }
+
         public Models.VisualScript.Action GetAction()
         {
             Models.VisualScript.Action action = new SetSpriteFrame(SpriteName);

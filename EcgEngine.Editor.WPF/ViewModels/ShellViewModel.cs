@@ -1,4 +1,5 @@
-﻿using EcgEngine.Core.Dialogs;
+﻿using EcgEngine.Core;
+using EcgEngine.Core.Dialogs;
 using EcgEngine.Core.Events;
 using EcgEngine.Services;
 using Prism.Commands;
@@ -31,17 +32,26 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand LoadCommand { get; set; }
         public DelegateCommand PublishCommand { get; set; }
+
+        private IApplicationCommands _applicationCommands;
+        public IApplicationCommands ApplicationCommands
+        {
+            get { return _applicationCommands; }
+            set { SetProperty(ref _applicationCommands, value); }
+        }
         public ShellViewModel(IGameManager gameManager,
                               IDialogService dialogService,
                               IEventAggregator eventAggregator,
-                              IPackageManager packageManager)
+                              IPackageManager packageManager,
+                              IApplicationCommands applicationCommands
+                              )
         {
             PlayCommand = new DelegateCommand(OpenPlaywindow);
             SelectSavefilePathCommand = new DelegateCommand(SelectSavefilePath);
             SaveCommand = new DelegateCommand(SaveData);
             LoadCommand = new DelegateCommand(LoadData);
             PublishCommand = new DelegateCommand(PublishPackage);
-
+            ApplicationCommands = applicationCommands;
 
             _gameManager = gameManager;
             _dialogService = dialogService;

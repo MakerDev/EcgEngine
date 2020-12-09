@@ -78,7 +78,9 @@
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
             </Button>
             <Button Style="{StaticResource ButtonMenubar}"
-                        ToolTip="Scene Preview">
+                    ToolTip="Scene Preview"
+                    Command="{Binding ApplicationCommands.AddNewGameObjectCommand}"
+                    >
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\scene_preview.png" />
             </Button>
             <Button Style="{StaticResource ButtonMenubar}"

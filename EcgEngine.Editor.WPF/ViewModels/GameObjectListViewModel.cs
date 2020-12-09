@@ -50,7 +50,9 @@ namespace EcgEngine.Editor.WPF.ViewModels
         public GameObjectListViewModel(IGameManager gameManager,
                                        IRegionManager regionManager,
                                        IEventAggregator eventAggregator,
-                                       IContainerExtension containerExtension)
+                                       IContainerExtension containerExtension,
+                                       IApplicationCommands applicationCommands
+                                       )
         {
             _gameManager = gameManager;
             _regionManager = regionManager;
@@ -59,6 +61,8 @@ namespace EcgEngine.Editor.WPF.ViewModels
             //TODO : 두 번쨰 로딩에서 오브젝트 클릭하면 터지는 거 해결하기
             ObjectSelectedCommand = new DelegateCommand(OnObjectSelected);
             AddNewObjectCommand = new DelegateCommand(AddNewObject);
+
+            applicationCommands.AddNewGameObjectCommand.RegisterCommand(AddNewObjectCommand);
 
             eventAggregator.GetEvent<SavefileLoadedEvent>().Subscribe(() =>
             {

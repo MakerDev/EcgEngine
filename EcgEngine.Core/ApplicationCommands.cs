@@ -8,5 +8,6 @@ namespace EcgEngine.Core
 
     public class ApplicationCommands : IApplicationCommands
     {
+        public CompositeCommand AddNewGameObjectCommand { get; } = new CompositeCommand();
     }
 }
