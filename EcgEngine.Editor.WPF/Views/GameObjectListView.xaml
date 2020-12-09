@@ -10,29 +10,11 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <DockPanel>
-        <ToolBarTray DockPanel.Dock="Top"
-                     VerticalAlignment="Top"
-                     Orientation="Horizontal">
-            <ToolBar>
-                <Button Style="{StaticResource ButtonToolbar}"
-                        ToolTip="New Scene">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\scene.png"
-                           Style="{StaticResource Icon16px}" />
-                </Button>
-                <Button Style="{StaticResource ButtonToolbar}"
-                        Command="{Binding AddNewObjectCommand}"
-                        ToolTip="New Game Object">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png"
-                           Style="{StaticResource Icon16px}" />
-                </Button>
-            </ToolBar>
-        </ToolBarTray>
-
         <ListBox x:Name="_gameObjectListBox"
                  ItemsSource="{Binding GameObjects}"
                  SelectedIndex="{Binding SelectedObjectIndex, Mode=TwoWay}"
-                 Width="200" Height="600"
-                 Background="Gray">
+                 Width="185" Height="550"
+                 Background="DimGray">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -47,8 +29,8 @@
                                 Style="{StaticResource GameObjectListBoxItem}"
                                 ToolTip="Game Object Item">
                         <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png"
-                               Style="{StaticResource Icon16px}"
-                               Margin="5 0 5 0" />
+                               Style="{StaticResource Icon20px}"
+                               Margin="3 0 5 0" />
                         <TextBlock Text="{Binding Name}"
                                    Style="{StaticResource GameObjectListBoxText}"/>
                     </StackPanel>
