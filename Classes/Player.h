@@ -1,25 +1,37 @@
 #pragma once
 #include "cocos2d.h"
 
-USING_NS_CC;
+using namespace cocos2d;
 
-class Player : public Node
+class Player : public Sprite
 {
 public:
-	enum State {
-		Standing, Walking, Jumping
-	};
+	float velocity_x;
+	float velocity_y;
 
-	State state;
-
-	bool facingRight;
+	int direction;
+	int facing_left;
+	int facing_right;
+	int facing_up;
+	int facing_down;
+	int facing_down_left;
+	int facing_down_right;
+	int facing_up_left;
+	int facing_up_right;
 	bool grounded;
-	float stateTime;
+	bool jumping;
 
-	Point position;
-	Point velocity;
+	Animate* walk;
+	Size player_size;
+
+	Rect getCollisionBox();
+	Rect getUpperCollisionBox();
+
+	static Player* create();
+
+	void updateState(float delta);
+	void setupAnimation(const char* name);
 
 	Player(void);
-	virtual ~Player();
+	virtual ~Player(void);
 };
-

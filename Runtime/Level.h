@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-
 #include "cocos2d.h"
 
 using namespace std;
@@ -10,13 +9,16 @@ class Level : public Node
 {
 public:
 
-	TMXTiledMap* map;
+	TMXTiledMap* _map;
 
 	void loadMap(const char* name);
 	TMXTiledMap* getMap();
 
-	Point tileCoordinateToPosition(Size s, Point point);
-	vector<Rect> getCollisionTiles(Point point, int fromX, int fromY);
+	Point tileCoordinateToPosition(Point point);
+	//Point positionForTileCoordinate(Size s, Point point);
+	Point positionToTileCoordinate(Point point);
+	vector<Rect> getCollisionTilesX(Point point, int direction);
+	vector<Rect> getCollisionTilesY(Point point, int direction);
 
 	Level(void);
 	virtual ~Level(void);
