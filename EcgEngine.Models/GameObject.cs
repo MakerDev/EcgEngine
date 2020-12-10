@@ -1,4 +1,5 @@
-﻿using EcgEngine.Models.VisualScript;
+﻿using EcgEngine.Models.VariableEngine;
+using EcgEngine.Models.VisualScript;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,6 @@ namespace EcgEngine.Models
         public float ScaleFactor { get; set; } = 2.0F;
 
         public List<ScriptComponent> ScriptComponents { get; set; } = new List<ScriptComponent>();
+        public List<EcgVariable> Variables { get; set; } = new List<EcgVariable>();
     }
 }
