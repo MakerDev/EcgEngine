@@ -168,6 +168,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="ActionArgument.cpp" />
     <ClCompile Include="ActionFunctor.cpp" />
+    <ClCompile Include="ConditionalActionFunctor.cpp" />
+    <ClCompile Include="ConstantTrigger.cpp" />
     <ClCompile Include="DefaultLayer.cpp" />
     <ClCompile Include="EcgVariable.cpp" />
     <ClCompile Include="EngineManager.cpp" />
@@ -191,6 +193,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="SetSpriteFrameFunctor.cpp" />
     <ClCompile Include="SetVariableValueFunctor.cpp" />
     <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="VariableCondition.cpp" />
     <ClCompile Include="VariableEngine.cpp" />
     <ClCompile Include="VariableEventTrigger.cpp" />
     <ClCompile Include="VisualComponent.cpp" />
@@ -199,6 +202,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AndroidLauncherScene.h" />
     <ClInclude Include="ActionArgument.h" />
     <ClInclude Include="ActionFunctor.h" />
+    <ClInclude Include="ConditionalActionFunctor.h" />
+    <ClInclude Include="ConditionType.h" />
+    <ClInclude Include="ConstantTrigger.h" />
     <ClInclude Include="EcgVariable.h" />
     <ClInclude Include="EngineManager.h" />
     <ClInclude Include="FileHelper.h" />
@@ -227,9 +233,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="SetVariableValueFunctor.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="TriggerType.h" />
+    <ClInclude Include="VariableCondition.h" />
     <ClInclude Include="VariableEngine.h" />
     <ClInclude Include="VariableEventTrigger.h" />
     <ClInclude Include="VariableEventType.h" />
+    <ClInclude Include="VariableType.h" />
     <ClInclude Include="VisualComponent.h" />
   </ItemGroup>
   <ItemGroup>

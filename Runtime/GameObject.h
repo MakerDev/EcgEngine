@@ -35,7 +35,7 @@ private:
 	void addActionFromJsonValue(const rapidjson::Value& value);
 
 private:
-	unique_ptr< VariableEngine> _localVariableEngine;
+	unique_ptr<VariableEngine> _localVariableEngine;
 
 	//TODO: 적절한 key를 선택하고 map으로 구조를 바꿔효율 높이기
 	//TODO : change to smart pointers

@@ -2,9 +2,9 @@
 #include "ActionArgument.h"
 #include "JsonHelper.h"
 
-void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
+
+shared_ptr<ActionFunctor> RuntimeJumpByFunctor::Create(GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
-	assert(runtimeAction != nullptr && "Param runtimeAction cannot be null");
 	assert(targetGameObject != nullptr && "Param targetGameObject cannot be null");
 
 	const auto& arguments = JsonHelper::GetConstArray(actionValueObject["Arguments"]);
@@ -17,8 +17,15 @@ void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction,
 	const ActionArgument heightArg(arguments[1]);
 	const float height = stoi(heightArg.GetValue());
 
-	std::unique_ptr<ActionFunctor> functor = make_unique<RuntimeJumpByFunctor>(targetGameObject, duration, height);
-	runtimeAction->PushFunctor(std::move(functor));
+	std::shared_ptr<ActionFunctor> functor = make_shared<RuntimeJumpByFunctor>(targetGameObject, duration, height);
+
+	return functor;
+}
+
+void RuntimeJumpByFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
+{
+	auto functor = RuntimeJumpByFunctor::Create(targetGameObject, actionValueObject);
+	runtimeAction->PushFunctor(functor);
 }
 
 RuntimeJumpByFunctor::RuntimeJumpByFunctor(GameObject* target, float duration, int height)

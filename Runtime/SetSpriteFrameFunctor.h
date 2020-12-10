@@ -3,11 +3,11 @@
 #include "RuntimeAction.h"
 #include "ActionFunctor.h"
 
-class SetSpriteFrameFunctor: public ActionFunctor
+class SetSpriteFrameFunctor : public ActionFunctor
 {
 public:
-	void static RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue);
-
+	static std::shared_ptr<ActionFunctor> Create(GameObject* target, const rapidjson::Value& actionObjectValue);
+	static void RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue);
 	virtual void Execute(float delta) override;
 
 private:

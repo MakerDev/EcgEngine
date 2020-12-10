@@ -2,7 +2,7 @@
 #include "ActionArgument.h"
 #include "JsonHelper.h"
 
-void SetSpriteFrameFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
+std::shared_ptr<ActionFunctor> SetSpriteFrameFunctor::Create(GameObject* target, const rapidjson::Value& actionObjectValue)
 {
 	const auto& arguments = JsonHelper::GetConstArray(actionObjectValue["Arguments"]);
 
@@ -14,7 +14,14 @@ void SetSpriteFrameFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction
 	functor->_visualComponent = target->GetVisual();
 	functor->_spriteName = spriteName;
 
-	runtimeAction->PushFunctor(unique_ptr<ActionFunctor>(functor));
+	return shared_ptr<SetSpriteFrameFunctor>(functor);
+}
+
+void SetSpriteFrameFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObject* target, const rapidjson::Value& actionObjectValue)
+{
+	auto functor = SetSpriteFrameFunctor::Create(target, actionObjectValue);
+
+	runtimeAction->PushFunctor(functor);
 }
 
 void SetSpriteFrameFunctor::Execute(float delta)

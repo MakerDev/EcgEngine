@@ -40,6 +40,9 @@
     <Filter Include="src\Helpers">
       <UniqueIdentifier>{8f39e6a3-a5cc-4c4a-8b16-2169dba2ed4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\VisualScript\Conditional">
+      <UniqueIdentifier>{31fbb65f-5dc7-4eb6-938e-c8da7a727596}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
@@ -131,6 +134,15 @@
     </ClCompile>
     <ClCompile Include="JsonHelper.cpp">
       <Filter>src\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableCondition.cpp">
+      <Filter>src\VisualScript\Conditional</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantTrigger.cpp">
+      <Filter>src\VisualScript\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionalActionFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +250,21 @@
     </ClInclude>
     <ClInclude Include="JsonHelper.h">
       <Filter>src\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableCondition.h">
+      <Filter>src\VisualScript\Conditional</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantTrigger.h">
+      <Filter>src\VisualScript\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionType.h">
+      <Filter>src\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalActionFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableType.h">
+      <Filter>src\VisualScript\Types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
