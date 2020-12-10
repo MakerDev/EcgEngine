@@ -349,5 +349,7 @@ ASALocalRun/
 healthchecksdb
 
 !cocos2d/external/**/*
+cocos2d/external/recast/**/*
 /cocos2d/cocos/platform/android/libcocos2dx/build
 /proj.visualstudio
+/global.json
