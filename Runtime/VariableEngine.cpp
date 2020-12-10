@@ -61,3 +61,13 @@ const std::string& VariableEngine::GetStringValueWithName(const string& variable
 {
 	return _variableTable.at(variableName)->GetStringValue();
 }
+
+void VariableEngine::SetValueByString(const string& variableName, const string& value)
+{
+	_variableTable[variableName]->SetValueByString(value);
+}
+
+string VariableEngine::GetValueAsString(const string& variableName)
+{
+	return _variableTable[variableName]->GetValueAsString();
+}

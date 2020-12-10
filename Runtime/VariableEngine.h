@@ -27,6 +27,9 @@ public:
 	int GetIntegerValueWithName(const string& variableName) const;
 	const std::string& GetStringValueWithName(const string& variableName) const;
 
+	void SetValueByString(const string& variableName, const string& value);
+	string GetValueAsString(const string& variableName);
+
 private:
 	static std::unique_ptr<VariableEngine> _instance;
 	std::map<std::string, std::unique_ptr<EcgVariable>> _variableTable;
