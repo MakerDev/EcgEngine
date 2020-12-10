@@ -34,6 +34,11 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
 
             var action = navigationContext.Parameters["OriginalAction"] as PlayAnimation;
 
+            if (action == null)
+            {
+                return;
+            }
+
             AnimationName = action.AnimationName;
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)

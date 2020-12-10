@@ -39,6 +39,11 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
 
             var action = navigationContext.Parameters["OriginalAction"] as SetSpriteFrame;
 
+            if (action == null)
+            {
+                return;
+            }
+
             SpriteName = action.SpriteName;
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)

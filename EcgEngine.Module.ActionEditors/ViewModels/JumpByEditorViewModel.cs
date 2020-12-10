@@ -38,6 +38,11 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
 
             var action = navigationContext.Parameters["OriginalAction"] as JumpBy;
 
+            if (action == null)
+            {
+                return;
+            }
+
             Height = action.Height;
             Duration = action.Duration;
         }

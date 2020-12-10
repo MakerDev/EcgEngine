@@ -60,6 +60,12 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             }
 
             var action = navigationContext.Parameters["OriginalAction"] as MoveX;
+
+            if (action == null)
+            {
+                return;
+            }
+
             Speed = action.Speed;
             IsDirectionLeft = action.Direction == "Left";
         }
