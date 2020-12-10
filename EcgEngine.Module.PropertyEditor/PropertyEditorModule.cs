@@ -1,4 +1,5 @@
 ﻿using EcgEngine.Core.Interfaces;
+using EcgEngine.Module.ActionEditors.Views;
 using EcgEngine.Module.PropertyEditor.ViewModels;
 using EcgEngine.Module.PropertyEditor.Views;
 using Prism.Ioc;
@@ -26,6 +27,7 @@ namespace EcgEngine.Module.PropertyEditor
             containerRegistry.RegisterForNavigation<ScriptEditor, ScriptEditorViewModel>();
             containerRegistry.RegisterForNavigation<ActionEditorPanel, ActionEditorPanelViewModel>();
             containerRegistry.RegisterForNavigation<PropertyEditorView, PropertyEditorViewModel>();
+            containerRegistry.RegisterForNavigation<VariableEditor, VariableEditorViewModel>();
         }
     }
 }

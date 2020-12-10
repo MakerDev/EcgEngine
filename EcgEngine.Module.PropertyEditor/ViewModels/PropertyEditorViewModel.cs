@@ -90,6 +90,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             p.Add("GameObject", GameObject);
 
             _regionManager.RequestNavigate(RegionNames.SCRIPT_EDITOR_REGION, "ScriptEditor", p);
+            _regionManager.RequestNavigate(RegionNames.VARIABLE_EDITOR_REGION, "VariableEditor", p);
         }
     }
 }

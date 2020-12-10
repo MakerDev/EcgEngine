@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="EcgEngine.Module.PropertyEditor.Views.VariableEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:EcgEngine.Module.PropertyEditor.Views"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodels:VariableEditorViewModel}"     
+             Width="600"
+             Height="600"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <DockPanel LastChildFill="False">
+
+        <Button DockPanel.Dock="Top" Height="35"      
+                Command="{Binding AddNewVariableCommand}"
+                Content="Add new Variable" />
+        <ListBox 
+            x:Name="_variableListBox"
+            ItemsSource="{Binding VariableItemViewModels}"
+            SelectedIndex="{Binding CurrentSelectedVariableIndex}"
+            HorizontalAlignment="Left"
+            DockPanel.Dock="Top"
+            Width="600"
+            Height="505"
+            >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:VariableListItem />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </DockPanel>
+</UserControl>

@@ -1,4 +1,5 @@
 ﻿using EcgEngine.Core.Interfaces;
+using EcgEngine.Module.ActionEditors.ViewModels;
 using EcgEngine.Module.ActionEditors.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -35,6 +36,8 @@ namespace EcgEngine.Module.ActionEditors
                 ViewModelLocationProvider.Register(actionEditorView.ToString(), actionEditorViewModels[$"{actionEditorView.Name}ViewModel"]);
                 containerRegistry.RegisterForNavigation(actionEditorView, actionEditorView.Name);
             }
+
+            containerRegistry.RegisterDialog<VariableEditorDialog, VariableEditorDialogViewModel>();
         }
     }
 }
