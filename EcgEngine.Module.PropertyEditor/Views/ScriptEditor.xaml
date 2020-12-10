@@ -9,54 +9,61 @@
              xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:ScriptEditorViewModel}"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             d:Background="#101820"
+             d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Width="500">
-    <StackPanel Orientation="Horizontal">
-        <DockPanel LastChildFill="False">
 
-            <ToolBarTray DockPanel.Dock="Top"
-                     VerticalAlignment="Top"
-                     Orientation="Horizontal">
-                <ToolBar>
-                    <Button Style="{StaticResource ButtonToolbar}"
-                        Command="{Binding CreateNewScriptCommand}"
-                        ToolTip="Create new trigger">
-                        <Image Source="C:\Dev\EcgEngine\Resources\icons\add_trigger.png"
-                           Style="{StaticResource Icon16px}" />
-                    </Button>
-                    <Button Style="{StaticResource ButtonToolbar}"
-                        Command="{Binding DeleteScriptCommand}"
-                        ToolTip="Delete trigger">
-                        <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
-                           Style="{StaticResource Icon16px}" />
-                    </Button>
-                </ToolBar>
-            </ToolBarTray>
+    <Grid Height="500" Width="500">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <ListBox DockPanel.Dock="Top"
+        <StackPanel Grid.Row="0" Grid.Column="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+            <Button ToolTip="Create new trigger"
+                    Command="{Binding CreateNewScriptCommand}"
+                    Style="{StaticResource ButtonToolBar}">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\add_trigger.png"
+                           Style="{StaticResource Icon20px}" />
+            </Button>
+            <Button ToolTip="Delete trigger"
+                    Command="{Binding DeleteScriptCommand}"
+                    Style="{StaticResource ButtonToolBar}">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
+                           Style="{StaticResource Icon20px}" />
+            </Button>
+        </StackPanel>
+
+        <ListBox Grid.Row="1" Grid.Column="0"
                      x:Name="_triggerList"
                      Width="250"
-                     Background="Black"
+                     Background="#101820"
                      SelectedIndex="{Binding SelectedTriggerItemIndex}"
                      ItemsSource="{Binding TriggerItemViewModels}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <prism:InvokeCommandAction 
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <prism:InvokeCommandAction 
                             Command="{Binding ItemSelectedCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <local:TriggerItem />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:TriggerItem />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        <ContentControl 
-            Width="250"
+        <ContentControl Grid.RowSpan="2" Grid.Column="1"
             prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
             prism:RegionManager.RegionName="{x:Static core:RegionNames.ACTION_LIST_REGION}" />
-    </StackPanel>
+    </Grid>
 </UserControl>

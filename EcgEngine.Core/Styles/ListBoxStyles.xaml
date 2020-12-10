@@ -3,10 +3,10 @@
                     xmlns:local="clr-namespace:EcgEngine.Editor.WPF.Styles">
 
     <Style x:Key="GameObjectListBoxItem" TargetType="StackPanel">
-        <Setter Property="Width" Value="185" />
+        <Setter Property="Width" Value="170" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 
 </ResourceDictionary>

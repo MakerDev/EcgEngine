@@ -10,10 +10,9 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:JumpByEditorViewModel}"       
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel
-            Width="280"
-            Height="250"
-            HorizontalAlignment="Center">
+    <StackPanel Background="#101820"
+                Width="280" Height="250"
+                HorizontalAlignment="Center">
         <TextBlock Text="JumpBy"
                    Style="{StaticResource EditorTitleText}" />
         <TextBlock Text="Duration"

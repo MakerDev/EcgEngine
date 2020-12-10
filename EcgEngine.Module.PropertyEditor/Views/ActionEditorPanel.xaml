@@ -9,32 +9,39 @@
              xmlns:local="clr-namespace:EcgEngine.Module.PropertyEditor.Views"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionEditorPanelViewModel}"             
              mc:Ignorable="d"
+             d:Background="#101820"
+             d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <DockPanel LastChildFill="False">
 
-        <ToolBarTray DockPanel.Dock="Top"
-                     VerticalAlignment="Top"
-                     Orientation="Horizontal">
-            <ToolBar>
-                <Button Style="{StaticResource ButtonToolbar}"
-                        Command="{Binding AddNewActionCommand}"
-                        ToolTip="Add new action">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\add_action.png"
-                           Style="{StaticResource Icon16px}" />
-                </Button>
-                <Button Style="{StaticResource ButtonToolbar}"
-                        Command="{Binding DeleteCommand}"
-                        ToolTip="Delete action">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
-                           Style="{StaticResource Icon16px}" />
-                </Button>
-            </ToolBar>
-        </ToolBarTray>
+    <Grid Height="500" Width="250">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <ListBox DockPanel.Dock="Top"
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+            <Button ToolTip="Add new action"
+                    Command="{Binding AddNewActionCommand}"
+                    Style="{StaticResource ButtonToolBar}">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\add_action.png"
+                           Style="{StaticResource Icon20px}" />
+            </Button>
+            <Button ToolTip="Delete action"
+                    Command="{Binding DeleteCommand}"
+                    Style="{StaticResource ButtonToolBar}">
+                <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
+                           Style="{StaticResource Icon20px}" />
+            </Button>
+        </StackPanel>
+
+        <ListBox Grid.Row="1"
+                 DockPanel.Dock="Top"
                  x:Name="_actionList"
                  Width="250"
-                 Background="Black"
+                 Background="#101820"
                  SelectedIndex="{Binding SelectedActionItemIndex}"
                  ItemsSource="{Binding ActionItemViewModels}">
             <i:Interaction.Triggers>
@@ -50,5 +57,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </DockPanel>
+    </Grid>
 </UserControl>
