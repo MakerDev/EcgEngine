@@ -17,6 +17,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
     {
         private readonly IGameManager _gameManager;
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IContainerExtension _containerExtension;
 
         public Action RefreshList { get; set; } = null;
@@ -31,18 +32,34 @@ namespace EcgEngine.Editor.WPF.ViewModels
             set { SetProperty(ref _gameObjects, value); }
         }
 
-        private GameObject _selectedObject = null;
         public GameObject SelectedObject
         {
-            get { return _selectedObject; }
-            set { SetProperty(ref _selectedObject, value); }
+            get
+            {
+                if (SelectedObjectIndex >= 0)
+                {
+                    return GameObjects[SelectedObjectIndex];
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         private int _selectedObjectIndex;
         public int SelectedObjectIndex
         {
             get { return _selectedObjectIndex; }
-            set { SetProperty(ref _selectedObjectIndex, value); }
+            set
+            {
+                SetProperty(ref _selectedObjectIndex, value);
+
+                if (value >= 0)
+                {
+                    _eventAggregator.GetEvent<SelectedGameObjectChangedEvent>().Publish(GameObjects[value]);
+                }
+            }
         }
 
         public DelegateCommand ObjectSelectedCommand { get; set; }
@@ -56,6 +73,7 @@ namespace EcgEngine.Editor.WPF.ViewModels
         {
             _gameManager = gameManager;
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             _containerExtension = containerExtension;
 
             //TODO : 두 번쨰 로딩에서 오브젝트 클릭하면 터지는 거 해결하기
@@ -63,6 +81,10 @@ namespace EcgEngine.Editor.WPF.ViewModels
             AddNewObjectCommand = new DelegateCommand(AddNewObject);
 
             applicationCommands.AddNewGameObjectCommand.RegisterCommand(AddNewObjectCommand);
+            applicationCommands.GetCurrentGameObject = () =>
+            {
+                return SelectedObject;
+            };
 
             eventAggregator.GetEvent<SavefileLoadedEvent>().Subscribe(() =>
             {
