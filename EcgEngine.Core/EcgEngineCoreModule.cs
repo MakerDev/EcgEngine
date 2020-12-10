@@ -4,10 +4,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace EcgEngine.Core
 {
