@@ -44,25 +44,25 @@ public:
 public:
     Level* level;
     Player* player;
-    Sprite* player_sprite;
     Sprite* cameraTarget;
+
+    boolean collidesX;
 
     Animate* walkRight;
     Animate* jumping;
     Animate* falling;
     Follow* camera;
 
+    DrawNode* rectWithBorder;
+
     vector<EventKeyboard::KeyCode> heldKeys;
 
-    virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
-    virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;
+    virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+    virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
     void updateScene(float interval);
-    void updatePlayer(float interval);
-    void updatePlayerSprite(float interval);
 
-    void setupAnimations();
-    void movePlayerForTest(int x);  
+    void updatePlayer(float interval);
 
     int signum(float x);
 
@@ -76,6 +76,8 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 
+    GameScene(void);
+    virtual ~GameScene(void);
 
 private:
     static void ButtonEventHandler(GameScene* gameScene, EventKeyboard::KeyCode keyCode, ui::Widget::TouchEventType touchEventType);
