@@ -21,6 +21,13 @@ Point Level::tileCoordinateToPosition(Point point) {
 
 }
 
+Point Level::tileCoordinateToPosition(Size s, Point point) {
+	float x = floor(s.width / 2 * SCALE_FACTOR + point.x * _map->getTileSize().width * SCALE_FACTOR);
+	float y = floor(s.height / 2 * SCALE_FACTOR + point.y * _map->getTileSize().height * SCALE_FACTOR);
+
+	return Point(x, y);
+}
+
 Point Level::positionToTileCoordinate(Point point) {
 
 	float x = floor(point.x / (_map->getTileSize().width * SCALE_FACTOR));

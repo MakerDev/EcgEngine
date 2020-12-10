@@ -15,7 +15,7 @@ public:
 	TMXTiledMap* getMap();
 
 	Point tileCoordinateToPosition(Point point);
-	//Point positionForTileCoordinate(Size s, Point point);
+	Point tileCoordinateToPosition(Size s, Point point);
 	Point positionToTileCoordinate(Point point);
 	vector<Rect> getCollisionTilesX(Point point, int direction);
 	vector<Rect> getCollisionTilesY(Point point, int direction);
