@@ -50,7 +50,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
         }
 
-        public DelegateCommand ItemSelectedCommand { get; set; }
         public DelegateCommand AddNewActionCommand { get; set; }
         public DelegateCommand EditActionCommand { get; set; }
         public DelegateCommand DeleteCommand { get; set; }

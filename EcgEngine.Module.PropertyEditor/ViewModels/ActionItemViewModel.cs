@@ -7,7 +7,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
     public class ActionItemViewModel : BindableBase
     {
         private Models.VisualScript.Action _action;
-        private readonly IDialogService _dialogService;
 
         public Models.VisualScript.Action Action
         {
@@ -19,16 +18,12 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             }
         }
 
+        //Injected by ActionEditorPanelViewModel
         private DelegateCommand _editActionCommand;
         public DelegateCommand EditActionCommand
         {
             get { return _editActionCommand; }
             set { SetProperty(ref _editActionCommand, value); }
-        }
-
-        public ActionItemViewModel(IDialogService dialogService)
-        {
-            _dialogService = dialogService;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using EcgEngine.Core;
+using Prism.Regions;
+using System;
+using System.Windows.Controls;
 
 namespace EcgEngine.Module.PropertyEditor.Views
 {

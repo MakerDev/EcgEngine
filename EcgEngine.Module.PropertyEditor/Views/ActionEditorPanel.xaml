@@ -44,12 +44,7 @@
                  Background="#101820"
                  SelectedIndex="{Binding SelectedActionItemIndex}"
                  ItemsSource="{Binding ActionItemViewModels}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <prism:InvokeCommandAction 
-                            Command="{Binding ItemSelectedCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:ActionItem>
