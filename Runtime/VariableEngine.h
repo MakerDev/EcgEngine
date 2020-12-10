@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "EcgVariable.h"
+#include "VariableType.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class VariableEngine
 public:
 	static VariableEngine* GetGlobalInstance();
 
-	void CreateNewVariableWithName(const std::string& name);
+	void CreateNewVariableWithName(const std::string& name, VariableType type);
 	EcgVariable* GetVariableWithName(const std::string& name);
 
 	//Helpers

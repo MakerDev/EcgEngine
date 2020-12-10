@@ -5,6 +5,12 @@ void EcgVariable::RegisterOnChangedCallback(std::function<void(EcgVariable*)> ca
 	_onChangedCallbacks.push_back(callback);
 }
 
+EcgVariable::EcgVariable(VariableType type)
+	: _type(type)
+{
+
+}
+
 void EcgVariable::SetFloatValue(float value)
 {
 	_floatValue = value;
@@ -33,9 +39,45 @@ int EcgVariable::GetIntegerValue() const noexcept
 	return _integerValue;
 }
 
-const std::string& EcgVariable::GetStringValue() const
+const std::string& EcgVariable::GetStringValue() const noexcept
 {
 	return _stringValue;
+}
+
+std::string EcgVariable::GetValueAsString() const
+{
+	switch (_type)
+	{
+	case VariableType::typeInteger:
+		return std::to_string(_integerValue);
+	case VariableType::typeFloat:
+		return std::to_string(_floatValue);
+	case VariableType::typeString:
+		return _stringValue;
+	default:
+		break;
+	}
+}
+
+void EcgVariable::SetValueByString(const std::string& value)
+{
+	switch (_type)
+	{
+	case VariableType::typeInteger:
+		_integerValue = std::stoi(value);
+		break;
+
+	case VariableType::typeFloat:
+		_floatValue = std::stof(value);
+		break;
+
+	case VariableType::typeString:
+		_stringValue = value;
+		break;
+
+	default:
+		break;
+	}
 }
 
 void EcgVariable::notifyValueChanged()
