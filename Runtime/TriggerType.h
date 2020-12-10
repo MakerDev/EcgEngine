@@ -5,4 +5,5 @@ enum class TriggerType
 	ClickEvent,
 	InteractionEvent,
 	VariableEvent,
+	Constant,
 };
