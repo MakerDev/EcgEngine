@@ -2,8 +2,6 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EcgEngine.Core.Dialogs.ViewModels
 {
@@ -39,7 +37,7 @@ namespace EcgEngine.Core.Dialogs.ViewModels
                 dialogParam.Add(nameof(UserInput), UserInput);
 
                 var dialogResult = new DialogResult(ButtonResult.OK, dialogParam);
-             
+
                 RequestClose?.Invoke(dialogResult);
             });
         }

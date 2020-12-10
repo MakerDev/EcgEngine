@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EcgEngine.Core.Dialogs
+﻿namespace EcgEngine.Core.Dialogs
 {
     public class DialogNames
     {

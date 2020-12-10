@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EcgEngine.Core
+﻿namespace EcgEngine.Core
 {
     public class RegionNames
     {
