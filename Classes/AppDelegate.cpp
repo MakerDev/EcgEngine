@@ -38,12 +38,12 @@ USING_NS_CC;
 //static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
 
 #ifndef _WIN32
-static cocos2d::Size designResolutionSize = cocos2d::Size(1920, 1080);
+static cocos2d::Size designResolutionSize = cocos2d::Size(960, 640);
 #else
 static cocos2d::Size designResolutionSize = cocos2d::Size(960, 640);
 #endif
 
-static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
+static cocos2d::Size smallResolutionSize = cocos2d::Size(960, 640);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
 
@@ -116,6 +116,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	}
 
 	register_all_packages();
+
+	// run
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("solbrain.plist");
+	AnimationCache::getInstance()->addAnimationsWithFile("solbrain-animations.plist");
 
 	// create a scene. it's an autorelease object
 #ifndef _WIN32

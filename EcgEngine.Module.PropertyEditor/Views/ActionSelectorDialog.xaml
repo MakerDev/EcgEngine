@@ -8,10 +8,14 @@
              xmlns:core="clr-namespace:EcgEngine.Core;assembly=EcgEngine.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionSelectorDialogViewModel}"             
              mc:Ignorable="d"
+             d:Background="#101820"
+             d:Foreground="#FFFFFF"
              Width="415" Height="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel Orientation="Horizontal">
-        <ListBox Background="WhiteSmoke">
+    <StackPanel Orientation="Horizontal"
+                Background="#101820">
+        <ListBox Background="DimGray"
+                 BorderBrush="Transparent">
             <ListBoxItem>
                 <Button Content="MoveX"
                         Command="{Binding OnActionToEditSelectedCommand}"

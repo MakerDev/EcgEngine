@@ -6,7 +6,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DataContext="{d:DesignInstance Type=viewmodels:ConfirmationDialogViewModel}"             
-             mc:Ignorable="d"             
+             mc:Ignorable="d"
+             d:Background="#101820"
+             d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,20 +23,21 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Width="280" Height="60"
-                    Background="White">
+                    Background="#101820">
             <Image Source="C:\Dev\EcgEngine\Resources\icons\warning.png"
                    Style="{StaticResource Icon16px}"
                    Margin="24 0 8 0"/>
             <TextBlock Text="Are you sure you want to delete this?"
                        VerticalAlignment="Center"
-                       FontSize="12"/>
+                       FontSize="12"
+                       Foreground="White"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Width="280" Height="40"
-                    Background="WhiteSmoke">
+                    Background="#363838">
             <Button Margin="50 0 30 0"
                     Command="{Binding CloseDialogCommand}"
                     CommandParameter="Yes"

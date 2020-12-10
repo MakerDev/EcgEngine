@@ -4,8 +4,8 @@
 
     <Style x:Key="ButtonDefault" TargetType="Button">
         <Setter Property="Cursor" Value="Arrow" />
-        <Setter Property="Background" Value="LightGray" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Background" Value="DimGray" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -15,20 +15,19 @@
         <Setter Property="Padding" Value="0 2 0 2" />
     </Style>
 
-    <Style x:Key="ButtonMenubar" TargetType="Button">
+    <Style x:Key="ButtonMenuBar" TargetType="Button">
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="Black" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="2 2 2 2" />
-        <Setter Property="Margin" Value="2 0 0 2" />
+        <Setter Property="Margin" Value="1 0 1 0" />
     </Style>
 
-    <Style x:Key="ButtonToolbar" TargetType="Button">
+    <Style x:Key="ButtonToolBar" TargetType="Button">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
@@ -46,13 +45,13 @@
         <Setter Property="Height" Value="25" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="Light" />
         <Setter Property="Padding" Value="2 2 2 2" />
     </Style>
 

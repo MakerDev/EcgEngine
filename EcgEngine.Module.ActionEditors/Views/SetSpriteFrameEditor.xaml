@@ -9,22 +9,15 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:SetSpriteFrameEditorViewModel}"             
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel
-            Width="450"
-            Height="250"
-            HorizontalAlignment="Center">
-        <TextBlock 
-                FontSize="24" HorizontalAlignment="Center"
-                Text="PlayAnimation"  />
-        <TextBlock 
-                Margin="0 30 0 15"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Text="Animation Name" />
+    <StackPanel Background="#101820"
+                Width="280" Height="250"
+                HorizontalAlignment="Center">
+        <TextBlock Text="SetSpriteFrame"
+                   Style="{StaticResource EditorTitleText}" />
+        <TextBlock Text="Sprite Name"
+                   Style="{StaticResource EditorInformationText}" />
 
-        <TextBox 
-                HorizontalContentAlignment="Center"
-                FontSize="16"
-                Text="{Binding SpriteName}" Width="100" Height="28"/>
+        <TextBox Text="{Binding SpriteName}"
+                 Style="{StaticResource ActionEditorTextBox}"/>
     </StackPanel>
 </views:ActionEditorViewBase>
