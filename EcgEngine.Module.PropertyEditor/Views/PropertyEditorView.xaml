@@ -109,11 +109,22 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        
-        <ContentControl 
+
+        <TabControl 
             Width="650"
-            DockPanel.Dock="Right"
-            prism:RegionManager.RegionName
+            DockPanel.Dock="Right" TabStripPlacement="Bottom">
+            <TabItem Header="script">
+                <ContentControl 
+                    Width="650"
+                    prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.SCRIPT_EDITOR_REGION}" />
+            </TabItem>
+            <TabItem Header="Vairables">
+                <ContentControl 
+                    Width="650"
+                    prism:RegionManager.RegionName
+                    ="{x:Static core:RegionNames.VARIABLE_EDITOR_REGION}" />
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </UserControl>
