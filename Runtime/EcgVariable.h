@@ -2,7 +2,8 @@
 #include <vector>
 #include <string>
 #include <functional>
-
+#include <rapidjson/document.h>
+#include <memory>
 #include "VariableType.h"
 
 class EcgVariable
@@ -10,7 +11,9 @@ class EcgVariable
 public:
 	void RegisterOnChangedCallback(std::function<void(EcgVariable*)> callback);
 
-	EcgVariable(VariableType type);
+	EcgVariable(const std::string& name, VariableType type);
+
+	const std::string& GetName() const noexcept;
 
 	void SetFloatValue(float value);
 	void SetIntegerValue(int value);
@@ -27,9 +30,10 @@ private:
 	void notifyValueChanged();
 
 private:
+	std::string _name;
 	VariableType _type;
-	float _floatValue;
-	int _integerValue;
+	float _floatValue = 0;
+	int _integerValue = 0;
 	std::string _stringValue;
 
 	std::vector <std::function<void(EcgVariable*)>> _onChangedCallbacks;

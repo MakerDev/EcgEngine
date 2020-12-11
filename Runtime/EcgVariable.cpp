@@ -5,10 +5,14 @@ void EcgVariable::RegisterOnChangedCallback(std::function<void(EcgVariable*)> ca
 	_onChangedCallbacks.push_back(callback);
 }
 
-EcgVariable::EcgVariable(VariableType type)
-	: _type(type)
+EcgVariable::EcgVariable(const std::string& name, VariableType type)
+	:_name(name), _type(type)
 {
+}
 
+const std::string& EcgVariable::GetName() const noexcept
+{
+	return _name;
 }
 
 void EcgVariable::SetFloatValue(float value)
