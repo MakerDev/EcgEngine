@@ -32,7 +32,7 @@ namespace EcgEngine.Services
 
             var directory = new DirectoryInfo(packageDirectory);
             var saveFile = directory
-                .GetFiles().FirstOrDefault(x => x.Extension == ".json");
+                .GetFiles().FirstOrDefault(x => x.Name == "ecgsave1.json");
 
             using (var zip = new ZipFile(Encoding.UTF8))
             {
