@@ -46,7 +46,7 @@ public:
     Player* player;
     Sprite* cameraTarget;
 
-    boolean collidesX;
+    bool collidesX;
 
     Animate* walkRight;
     Animate* jumping;

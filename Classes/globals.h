@@ -11,7 +11,7 @@ const EventKeyboard::KeyCode RIGHT_ARROW = EventKeyboard::KeyCode::KEY_RIGHT_ARR
 
 
 #ifndef _WIN32
-    const float SCALE_FACTOR = 3.0f;
+    const float SCALE_FACTOR = 2.0f;
 #else
     const float SCALE_FACTOR = 2.0f;
 #endif
