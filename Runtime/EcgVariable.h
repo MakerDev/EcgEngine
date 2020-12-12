@@ -4,6 +4,7 @@
 #include <functional>
 #include <rapidjson/document.h>
 #include <memory>
+
 #include "VariableType.h"
 
 class EcgVariable
@@ -14,6 +15,7 @@ public:
 	EcgVariable(const std::string& name, VariableType type);
 
 	const std::string& GetName() const noexcept;
+	VariableType GetType() const noexcept;
 
 	void SetFloatValue(float value);
 	void SetIntegerValue(int value);
@@ -30,8 +32,8 @@ private:
 	void notifyValueChanged();
 
 private:
-	std::string _name;
 	VariableType _type;
+	std::string _name;
 	float _floatValue = 0;
 	int _integerValue = 0;
 	std::string _stringValue;

@@ -15,6 +15,11 @@ const std::string& EcgVariable::GetName() const noexcept
 	return _name;
 }
 
+VariableType EcgVariable::GetType() const noexcept
+{
+	return _type;
+}
+
 void EcgVariable::SetFloatValue(float value)
 {
 	_floatValue = value;
