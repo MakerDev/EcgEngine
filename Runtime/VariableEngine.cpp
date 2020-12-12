@@ -14,12 +14,13 @@ VariableEngine* VariableEngine::GetGlobalInstance()
 	return _instance.get();
 }
 
-void VariableEngine::CreateNewVariableWithName(const std::string& name, VariableType type)
+EcgVariable* VariableEngine::CreateNewVariableWithName(const std::string& name, VariableType type)
 {
 	//TODO : Do proper error handling, not assertion
 	assert(_variableTable.count(name) <= 0 && ("Variable " + name + "already exists").c_str());
-
-	_variableTable.insert(std::make_pair(name, std::make_unique<EcgVariable>(type)));
+	
+	_variableTable.insert(std::make_pair(name, std::make_unique<EcgVariable>(name, type)));
+	return _variableTable[name].get();
 }
 
 EcgVariable* VariableEngine::GetVariableWithName(const std::string& name)
