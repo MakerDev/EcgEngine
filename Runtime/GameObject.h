@@ -17,11 +17,14 @@ public:
 	float GetScaleFactor() const noexcept;
 	void SetScaleFactor(float scaleFactor);
 	Point GetPosition() const;
+	string GetObjectName() const noexcept;
+
+
 	virtual void OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys, const vector<EventKeyboard::KeyCode>& releasedKeys);
-	VisualComponent* GetVisual();
-	VisualComponent* GetVisualConst() const;
-	Sprite* GetSprite() const;
-	VariableEngine* GetLocalVariableEngine();
+	VisualComponent* GetVisual() const noexcept;
+	VisualComponent* GetVisualConst() const noexcept;
+	Sprite* GetSprite() const noexcept;
+	VariableEngine* GetLocalVariableEngine() noexcept;
 
 	GameObject();
 
@@ -33,6 +36,7 @@ private:
 
 	//TODO : this is temporal
 	void addActionFromJsonValue(const rapidjson::Value& value);
+	void addNewVariableFromJsonValue(const rapidjson::Value& variableValue);
 
 private:
 	unique_ptr<VariableEngine> _localVariableEngine;
@@ -42,5 +46,6 @@ private:
 	unique_ptr<VisualComponent> _visualComponent;
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
 	float _scaleFactor = 1.0F;
+	string _name = "";
 };
 

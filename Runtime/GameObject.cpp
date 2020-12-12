@@ -12,6 +12,8 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 {
 	auto gameObject = make_unique<GameObject>();
 
+	gameObject->_name = value["Name"].GetString();
+
 	//TODO: Extract these infomation from json file.
 	gameObject->_visualComponent = make_unique<VisualComponent>("solbrain.plist", "solbrain-animations.plist", "idle");
 
@@ -27,6 +29,15 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 	gameObject->position = Point(position["X"].GetInt(), position["Y"].GetInt());
 	gameObject->size = gameObject->GetSprite()->getContentSize();
 
+
+	//INFO : Variables must be parsed before ScriptComponents as some script depends on variables
+	auto& localVariables = value["Variables"];
+
+	for (auto& localVariable : JsonHelper::GetConstArray(localVariables))
+	{
+		gameObject->addNewVariableFromJsonValue(localVariable);
+	}
+
 	auto& scriptComponents = value["ScriptComponents"];
 
 	for (auto& scriptComponent : JsonHelper::GetConstArray(scriptComponents))
@@ -34,7 +45,13 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 		gameObject->addActionFromJsonValue(scriptComponent);
 	}
 
+
 	return std::move(gameObject);
+}
+
+GameObject::GameObject()
+{
+	_localVariableEngine = make_unique<VariableEngine>();
 }
 
 float GameObject::GetScaleFactor() const noexcept
@@ -51,6 +68,11 @@ void GameObject::SetScaleFactor(float scaleFactor)
 Point GameObject::GetPosition() const
 {
 	return this->GetSprite()->getPosition();
+}
+
+string GameObject::GetObjectName() const noexcept
+{
+	return _name;
 }
 
 void GameObject::OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& heldKeys, const vector<EventKeyboard::KeyCode>& releasedKeys)
@@ -85,35 +107,30 @@ void GameObject::OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& hel
 	}
 }
 
-VisualComponent* GameObject::GetVisual()
+VisualComponent* GameObject::GetVisual() const noexcept
 {
 	assert(_visualComponent != nullptr && "VisualComponent is null");
 
 	return _visualComponent.get();
 }
 
-VisualComponent* GameObject::GetVisualConst() const
+VisualComponent* GameObject::GetVisualConst() const noexcept
 {
 	assert(_visualComponent != nullptr && "VisualComponent is null");
 
 	return _visualComponent.get();
 }
 
-Sprite* GameObject::GetSprite() const
+Sprite* GameObject::GetSprite() const noexcept
 {
 	assert(_visualComponent != nullptr && "Couldn't get sprite from null visual component");
 
 	return _visualComponent->GetSprite();
 }
 
-VariableEngine* GameObject::GetLocalVariableEngine()
+VariableEngine* GameObject::GetLocalVariableEngine() noexcept
 {
 	return _localVariableEngine.get();
-}
-
-GameObject::GameObject()
-{
-	_localVariableEngine = make_unique<VariableEngine>();
 }
 
 /// <summary>
@@ -149,10 +166,22 @@ void GameObject::addActionFromJsonValue(const rapidjson::Value& scriptComponentV
 	case TriggerType::InteractionEvent:
 		break;
 	case TriggerType::VariableEvent:
-
 		break;
 
 	default:
 		break;
 	}
+}
+
+void GameObject::addNewVariableFromJsonValue(const rapidjson::Value& variableValue)
+{
+	auto name = variableValue["Name"].GetString();
+	const VariableType type = static_cast<VariableType>(variableValue["EcgVariableType"].GetInt());
+	auto valueString = variableValue["Value"].GetString();
+
+	auto newVariable = this->GetLocalVariableEngine()->CreateNewVariableWithName(name, type);
+
+	assert(newVariable != nullptr && "Creating new variable failed");
+
+	newVariable->SetValueByString(valueString);
 }
