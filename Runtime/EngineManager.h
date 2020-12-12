@@ -6,11 +6,7 @@ class EngineManager
 public:
 	static EngineManager* GetInstance();
 
-	EngineManager()
-		:_packageName("")
-	{
-
-	}
+	EngineManager();
 
 	void SetDefaultLayer(shared_ptr<DefaultLayer> defaultLayer);
 	DefaultLayer* GetDefaultLayer();
@@ -21,6 +17,5 @@ private:
 	std::string _packageName = "";
 	static std::unique_ptr<EngineManager> _instance;
 	static std::shared_ptr<DefaultLayer> _defaultLayer;
-
 };
 

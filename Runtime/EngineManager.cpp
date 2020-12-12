@@ -14,6 +14,12 @@ EngineManager* EngineManager::GetInstance()
 	return _instance.get();
 }
 
+EngineManager::EngineManager()
+	:_packageName("")
+{
+
+}
+
 void EngineManager::SetDefaultLayer(shared_ptr<DefaultLayer> defaultLayer)
 {
 	_defaultLayer = defaultLayer;
