@@ -10,42 +10,17 @@ void SetVariableValueFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeActi
 	const ActionArgument arg1(arguments[0]);
 	const string& variableName = arg1.GetValue();
 
-	//Arg2 : Value Type
+	//Arg2 : New Value
 	const ActionArgument arg2(arguments[0]);
-	const string& valueType = arg2.GetValue();
+	const string& newValue = arg2.GetValue();
 
-	//Arg2 : Value converted to string
-	const ActionArgument arg3(arguments[0]);
-	function<void(void)> setter;
+	shared_ptr<ActionFunctor> functor = make_shared<SetVariableValueFunctor>(targetGameObject, variableName, newValue);
 
-	if (valueType=="float")
-	{
-		const float value = stof(arg3.GetValue());
-	}
-
-	//function<void(void)> flipFunction;
-
-	//if (arg1.GetValue().compare("Right") == 0)
-	//{
-	//	flipFunction = std::bind(RuntimeActionTemplates::FlipSpriteXTrue, target);
-	//}
-	//else
-	//{
-	//	flipFunction = std::bind(RuntimeActionTemplates::FlipSpriteXFalse, target);
-	//}
-
-	//const ActionArgument arg2(arguments[1]);
-	////Value값이 generic이라서 string이기 때문. 타입보고 변환해줄필요있음
-	//int velocity = stoi(arg2.GetValue());
-	//auto moveFunction = std::bind(RuntimeActionTemplates::MoveX, target, velocity);
-
-	//unique_ptr<ActionFunctor> functor = make_unique<MoveXFunctor>(flipFunction, moveFunction);
-
-	//runtimeAction->PushFunctor(std::move(functor));
+	runtimeAction->PushFunctor(functor);
 }
 
-SetVariableValueFunctor::SetVariableValueFunctor(GameObject* target, const string& name, function<void(void)> setter)
-	: _target(target), _variableName(name), _setter(setter)
+SetVariableValueFunctor::SetVariableValueFunctor(GameObject* target, const string& variableName, const string& newValue)
+	: _target(target), _variableName(variableName), _newValue(newValue)
 {
 	VariableEngine* variableEngine = nullptr;
 
@@ -56,9 +31,12 @@ SetVariableValueFunctor::SetVariableValueFunctor(GameObject* target, const strin
 	else
 	{
 		variableEngine = _target->GetLocalVariableEngine();
-	}	
+	}
+
+	_targetVariable = variableEngine->GetVariableWithName(variableName);
 }
 
 void SetVariableValueFunctor::Execute(float delta)
 {
+	_targetVariable->SetValueByString(_newValue);
 }

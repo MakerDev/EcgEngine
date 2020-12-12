@@ -5,6 +5,8 @@
 #include "MoveXFunctor.h"
 #include "PlayAnimationFunctor.h"
 #include "SetSpriteFrameFunctor.h"
+#include "SetVariableValueFunctor.h"
+#include "IncreaseVariableValueFunctor.h"
 
 #define REGISTER_FUNC_TYPE function<void(RuntimeAction*, GameObject*, const rapidjson::Value&)>
 

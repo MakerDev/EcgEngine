@@ -6,6 +6,8 @@ std::map<string, REGISTER_FUNC_TYPE> RuntimeActionCatalog::_actionList =
 	{"JumpBy", RuntimeJumpByFunctor::RegisterToRuntimeAction},
 	{"PlayAnimation", PlayAnimationFunctor::RegisterToRuntimeAction},
 	{"SetSpriteFrame", SetSpriteFrameFunctor::RegisterToRuntimeAction},
+	{"SetVariableValue", SetVariableValueFunctor::RegisterToRuntimeAction},
+	{"IncreaseVariableValue", IncreaseVariableValueFunctor::RegisterToRuntimeAction},
 };
 
 //TODO : Return error code or throw exception
