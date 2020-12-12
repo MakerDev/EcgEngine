@@ -31,6 +31,7 @@ public:
 	//TODO: consider changing name to LoadTmxMap
 	void LoadTileMap(string filename, float scaleFactor);
 	const vector<unique_ptr<GameObject>>& GetGameObjects() const noexcept;
+	GameObject* FindGameObject(const std::string& name);
 
 	float GetScaleFactor() const;
 

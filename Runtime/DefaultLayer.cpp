@@ -133,6 +133,19 @@ const vector<unique_ptr<GameObject>>& DefaultLayer::GetGameObjects() const noexc
 	return _gameObjects;
 }
 
+GameObject* DefaultLayer::FindGameObject(const std::string& name)
+{
+	for (auto& gameObject : _gameObjects)
+	{
+		if (gameObject->GetObjectName().compare(name) == 0)
+		{
+			return gameObject.get();
+		}
+	}
+
+	return nullptr;
+}
+
 float DefaultLayer::GetScaleFactor() const
 {
 	return _scaleFactor;
