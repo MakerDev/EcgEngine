@@ -14,7 +14,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel Orientation="Horizontal"
                 Background="#101820">
-        <ListBox Background="DimGray"
+        <ListBox x:Name="_actionList"
+                 Background="DimGray"
                  BorderBrush="Transparent">
             <ListBoxItem>
                 <Button Content="MoveX"
@@ -38,6 +39,18 @@
                 <Button Content="SetSpriteFrame"
                         Command="{Binding OnActionToEditSelectedCommand}"
                         CommandParameter="SetSpriteFrameEditor"
+                        Style="{StaticResource ButtonActionSelect}" />
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="SetVariableValue"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="SetVariableValueEditor"
+                        Style="{StaticResource ButtonActionSelect}" />
+            </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="IncreaseVariableValue"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="IncreaseVariableValueEditor"
                         Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
         </ListBox>

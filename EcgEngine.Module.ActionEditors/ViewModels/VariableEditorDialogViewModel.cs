@@ -10,8 +10,6 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
 {
     public class VariableEditorDialogViewModel : BindableBase, IDialogAware
     {
-
-
         public string Title => "VariableEditor";
 
         public event Action<IDialogResult> RequestClose;

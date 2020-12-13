@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EcgEngine.Core\EcgEngine.Core.csproj" />
     <ProjectReference Include="..\EcgEngine.Models\EcgEngine.Models.csproj" />
+    <ProjectReference Include="..\EcgEngine.Services\EcgEngine.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\MoveXEditor.xaml.cs">

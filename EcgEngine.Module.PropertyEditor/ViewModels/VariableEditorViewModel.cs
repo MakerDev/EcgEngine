@@ -79,6 +79,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
                 if (result.Result == ButtonResult.OK)
                 {
                     var newVariable = result.Parameters.GetValue<EcgVariable>("EcgVariable");
+                    newVariable.ParentName = GameObject.Name;
                     GameObject.Variables.Add(newVariable);
                     VariableItemViewModels.Add(CreateNewListItemViewModel(newVariable));
                 }
@@ -96,7 +97,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             {
                 if (result.Result == ButtonResult.OK)
                 {
-                    var newVariable = result.Parameters.GetValue<EcgVariable>("EcgVariable");
+                    var newVariable = result.Parameters.GetValue<EcgVariable>("EcgVariable");                    
                     GameObject.Variables[CurrentSelectedVariableIndex] = newVariable;
                     VariableItemViewModels[CurrentSelectedVariableIndex] = CreateNewListItemViewModel(newVariable);
                 }
