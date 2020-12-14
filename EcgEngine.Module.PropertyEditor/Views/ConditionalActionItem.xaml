@@ -19,7 +19,7 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BackgroundColor" Color="Wheat"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="Transparent"/>
     </UserControl.Resources>
     <local:ActionItemViewBase.RenderTransform>
         <TransformGroup>
@@ -54,8 +54,9 @@
             ScriptComponent="{Binding Path=DataContext.ScriptComponent,
                 ElementName=_ifPanel}" />
 
-        <TextBlock 
-            Background="{StaticResource BackgroundColor}"
-            Text="END" FontSize="20" Width="450" Height="30" />
+        <TextBlock Text=" END"
+                   Background="{StaticResource BackgroundColor}"
+                   Width="450" Height="30"
+                   Style="{StaticResource TextDefault}" />
     </StackPanel>
 </local:ActionItemViewBase>

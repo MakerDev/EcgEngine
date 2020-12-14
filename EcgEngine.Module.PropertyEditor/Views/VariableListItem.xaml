@@ -10,8 +10,8 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:VariableListItemViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             >
+             d:Background="#101820" d:Foreground="#FFFFFF"
+             prism:ViewModelLocator.AutoWireViewModel="True">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="PreviewMouseDoubleClick">
@@ -21,25 +21,34 @@
     </i:Interaction.Triggers>
     
     <StackPanel Orientation="Horizontal" 
-                Width="500" Height="40">
+                Width="600" Height="40">
 
-        <TextBlock Height="40" 
+        <TextBlock Text=""
+                   Width="10"
+                   Style="{StaticResource TextDefault}"/>
+        <TextBlock d:Text="VarName"
+                   Text="{Binding Variable.Name}"
                    Width="180"
                    HorizontalAlignment="Left"
-                   d:Text="VarName"
-                   FontSize="24"
-                   Text="{Binding Variable.Name}" />
-        <TextBlock Height="40"
+                   FontSize="12"
+                   Style="{StaticResource TextDefault}" />
+        <TextBlock Text="|"
+                   Width="20"
+                   Style="{StaticResource TextDefault}"/>
+        <TextBlock d:Text="TypeInteger"
+                   Text="{Binding Variable.EcgVariableType}"
                    Width="180"
-                   HorizontalAlignment="Left" 
-                   d:Text="TypeInteger"
-                   FontSize="24"
-                   Text="{Binding Variable.EcgVariableType}"/>
-        <TextBlock Height="40" 
-                   Width="170"
                    HorizontalAlignment="Left"
-                   d:Text="Value"
-                   FontSize="24"
-                   Text="{Binding Variable.Value}" />
+                   FontSize="12"
+                   Style="{StaticResource TextDefault}" />
+        <TextBlock Text="|"
+                   Width="20"
+                   Style="{StaticResource TextDefault}"/>
+        <TextBlock d:Text="Value"
+                   Text="{Binding Variable.Value}"
+                   Width="180"
+                   HorizontalAlignment="Left"
+                   FontSize="12"
+                   Style="{StaticResource TextDefault}" />
     </StackPanel>
 </UserControl>
