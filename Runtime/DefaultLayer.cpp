@@ -52,23 +52,7 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const string& filename)
 
 		if (gameObject->GetObjectName().compare("player") == 0)
 		{
-			Point origin = Director::getInstance()->getVisibleOrigin();
-			Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
-
-			auto cameraTarget = Sprite::create();
-			defaultLayer->_cameraTarget = cameraTarget;
-
-			defaultLayer->_playerSprite = gameObject->GetSprite();
-
-			cameraTarget->setPositionX(defaultLayer->_playerSprite->getPositionX()); // set to players x
-			cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
-
-			cameraTarget->retain();
-			defaultLayer->addChild(cameraTarget);
-			
-			defaultLayer->_cameraAction = Follow::create(cameraTarget, Rect::ZERO);
-			defaultLayer->_cameraAction->retain();
-			defaultLayer->runAction(defaultLayer->_cameraAction);
+			defaultLayer->configureCamera(*gameObject);
 		}
 
 		defaultLayer->AddGameObject(std::move(gameObject));
@@ -175,7 +159,6 @@ GameObject* DefaultLayer::FindGameObject(const std::string& name)
 		{
 			return gameObject->get();
 		}
-
 	}
 
 	return nullptr;
@@ -197,6 +180,27 @@ void DefaultLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	_heldKeys.erase(std::remove(_heldKeys.begin(), _heldKeys.end(), keyCode), _heldKeys.end());
 	_releasedKeys.push_back(keyCode);
+}
+
+void DefaultLayer::configureCamera(const GameObject& gameObject)
+{
+	Point origin = Director::getInstance()->getVisibleOrigin();
+	Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
+
+	auto cameraTarget = Sprite::create();
+	this->_cameraTarget = cameraTarget;
+
+	this->_playerSprite = gameObject.GetSprite();
+
+	cameraTarget->setPositionX(this->_playerSprite->getPositionX()); // set to players x
+	cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
+	cameraTarget->retain();
+
+	this->addChild(cameraTarget);
+
+	this->_cameraAction = Follow::create(cameraTarget, Rect::ZERO);
+	this->_cameraAction->retain();
+	this->runAction(this->_cameraAction);
 }
 
 //TODO : Consider move this to another place
