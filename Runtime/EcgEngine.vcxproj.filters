@@ -141,8 +141,11 @@
     <ClCompile Include="ConstantTrigger.cpp">
       <Filter>src\VisualScript\Triggers</Filter>
     </ClCompile>
+    <ClCompile Include="IncreaseVariableValueFunctor.cpp">
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClCompile>
     <ClCompile Include="ConditionalActionFunctor.cpp">
-      <Filter>src\VisualScript\Actions</Filter>
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,11 +263,14 @@
     <ClInclude Include="ConditionType.h">
       <Filter>src\VisualScript\Types</Filter>
     </ClInclude>
-    <ClInclude Include="ConditionalActionFunctor.h">
-      <Filter>src\VisualScript\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="VariableType.h">
       <Filter>src\VisualScript\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="IncreaseVariableValueFunctor.h">
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalActionFunctor.h">
+      <Filter>src\VisualScript\Actions\VariableActions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,15 +1,32 @@
 #include "VariableCondition.h"
+#include "EngineManager.h"
 
+unique_ptr<VariableCondition> VariableCondition::CreateFromJsonValue(const rapidjson::Value& value)
+{
+	string targetObjectName = value["TargetObjectName"].GetString();
+	auto targetVariableName = value["TargetVariableName"].GetString();
+	const auto conditionType = static_cast<ConditionType>(value["conditionType"].GetInt());
+	string valueToCompare = value["ValueToCompare"].GetString();
 
+	if (targetObjectName.empty())
+	{
+		return make_unique<VariableCondition>(targetVariableName, conditionType, valueToCompare);
+	}
 
-inline VariableCondition::VariableCondition(GameObject& target, const std::string& variableName, ConditionType conditionType, const string& valueToCompare)
+	auto defaultLayer = EngineManager::GetInstance()->GetDefaultLayer();
+	auto targetObject = defaultLayer->FindGameObject(targetObjectName);
+
+	return make_unique<VariableCondition>(*targetObject, targetVariableName, conditionType, valueToCompare);
+}
+
+VariableCondition::VariableCondition(GameObject& target, const std::string& variableName, ConditionType conditionType, const string& valueToCompare)
 	:_conditionType(conditionType), _valueToCompare(valueToCompare)
 {
 	const auto localVariableEngine = target.GetLocalVariableEngine();
 	_targetVariable = localVariableEngine->GetVariableWithName(variableName);
 }
 
-inline VariableCondition::VariableCondition(const std::string& variableName, ConditionType conditionType, const string& valueToCompare)
+VariableCondition::VariableCondition(const std::string& variableName, ConditionType conditionType, const string& valueToCompare)
 	:_conditionType(conditionType), _valueToCompare(valueToCompare)
 {
 	const auto globalVariableEngine = VariableEngine::GetGlobalInstance();
