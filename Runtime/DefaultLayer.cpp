@@ -14,7 +14,7 @@ DefaultLayer* DefaultLayer::CreateDefaultLayer()
 {
 	DefaultLayer* ret = new (std::nothrow) DefaultLayer();
 
-	EngineManager::GetInstance()->SetDefaultLayer(shared_ptr<DefaultLayer>(ret));
+	EngineManager::GetInstance()->SetDefaultLayer(ret);
 
 	if (ret && ret->init())
 	{
