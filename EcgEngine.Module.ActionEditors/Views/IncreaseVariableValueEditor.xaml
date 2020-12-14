@@ -1,0 +1,77 @@
+﻿<views:ActionEditorViewBase x:Class="EcgEngine.Module.ActionEditors.Views.IncreaseVariableValueEditor"
+        xmlns:views="clr-namespace:EcgEngine.Module.ActionEditors.Views"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/" 
+        xmlns:viewmodels="clr-namespace:EcgEngine.Module.ActionEditors.ViewModels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:IncreaseVariableValueEditorViewModel}"       
+        Background="White"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel>
+        <StackPanel 
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBlock 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="TargetObject"  Margin="0 0 15 0" Width="110" 
+                TextAlignment="Center" Height="35" />
+            <ComboBox ItemsSource="{Binding GameObjects}" 
+                      SelectedItem="{Binding SelectedObject}"
+                      Width="140" Height="20">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+        </StackPanel>
+
+        <StackPanel 
+            x:Name="_detailsPanel"
+            Visibility="{Binding IsObjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+            d:Visibility="Visible"
+            >
+            <StackPanel 
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Text="Vairable Name"  Margin="0 0 15 0" Width="110" 
+                    TextAlignment="Center" Height="35" />
+                <ComboBox                 
+                    ItemsSource="{Binding Variables}"                     
+                    SelectedItem="{Binding SelectedVariable}"
+                    Width="140" Height="20">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel 
+                d:Visibility="Visible"
+                Visibility="{Binding IsVariableSelected, 
+                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Text="IncreaseBy" Margin="0 0 15 0" Width="110" 
+                    TextAlignment="Center" Height="35" />
+
+                <TextBox d:Text="20" 
+                     Width="110"
+                     Text="{Binding SelectedVariable.Value}" Height="24" />
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</views:ActionEditorViewBase>
