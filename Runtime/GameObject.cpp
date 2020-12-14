@@ -38,15 +38,25 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 		gameObject->addNewVariableFromJsonValue(localVariable);
 	}
 
+	GameObject* target = gameObject.get();
+
+	gameObject->_registerActions = [&value, target] () {
+		//TODO orignal unique_ptr is moved due to std::move.
+		target->registerAllActionInternal(value);
+	};
+
+	return std::move(gameObject);
+}
+
+
+void GameObject::registerAllActionInternal(const rapidjson::Value& value)
+{
 	auto& scriptComponents = value["ScriptComponents"];
 
 	for (auto& scriptComponent : JsonHelper::GetConstArray(scriptComponents))
 	{
-		gameObject->addActionFromJsonValue(scriptComponent);
+		this->addActionFromJsonValue(scriptComponent);
 	}
-
-
-	return std::move(gameObject);
 }
 
 GameObject::GameObject()
@@ -131,6 +141,11 @@ Sprite* GameObject::GetSprite() const noexcept
 VariableEngine* GameObject::GetLocalVariableEngine() noexcept
 {
 	return _localVariableEngine.get();
+}
+
+void GameObject::RegisterAllActions()
+{
+	this->_registerActions();
 }
 
 /// <summary>
