@@ -77,11 +77,11 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             set { SetProperty(ref _isVariableSelected, value); }
         }
 
-        private string valueToCompare = "";
+        private string _valueToCompare = "";
         public string ValueToCompare
         {
-            get { return valueToCompare; }
-            set { SetProperty(ref valueToCompare, value); }
+            get { return _valueToCompare; }
+            set { SetProperty(ref _valueToCompare, value); }
         }
 
         private string _selectedVariableName = "";

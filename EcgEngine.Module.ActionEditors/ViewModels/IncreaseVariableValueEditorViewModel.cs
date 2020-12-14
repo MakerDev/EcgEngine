@@ -3,6 +3,7 @@ using EcgEngine.Core.Interfaces;
 using EcgEngine.Models;
 using EcgEngine.Models.VariableEngine;
 using EcgEngine.Models.VisualScript.ActionPresets;
+using EcgEngine.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -51,13 +52,6 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             set { SetProperty(ref _variables, value); }
         }
 
-        private EcgVariable _selectedVariable;
-        public EcgVariable SelectedVariable
-        {
-            get { return _selectedVariable; }
-            set { SetProperty(ref _selectedVariable, value); }
-        }
-
         private bool _isVariableSelected;
         public bool IsVariableSelected
         {
@@ -65,18 +59,44 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             set { SetProperty(ref _isVariableSelected, value); }
         }
 
-        private string _increaseBy;
+        private EcgVariable _selectedVariable;
+        public EcgVariable SelectedVariable
+        {
+            get { return _selectedVariable; }
+            set { 
+                SetProperty(ref _selectedVariable, value);
+
+                if (value != null)
+                {
+                    IsVariableSelected = true;
+                    SelectedVariableName = value.Name;
+                }
+            }
+        }
+        private string _selectedVariableName;
+        public string SelectedVariableName
+        {
+            get { return _selectedVariableName; }
+            set { 
+                SetProperty(ref _selectedVariableName, value); 
+            }
+        }
+
+
         private readonly IDialogService _dialogService;
 
+        private string _increaseBy;
         public string IncreaseBy
         {
             get { return _increaseBy; }
             set { SetProperty(ref _increaseBy, value); }
         }
 
-        public IncreaseVariableValueEditorViewModel(IDialogService dialogService)
+        public IncreaseVariableValueEditorViewModel(IDialogService dialogService, IGameManager gameManager)
         {
             _dialogService = dialogService;
+
+            GameObjects = gameManager.GameObjects;
         }
 
         public Models.VisualScript.Action GetAction()

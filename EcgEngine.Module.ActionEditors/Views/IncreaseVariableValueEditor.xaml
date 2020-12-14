@@ -91,7 +91,7 @@
                            Style="{StaticResource TextDefault}" />
                     <TextBox Grid.Column="1"
                          d:Text="Value"
-                         Text="{Binding SelectedVariable.Value}"
+                         Text="{Binding IncreaseBy}"
                          Style="{StaticResource TextBoxDefault}"
                          Width="110" Height="25" />
                 </Grid>
