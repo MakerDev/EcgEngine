@@ -35,6 +35,13 @@ bool KeyEventTrigger::IsMatched(const EventContext& context)
 			result = false;
 		}
 	}
+	else if (_type == KeyEventType::Released)
+	{
+		if (context.KeyEventType == KeyEventType::Released)
+		{
+			result = true;
+		}
+	}
 
 	SetLastMatchResult(result);
 
