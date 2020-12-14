@@ -8,6 +8,7 @@ std::map<string, REGISTER_FUNC_TYPE> RuntimeActionCatalog::_actionList =
 	{"SetSpriteFrame", SetSpriteFrameFunctor::RegisterToRuntimeAction},
 	{"SetVariableValue", SetVariableValueFunctor::RegisterToRuntimeAction},
 	{"IncreaseVariableValue", IncreaseVariableValueFunctor::RegisterToRuntimeAction},
+	{"ConditionalAction", ConditionalActionFunctor::RegisterToRuntimeAction},
 };
 
 //TODO : Return error code or throw exception
