@@ -34,7 +34,7 @@
                     HorizontalAlignment="Center">
             <Button Margin="10 0"  
                     Visibility="Visible"
-                    Width="80" Height="30" 
+                    Width="100" Height="30" 
                     Content="Create Scene" 
                     Command="{Binding CreateSceneCommand}"
                     Focusable="False"/>
