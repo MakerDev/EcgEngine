@@ -12,7 +12,7 @@
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Height="650" Width="950">
+    <Grid Height="650" Width="1250" HorizontalAlignment="Left">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275" />
             <ColumnDefinition Width="10" />
@@ -119,18 +119,19 @@
         </StackPanel>
 
         <TabControl 
-            Width="650"
+            Width="850"
             Grid.Row="2" Grid.Column="2"
             DockPanel.Dock="Right" TabStripPlacement="Bottom" Background="{x:Null}">
             <TabItem Header="script">
                 <ContentControl 
-                    Width="650"
+                    HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                    Width="800"
                     prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.SCRIPT_EDITOR_REGION}" />
             </TabItem>
             <TabItem Header="Vairables">
                 <ContentControl 
-                    Width="650"
+                    Width="850"
                     prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.VARIABLE_EDITOR_REGION}" />
             </TabItem>

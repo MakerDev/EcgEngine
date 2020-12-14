@@ -13,9 +13,9 @@
              d:Background="#101820"
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Width="500">
+             Width="800">
 
-    <Grid Height="500" Width="500">
+    <Grid Height="500" Width="750">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
@@ -63,6 +63,7 @@
         </ListBox>
 
         <ContentControl Grid.RowSpan="2" Grid.Column="1"
+                        Width="460"
             prism:RegionManager.RegionManager="{Binding ScopedRegionManager}"
             prism:RegionManager.RegionName="{x:Static core:RegionNames.ACTION_LIST_REGION}" />
     </Grid>
