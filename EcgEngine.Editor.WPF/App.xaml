@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/ListBoxStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/MenuBarStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/RegionStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TabStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TextBlockStyles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/EcgEngine.Core;component/Styles/TextBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
