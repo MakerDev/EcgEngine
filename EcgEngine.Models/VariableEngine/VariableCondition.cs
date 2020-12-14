@@ -22,5 +22,10 @@ namespace EcgEngine.Models.VariableEngine
             ConditionType = conditionType;
             ValueToCompare = valueToCompare;
         }
+
+        public override string ToString()
+        {
+            return $"{TargetObjectName} {TargetVariableName} {ConditionType} {ValueToCompare}";
+        }
     }
 }
