@@ -49,6 +49,28 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const string& filename)
 	for (auto& gameObjectJsonValue : JsonHelper::GetConstArray(gameobjects))
 	{
 		auto gameObject = GameObject::CreateFromJsonValue(gameObjectJsonValue);
+
+		if (gameObject->GetObjectName().compare("player") == 0)
+		{
+			Point origin = Director::getInstance()->getVisibleOrigin();
+			Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
+
+			auto cameraTarget = Sprite::create();
+			defaultLayer->_cameraTarget = cameraTarget;
+
+			defaultLayer->_playerSprite = gameObject->GetSprite();
+
+			cameraTarget->setPositionX(defaultLayer->_playerSprite->getPositionX()); // set to players x
+			cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
+
+			cameraTarget->retain();
+			defaultLayer->addChild(cameraTarget);
+			
+			defaultLayer->_cameraAction = Follow::create(cameraTarget, Rect::ZERO);
+			defaultLayer->_cameraAction->retain();
+			defaultLayer->runAction(defaultLayer->_cameraAction);
+		}
+
 		defaultLayer->AddGameObject(std::move(gameObject));
 	}
 
@@ -104,6 +126,8 @@ void DefaultLayer::SetInitialPositions()
 
 void DefaultLayer::UpdateScene(float timeDelta)
 {
+	_cameraTarget->setPositionX(_playerSprite->getPositionX());
+
 	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
 		(*gameObject)->OnUpdate(timeDelta, _heldKeys, _releasedKeys);

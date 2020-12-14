@@ -45,6 +45,10 @@ protected:
 	vector<EventKeyboard::KeyCode> _releasedKeys;
 
 private:
+	Sprite* _cameraTarget = nullptr;
+	Sprite* _playerSprite = nullptr;
+	Follow* _cameraAction = nullptr;
+	
 	static string readJson(const string& filename);
 	float _scaleFactor = 2.0f;
 };
