@@ -10,8 +10,8 @@ void SetVariableValueFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeActi
 	const ActionArgument arg1(arguments[0]);
 	const string& variableName = arg1.GetValue();
 
-	//Arg2 : New Value
-	const ActionArgument arg2(arguments[0]);
+	//Arg3 : New Value
+	const ActionArgument arg2(arguments[2]);
 	const string& newValue = arg2.GetValue();
 
 	shared_ptr<ActionFunctor> functor = make_shared<SetVariableValueFunctor>(targetGameObject, variableName, newValue);
@@ -39,4 +39,5 @@ SetVariableValueFunctor::SetVariableValueFunctor(GameObject* target, const strin
 void SetVariableValueFunctor::Execute(float delta)
 {
 	_targetVariable->SetValueByString(_newValue);
+	CCLOG("State %s", _newValue.c_str());
 }
