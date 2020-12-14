@@ -10,52 +10,62 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:VariableEditorDialogViewModel}"             
              mc:Ignorable="d"
              Width="280" Height="300"
-             prism:ViewModelLocator.AutoWireViewModel="True">
-    <StackPanel>
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <TextBlock 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Text="Name"  Margin="0 0 15 0" Width="110" 
-                TextAlignment="Center" Height="35" />
-            <TextBox d:Text="PlayerHeight" 
-                     Width="110"
-                     Text="{Binding Variable.Name}" Height="24" />
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:Background="#101820" Foreground="#FFFFFF">
+
+    <Grid Background="#101820">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock Text="Variable Editor"
+                       Style="{StaticResource EditorTitleText}" />
         </StackPanel>
 
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <TextBlock 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Text="Type"  Margin="0 0 15 0" Width="110" 
-                TextAlignment="Center" Height="35" />
-            <ComboBox                 
-                ItemsSource="{Binding 
-                    Source={helper:EnumBindingSource model:EcgVariableType}}" 
-                SelectedItem="{Binding VariableType}"
-                Width="110" Height="20"
-                />
-        </StackPanel>
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Name"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource TextDefault}" />
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 Text="{Binding Variable.Name}"
+                 Width="120" Height="25"
+                 Style="{StaticResource ActionEditorTextBox}" />
 
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <TextBlock 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Text="Value" Margin="0 0 15 0" Width="110" 
-                TextAlignment="Center" Height="35" />
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                   Text="Type"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource TextDefault}" />
+        <ComboBox Grid.Row="2" Grid.Column="1"
+                  ItemsSource="{Binding Source=
+                                {helper:EnumBindingSource model:EcgVariableType}}"
+                  SelectedItem="{Binding VariableType}"
+                  Width="120" Height="25" />
 
-            <TextBox d:Text="Value" 
-                     Width="110"
-                     Text="{Binding Variable.Value}" Height="24" />
-        </StackPanel>
+        <TextBlock Grid.Row="3" Grid.Column="0"
+                   Text="Value"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource TextDefault}" />
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 d:Text="Value"
+                 Text="{Binding Variable.Value}"
+                 Style="{StaticResource ActionEditorTextBox}" />
 
-        <Button Content="Save" 
-                Command="{Binding CloseCommand}" />
-    </StackPanel>
+        <Button Grid.Row="4" Grid.ColumnSpan="2"
+                Content="Save"
+                Command="{Binding CloseCommand}"
+                Style="{StaticResource ButtonDefault}"
+                Margin="100 15 100 30" Cursor="Arrow"/>
+    </Grid>
 </UserControl>

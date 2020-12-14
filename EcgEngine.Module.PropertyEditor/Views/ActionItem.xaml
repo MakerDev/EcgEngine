@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionItemViewModel}"     
              mc:Ignorable="d"       
-             d:Width="250" Height="30"
+             d:Width="450" Height="30"
              >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="PreviewMouseDoubleClick">

@@ -10,72 +10,94 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewmodels:SetVariableValueEditorViewModel}"      
     prism:ViewModelLocator.AutoWireViewModel="True"
-    Background="White"
-    >
-    
-    <StackPanel>
-        <StackPanel 
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <TextBlock 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Text="TargetObject"  Margin="0 0 15 0" Width="110" 
-                TextAlignment="Center" Height="35" />
-            <ComboBox ItemsSource="{Binding GameObjects}" 
-                      SelectedItem="{Binding SelectedObject}"
-                      Width="140" Height="20">
+    Background="#101820" Foreground="#FFFFFF">
+
+    <StackPanel Background="#101820"
+                Width="280" Height="250"
+                HorizontalAlignment="Center">
+        <TextBlock Text="SetVariableValue"
+                   Style="{StaticResource EditorTitleText}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="160" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="Target object"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource TextDefault}" />
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                  ItemsSource="{Binding GameObjects}"
+                  SelectedItem="{Binding SelectedObject}"
+                  Width="140" Height="25">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Name}"
+                               FontSize="12"
+                               Foreground="Black"
+                               Style="{StaticResource TextDefault}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-        </StackPanel>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2"
+              x:Name="_detailsPanel"
+              Visibility="{Binding IsObjectSelected,
+                            Converter={StaticResource BooleanToVisibilityConverter}}"
+              d:Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <StackPanel 
-            x:Name="_detailsPanel"
-            Visibility="{Binding IsObjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
-            d:Visibility="Visible"
-            >
-            <StackPanel 
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <TextBlock 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Text="Vairable Name"  Margin="0 0 15 0" Width="110" 
-                    TextAlignment="Center" Height="35" />
-                <ComboBox                 
-                    ItemsSource="{Binding Variables}"                     
-                    SelectedItem="{Binding SelectedVariable}"
-                    Width="140" Height="20">
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Variable Name"
+                       HorizontalAlignment="Right"
+                       Style="{StaticResource TextDefault}" />
+                <ComboBox Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding Variables}"
+                      SelectedItem="{Binding SelectedVariable}"
+                      Width="140" Height="25">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="12"
+                                       Foreground="Black"
+                                       Style="{StaticResource TextDefault}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </StackPanel>
 
-            <StackPanel 
-                d:Visibility="Visible"
-                Visibility="{Binding IsVariableSelected, 
-                    Converter={StaticResource BooleanToVisibilityConverter}}"
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <TextBlock 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Text="Set Value To" Margin="0 0 15 0" Width="110" 
-                    TextAlignment="Center" Height="35" />
+                <Grid Grid.Row="1" Grid.ColumnSpan="2"
+                  Visibility="{Binding IsVariableSelected,
+                                Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                <TextBox d:Text="Value" 
-                     Width="110"
-                     Text="{Binding NewValue}" Height="24" />
-            </StackPanel>
-        </StackPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
+                    <TextBlock Grid.Column="0"
+                           Text="Set value to:"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource TextDefault}" />
+                    <TextBox Grid.Column="1"
+                         d:Text="Value"
+                         Text="{Binding NewValue}"
+                         Style="{StaticResource TextBoxDefault}"
+                         Width="110" Height="25" />
+                </Grid>
+            </Grid>
+        </Grid>
     </StackPanel>
 </views:ActionEditorViewBase>
