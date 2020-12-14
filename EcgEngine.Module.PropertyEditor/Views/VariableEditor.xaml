@@ -8,29 +8,35 @@
              xmlns:local="clr-namespace:EcgEngine.Module.PropertyEditor.Views"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewmodels:VariableEditorViewModel}"     
-             Width="600"
-             Height="600"
+             Width="620"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <DockPanel LastChildFill="False">
+    <DockPanel LastChildFill="False"
+               Background="#101820">
 
-        <Button DockPanel.Dock="Top" Height="35"      
+        <Button ToolTip="Add new variable"
                 Command="{Binding AddNewVariableCommand}"
-                Content="Add new Variable" />
-        <ListBox 
-            x:Name="_variableListBox"
-            ItemsSource="{Binding VariableItemViewModels}"
-            SelectedIndex="{Binding CurrentSelectedVariableIndex}"
-            HorizontalAlignment="Left"
-            DockPanel.Dock="Top"
-            Width="600"
-            Height="505"
-            >
+                DockPanel.Dock="Top"
+                Width="620" Height="30"
+                VerticalContentAlignment="Center"
+                Style="{StaticResource ButtonDefault}" Cursor="Hand">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Add New Variable"
+                       Style="{StaticResource TextDefault}" />
+            </StackPanel>
+            
+        </Button>
+        <ListBox x:Name="_variableListBox"
+                 ItemsSource="{Binding VariableItemViewModels}"
+                 SelectedIndex="{Binding CurrentSelectedVariableIndex}"
+                 HorizontalAlignment="Left"
+                 DockPanel.Dock="Top"
+                 Width="620"
+                 Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:VariableListItem />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </DockPanel>
 </UserControl>

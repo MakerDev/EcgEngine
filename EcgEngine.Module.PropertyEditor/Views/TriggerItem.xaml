@@ -15,7 +15,7 @@
     </i:Interaction.Triggers>
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Trigger}" 
-                   Width="250" Height="30"
+                   Width="235" Height="30"
                    TextWrapping="Wrap"
                    Style="{StaticResource TriggerListBoxText}" />
     </StackPanel>

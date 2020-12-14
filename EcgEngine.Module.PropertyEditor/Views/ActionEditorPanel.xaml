@@ -12,7 +12,7 @@
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Height="500" Width="450" x:Name="_mainGrid">
+    <Grid Width="540" x:Name="_mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
@@ -30,19 +30,19 @@
             </Button>
             <Button ToolTip="Delete action"
                     Command="{Binding DeleteCommand}"
-                    Style="{StaticResource ButtonToolBar}">
+                    Style="{StaticResource ButtonToolBar}" Cursor="Hand">
                 <Image Source="C:\Dev\EcgEngine\Resources\icons\delete.png"
                            Style="{StaticResource Icon20px}" />
             </Button>
         </StackPanel>
 
         <ListBox Grid.Row="1"
-                 DockPanel.Dock="Top"
+                 HorizontalAlignment="Left"
                  Background="#101820"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  ScrollViewer.CanContentScroll="False"
                  SelectedIndex="{Binding SelectedActionItemIndex}"
-                 Width="450"
+                 Width="435"
                  ItemsSource="{Binding ActionItemViewModels}">
             <ListBox.Resources>
                 <DataTemplate 

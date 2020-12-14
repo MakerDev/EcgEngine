@@ -18,21 +18,22 @@
     </i:Interaction.Triggers>
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BackgroundColor" Color="Wheat"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="Transparent"/>
     </UserControl.Resources>
 
-    <StackPanel 
-        x:Name="_ifPanel"
-        Width="450">
-        <StackPanel
-            Orientation="Horizontal"
-            Height="60">
-            <TextBlock 
-                Background="{StaticResource BackgroundColor}"
-                Text="IF|" FontSize="20" Width="20" Height="60" />
+    <StackPanel x:Name="_ifPanel"
+                Background="#101820"
+                Width="450">
+        <StackPanel Orientation="Horizontal"
+                    Height="30">
+            <TextBlock Text=" IF  "
+                       Background="{StaticResource BackgroundColor}"
+                       Width="30" Height="30"
+                       Style="{StaticResource TextDefault}"/>
             <TextBlock Text="{Binding Action}"
                        Background="{StaticResource BackgroundColor}"
-                       Width="430" Height="60" TextWrapping="WrapWithOverflow"
+                       Foreground="White"
+                       Width="420" Height="30" TextWrapping="WrapWithOverflow"
                        Style="{StaticResource ActionListBoxText}" />
         </StackPanel>
 
@@ -45,8 +46,9 @@
             ScriptComponent="{Binding Path=DataContext.ScriptComponent,
                 ElementName=_ifPanel}" />
 
-        <TextBlock 
-            Background="{StaticResource BackgroundColor}"
-            Text="END" FontSize="20" Width="450" Height="30" />
+        <TextBlock Text=" END"
+                   Background="{StaticResource BackgroundColor}"
+                   Width="450" Height="30"
+                   Style="{StaticResource TextDefault}" />
     </StackPanel>
 </local:ActionItemViewBase>
