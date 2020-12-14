@@ -14,7 +14,6 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             set
             {
                 SetProperty(ref _action, value);
-
             }
         }
 

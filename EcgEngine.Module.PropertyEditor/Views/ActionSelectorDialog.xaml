@@ -53,6 +53,12 @@
                         CommandParameter="IncreaseVariableValueEditor"
                         Style="{StaticResource ButtonActionSelect}" />
             </ListBoxItem>
+            <ListBoxItem>
+                <Button Content="ConditionalAction"
+                        Command="{Binding OnActionToEditSelectedCommand}"
+                        CommandParameter="ConditionalActionEditor"
+                        Style="{StaticResource ButtonActionSelect}" />
+            </ListBoxItem>
         </ListBox>
 
         <StackPanel Width="280"

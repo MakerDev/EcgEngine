@@ -3,11 +3,11 @@
 namespace EcgEngine.Module.ActionEditors.Views
 {
     /// <summary>
-    /// Interaction logic for IncreaseVariableValue
+    /// Interaction logic for ConditionalActionEditor
     /// </summary>
-    public partial class IncreaseVariableValue : ActionEditorViewBase
+    public partial class ConditionalActionEditor : ActionEditorViewBase
     {
-        public IncreaseVariableValue()
+        public ConditionalActionEditor()
         {
             InitializeComponent();
         }
