@@ -30,10 +30,10 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
             set { SetProperty(ref _actionItemViewModels, value); }
         }
 
-        private int _selectedTriggerItemIndex = -1;
         private readonly IContainerExtension _containerExtension;
         private readonly IDialogService _dialogService;
 
+        private int _selectedTriggerItemIndex = -1;
         public int SelectedActionItemIndex
         {
             get
@@ -87,6 +87,7 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
         private void EditAction()
         {
+            //TODO : fix crash when editing nested actions
             var dialogParameters = new DialogParameters();
             dialogParameters.Add("OriginalAction", ScriptComponent.Actions[SelectedActionItemIndex]);
 

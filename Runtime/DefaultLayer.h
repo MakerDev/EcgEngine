@@ -16,7 +16,7 @@ class DefaultLayer : public cocos2d::Layer
 {
 public:
 	static DefaultLayer* CreateDefaultLayer();
-	static DefaultLayer* CreateDefaultLayerFromJson(const char* filename);
+	static DefaultLayer* CreateDefaultLayerFromJson(const string& filename);
 
 	void AddButtonLayer(Scene* scene, DefaultLayer* layer);
 	void ButtonEventHandler(DefaultLayer* layer, EventKeyboard::KeyCode keyCode, ui::Widget::TouchEventType touchEventType);
@@ -45,7 +45,11 @@ protected:
 	vector<EventKeyboard::KeyCode> _releasedKeys;
 
 private:
-	static string readJson(const char* filename);
+	Sprite* _cameraTarget = nullptr;
+	Sprite* _playerSprite = nullptr;
+	Follow* _cameraAction = nullptr;
+	
+	static string readJson(const string& filename);
 	float _scaleFactor = 2.0f;
 };
 

@@ -12,7 +12,7 @@
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Height="500" Width="450" x:Name="_mainGrid">
+    <Grid MinHeight="50" Width="450" x:Name="_mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />

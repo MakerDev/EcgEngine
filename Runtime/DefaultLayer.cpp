@@ -6,12 +6,16 @@
 #include "Level.h"
 #include "FileHelper.h"
 #include "JsonHelper.h"
+#include "EngineManager.h" 
 
 using namespace rapidjson;
 
 DefaultLayer* DefaultLayer::CreateDefaultLayer()
 {
 	DefaultLayer* ret = new (std::nothrow) DefaultLayer();
+
+	EngineManager::GetInstance()->SetDefaultLayer(ret);
+
 	if (ret && ret->init())
 	{
 		ret->autorelease();
@@ -24,7 +28,7 @@ DefaultLayer* DefaultLayer::CreateDefaultLayer()
 	}
 }
 
-DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
+DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const string& filename)
 {
 	auto defaultLayer = DefaultLayer::CreateDefaultLayer();
 
@@ -38,14 +42,42 @@ DefaultLayer* DefaultLayer::CreateDefaultLayerFromJson(const char* filename)
 	assert(document.HasMember("DefaultLayer") && "There is no default layer!");
 
 	const rapidjson::Value& layer = document["DefaultLayer"];
-
 	const rapidjson::Value& gameobjects = document["GameObjects"];
 
-	
-	for (auto& gameObject : JsonHelper::GetConstArray(gameobjects))
+	//auto gameObjects
+
+	for (auto& gameObjectJsonValue : JsonHelper::GetConstArray(gameobjects))
 	{
-		auto player = GameObject::CreateFromJsonValue(gameObject);
-		defaultLayer->AddGameObject(std::move(player));
+		auto gameObject = GameObject::CreateFromJsonValue(gameObjectJsonValue);
+
+		if (gameObject->GetObjectName().compare("player") == 0)
+		{
+			Point origin = Director::getInstance()->getVisibleOrigin();
+			Size wsize = Director::getInstance()->getVisibleSize();  //default screen size (or design resolution size, if you are using design resolution)
+
+			auto cameraTarget = Sprite::create();
+			defaultLayer->_cameraTarget = cameraTarget;
+
+			defaultLayer->_playerSprite = gameObject->GetSprite();
+
+			cameraTarget->setPositionX(defaultLayer->_playerSprite->getPositionX()); // set to players x
+			cameraTarget->setPositionY(wsize.height / 2 + origin.y); // center of height
+
+			cameraTarget->retain();
+			defaultLayer->addChild(cameraTarget);
+			
+			defaultLayer->_cameraAction = Follow::create(cameraTarget, Rect::ZERO);
+			defaultLayer->_cameraAction->retain();
+			defaultLayer->runAction(defaultLayer->_cameraAction);
+		}
+
+		defaultLayer->AddGameObject(std::move(gameObject));
+	}
+
+	//TODO : clean up this process
+	for (auto& gameObject : defaultLayer->GetGameObjects())
+	{
+		gameObject->RegisterAllActions();
 	}
 
 	//TODO : enable to manually set this scale factor 
@@ -94,6 +126,8 @@ void DefaultLayer::SetInitialPositions()
 
 void DefaultLayer::UpdateScene(float timeDelta)
 {
+	_cameraTarget->setPositionX(_playerSprite->getPositionX());
+
 	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
 		(*gameObject)->OnUpdate(timeDelta, _heldKeys, _releasedKeys);
@@ -135,12 +169,13 @@ const vector<unique_ptr<GameObject>>& DefaultLayer::GetGameObjects() const noexc
 
 GameObject* DefaultLayer::FindGameObject(const std::string& name)
 {
-	for (auto& gameObject : _gameObjects)
+	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
-		if (gameObject->GetObjectName().compare(name) == 0)
+		if ((*gameObject)->GetObjectName().compare(name) == 0)
 		{
-			return gameObject.get();
+			return gameObject->get();
 		}
+
 	}
 
 	return nullptr;
@@ -165,7 +200,7 @@ void DefaultLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 }
 
 //TODO : Consider move this to another place
-string DefaultLayer::readJson(const char* filename)
+string DefaultLayer::readJson(const string& filename)
 {
 	string jsonContent;
 

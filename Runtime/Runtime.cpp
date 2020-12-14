@@ -65,8 +65,8 @@ void Runtime::CreateScene(const std::string& filename)
 	Scene* newScene = Scene::createWithSize(Size(320, 320));
 
 	assert(newScene != nullptr && "Failed to create new scene");
-
-	auto gameObjectsLayer = DefaultLayer::CreateDefaultLayerFromJson(filename.c_str());
+	
+	auto gameObjectsLayer = EngineManager::CreateDefaultLayer(filename);
 
 #ifndef _WIN32
 	gameObjectsLayer->AddButtonLayer(newScene, gameObjectsLayer);

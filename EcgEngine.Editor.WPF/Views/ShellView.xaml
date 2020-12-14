@@ -9,115 +9,117 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"            
             prism:ViewModelLocator.AutoWireViewModel="True"
-            MinWidth="1200" Height="815" Title="EcgEngine" Icon="C:\Dev\EcgEngine\Resources\icons\logo.png"
+             Title="EcgEngine" Icon="C:\Dev\EcgEngine\Resources\icons\logo.png"
             Background="#101820" Foreground="#FFFFFF">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="188" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="55" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Viewbox Stretch="UniformToFill">
+        <Grid Width="1500" Height="820">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="188" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0">
-            <Menu Style="{StaticResource MenuBar}">
-                <Image Source="C:\Dev\EcgEngine\Resources\icons\logo.png" />
-                <MenuItem Header="_File(F)">
-                    <MenuItem Header="Load"
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <Menu Style="{StaticResource MenuBar}">
+                    <Image Source="C:\Dev\EcgEngine\Resources\icons\logo.png" />
+                    <MenuItem Header="_File(F)">
+                        <MenuItem Header="Load"
                           Command="{Binding LoadCommand}"
                           Style="{StaticResource MenuBarItem}">
-                        <MenuItem.Icon>
-                            <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Save"
+                            <MenuItem.Icon>
+                                <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save"
                           Command="{Binding SaveCommand}"
                           Style="{StaticResource MenuBarItem}">
-                        <MenuItem.Icon>
-                            <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Publish"
+                            <MenuItem.Icon>
+                                <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Publish"
                           Command="{Binding PublishCommand}"
                           Style="{StaticResource MenuBarItem}">
-                        <MenuItem.Icon>
-                            <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
-                        </MenuItem.Icon>
+                            <MenuItem.Icon>
+                                <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_Edit(E)">
-                    <MenuItem Header="New Game Object"
+                    <MenuItem Header="_Edit(E)">
+                        <MenuItem Header="New Game Object"
                           Command="{Binding ApplicationCommands.AddNewGameObjectCommand}"
                           Style="{StaticResource MenuBarItem}">
-                        <MenuItem.Icon>
-                            <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png" />
-                        </MenuItem.Icon>
+                            <MenuItem.Icon>
+                                <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_View(V)">
-                    <MenuItem Header="Play"
+                    <MenuItem Header="_View(V)">
+                        <MenuItem Header="Play"
                           Command="{Binding PlayCommand}"
                           Style="{StaticResource MenuBarItem}">
-                        <MenuItem.Icon>
-                            <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
-                        </MenuItem.Icon>
+                            <MenuItem.Icon>
+                                <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-            </Menu>
+                </Menu>
 
-            <StackPanel x:Name="_menubar"
+                <StackPanel x:Name="_menubar"
                     Style="{StaticResource MenuBar_StackPanel}">
-                <Separator Width="5"
+                    <Separator Width="5"
                        Background="Transparent" />
-                <Button ToolTip="Save"
+                    <Button ToolTip="Save"
                     Command="{Binding SaveCommand}"
                     Style="{StaticResource ButtonMenuBar}">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
-                </Button>
-                <Button ToolTip="Load"
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\save.png" />
+                    </Button>
+                    <Button ToolTip="Load"
                     Command="{Binding LoadCommand}"
                     Style="{StaticResource ButtonMenuBar}">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
-                </Button>
-                <Button ToolTip="Publish"
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\load.png" />
+                    </Button>
+                    <Button ToolTip="Publish"
                     Command="{Binding PublishCommand}"
                     Style="{StaticResource ButtonMenuBar}">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
-                </Button>
-                <Button ToolTip="Play"
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\publish.png" />
+                    </Button>
+                    <Button ToolTip="Play"
                     Command="{Binding PlayCommand}"
                     Style="{StaticResource ButtonMenuBar}">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
-                </Button>
-                <TextBlock Style="{StaticResource Separator_TextBlock}" />
-                <Button ToolTip="New Game Object"
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\play.png" />
+                    </Button>
+                    <TextBlock Style="{StaticResource Separator_TextBlock}" />
+                    <Button ToolTip="New Game Object"
                     Command="{Binding ApplicationCommands.AddNewGameObjectCommand}"
                     Style="{StaticResource ButtonMenuBar}">
-                    <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png" />
-                </Button>
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\game_object.png" />
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
 
-        <DockPanel Grid.Row="1" Grid.Column="0"
+            <DockPanel Grid.Row="1" Grid.Column="0"
                    x:Name="_gameObjectListPanel"
                    LastChildFill="False"
                    VerticalAlignment="Top"
                    Margin="0 5 0 0">
-            <ContentControl
+                <ContentControl
                 prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.GAMEOBJECT_LIST_REGION}"
                 HorizontalContentAlignment="Center">
-            </ContentControl>
-        </DockPanel>
+                </ContentControl>
+            </DockPanel>
 
-        <ContentControl Grid.RowSpan="2" Grid.Column="1"
+            <ContentControl Grid.RowSpan="2" Grid.Column="1"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Margin="30"
                 prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.EDITOR_REGION}" />
-    </Grid>
+        </Grid>
+    </Viewbox>
 </Window>

@@ -2,7 +2,7 @@
 
 //Static variable init
 std::unique_ptr<EngineManager> EngineManager::_instance = nullptr;
-std::shared_ptr<DefaultLayer> EngineManager::_defaultLayer = nullptr;
+DefaultLayer* EngineManager::_defaultLayer = nullptr;
 
 EngineManager* EngineManager::GetInstance()
 {
@@ -20,14 +20,21 @@ EngineManager::EngineManager()
 
 }
 
-void EngineManager::SetDefaultLayer(shared_ptr<DefaultLayer> defaultLayer)
+DefaultLayer* EngineManager::CreateDefaultLayer(const string& filename)
+{
+	auto defaultLayer = DefaultLayer::CreateDefaultLayerFromJson(filename);
+
+	return defaultLayer;
+}
+
+void EngineManager::SetDefaultLayer(DefaultLayer* defaultLayer)
 {
 	_defaultLayer = defaultLayer;
 }
 
 DefaultLayer* EngineManager::GetDefaultLayer()
 {
-	return _defaultLayer.get();
+	return _defaultLayer;
 }
 
 const string& EngineManager::GetPackageName() const

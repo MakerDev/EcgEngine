@@ -9,7 +9,8 @@
              xmlns:local="clr-namespace:EcgEngine.Module.PropertyEditor.Views"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewmodels:ConditionalActionItemViewModel}"    
-             MinHeight="50"
+             MinHeight="20"
+             RenderTransformOrigin="0 0.5"                          
              prism:ViewModelLocator.AutoWireViewModel="True">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="PreviewMouseDoubleClick">
@@ -20,6 +21,14 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="BackgroundColor" Color="Wheat"/>
     </UserControl.Resources>
+    <local:ActionItemViewBase.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleX="0.9" ScaleY="1"/>
+            <SkewTransform/>
+            <RotateTransform/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </local:ActionItemViewBase.RenderTransform>
 
     <StackPanel 
         x:Name="_ifPanel"
@@ -29,10 +38,10 @@
             Height="60">
             <TextBlock 
                 Background="{StaticResource BackgroundColor}"
-                Text="IF|" FontSize="20" Width="20" Height="60" />
+                Text="IF :" FontSize="20" Width="30" Height="30" />
             <TextBlock Text="{Binding Action}"
                        Background="{StaticResource BackgroundColor}"
-                       Width="430" Height="60" TextWrapping="WrapWithOverflow"
+                       Width="430" Height="30" TextWrapping="WrapWithOverflow"
                        Style="{StaticResource ActionListBoxText}" />
         </StackPanel>
 

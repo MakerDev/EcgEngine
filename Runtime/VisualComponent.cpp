@@ -57,6 +57,4 @@ void VisualComponent::PlayAnimation(const string& animationName, float delta)
 	}
 
 	animation->step(delta);
-
-	CCLOG("walking...");
 }

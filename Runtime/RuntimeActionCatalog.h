@@ -7,6 +7,7 @@
 #include "SetSpriteFrameFunctor.h"
 #include "SetVariableValueFunctor.h"
 #include "IncreaseVariableValueFunctor.h"
+#include "ConditionalActionFunctor.h"
 
 #define REGISTER_FUNC_TYPE function<void(RuntimeAction*, GameObject*, const rapidjson::Value&)>
 
