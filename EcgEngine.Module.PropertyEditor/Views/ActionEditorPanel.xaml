@@ -5,7 +5,6 @@
              xmlns:viewmodels="clr-namespace:EcgEngine.Module.PropertyEditor.ViewModels" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:EcgEngine.Module.PropertyEditor.Views"
              d:DataContext="{d:DesignInstance Type=viewmodels:ActionEditorPanelViewModel}"             
              mc:Ignorable="d"
@@ -13,7 +12,7 @@
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Height="500" Width="250">
+    <Grid Height="500" Width="450" x:Name="_mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
@@ -39,18 +38,24 @@
 
         <ListBox Grid.Row="1"
                  DockPanel.Dock="Top"
-                 x:Name="_actionList"
-                 Width="250"
                  Background="#101820"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 ScrollViewer.CanContentScroll="False"
                  SelectedIndex="{Binding SelectedActionItemIndex}"
+                 Width="450"
                  ItemsSource="{Binding ActionItemViewModels}">
-
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:ActionItem>
-                    </local:ActionItem>
+            <ListBox.Resources>
+                <DataTemplate 
+                        DataType="{x:Type viewmodels:ActionItemViewModel}">
+                    <local:ActionItem EditCommand="{Binding Path=DataContext.EditActionCommand,
+                        ElementName=_mainGrid}" />
                 </DataTemplate>
-            </ListBox.ItemTemplate>
+                <DataTemplate 
+                        DataType="{x:Type viewmodels:ConditionalActionItemViewModel}">
+                    <local:ConditionalActionItem  EditCommand="{Binding Path=DataContext.EditActionCommand,
+                        ElementName=_mainGrid}" />
+                </DataTemplate>
+            </ListBox.Resources>
         </ListBox>
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"            
             prism:ViewModelLocator.AutoWireViewModel="True"
-            Width="1200" Height="815" Title="EcgEngine" Icon="C:\Dev\EcgEngine\Resources\icons\logo.png"
+            MinWidth="1200" Height="815" Title="EcgEngine" Icon="C:\Dev\EcgEngine\Resources\icons\logo.png"
             Background="#101820" Foreground="#FFFFFF">
 
     <Grid>

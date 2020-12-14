@@ -20,9 +20,18 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
         public EcgVariable Variable
         {
             get { return _variable; }
-            set { SetProperty(ref _variable, value); }
+            set { 
+                SetProperty(ref _variable, value);
+                VariableType = _variable.EcgVariableType;
+            }
         }
 
+        private EcgVariableType _variableType;
+        public EcgVariableType VariableType
+        {
+            get { return _variableType; }
+            set { SetProperty(ref _variableType, value); }
+        }
         public VariableEditorDialogViewModel()
         {
             CloseCommand = new DelegateCommand(CloseAndSave);

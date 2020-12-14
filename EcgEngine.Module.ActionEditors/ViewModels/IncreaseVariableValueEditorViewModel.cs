@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace EcgEngine.Module.ActionEditors.ViewModels
 {
-    public class IncreaseVariableValueViewModel : BindableBase, IActionEditorViewModel
+    public class IncreaseVariableValueEditorViewModel : BindableBase, IActionEditorViewModel
     {
         private List<GameObject> _gameObjects;
         public List<GameObject> GameObjects
@@ -74,7 +74,7 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             set { SetProperty(ref _increaseBy, value); }
         }
 
-        public IncreaseVariableValueViewModel(IDialogService dialogService)
+        public IncreaseVariableValueEditorViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;
         }

@@ -34,8 +34,9 @@
                 Text="Type"  Margin="0 0 15 0" Width="110" 
                 TextAlignment="Center" Height="35" />
             <ComboBox                 
-                ItemsSource="{Binding Source={helper:EnumBindingSource model:EcgVariableType}}" 
-                SelectedItem="{Binding Variable.EcgVariableType}"
+                ItemsSource="{Binding 
+                    Source={helper:EnumBindingSource model:EcgVariableType}}" 
+                SelectedItem="{Binding VariableType}"
                 Width="110" Height="20"
                 />
         </StackPanel>

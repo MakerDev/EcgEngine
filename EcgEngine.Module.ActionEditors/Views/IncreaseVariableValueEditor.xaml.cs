@@ -5,9 +5,9 @@ namespace EcgEngine.Module.ActionEditors.Views
     /// <summary>
     /// Interaction logic for IncreaseVariableValue
     /// </summary>
-    public partial class IncreaseVariableValue : ActionEditorViewBase
+    public partial class IncreaseVariableValueEditor : ActionEditorViewBase
     {
-        public IncreaseVariableValue()
+        public IncreaseVariableValueEditor()
         {
             InitializeComponent();
         }

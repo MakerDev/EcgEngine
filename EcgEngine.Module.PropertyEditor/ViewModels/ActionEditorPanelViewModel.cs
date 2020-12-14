@@ -1,5 +1,6 @@
 ﻿using EcgEngine.Core.Dialogs;
 using EcgEngine.Models.VisualScript;
+using EcgEngine.Models.VisualScript.ActionPresets;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -15,7 +16,10 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
         public ScriptComponent ScriptComponent
         {
             get { return _scriptComponent; }
-            set { SetProperty(ref _scriptComponent, value); }
+            set { 
+                SetProperty(ref _scriptComponent, value);
+                RefreshActionItems();
+            }
         }
 
         private ObservableCollection<ActionItemViewModel> _actionItemViewModels
@@ -122,7 +126,19 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 
             foreach (var action in ScriptComponent.Actions)
             {
-                var vm = _containerExtension.Resolve<ActionItemViewModel>();
+                ActionItemViewModel vm;
+
+                if (action is ConditionalAction)
+                {
+                    //TODO : clean up this
+                    var conditionalViewModel = _containerExtension.Resolve<ConditionalActionItemViewModel>();
+                    conditionalViewModel.ConditionalAction = action as ConditionalAction;
+                    vm = conditionalViewModel;
+                }
+                else
+                {
+                    vm = _containerExtension.Resolve<ActionItemViewModel>();
+                }
 
                 //TODO : Try to remove this init stages
                 vm.Action = action;
