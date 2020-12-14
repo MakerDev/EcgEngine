@@ -21,6 +21,8 @@ void SetSpriteFrameFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction
 {
 	auto functor = SetSpriteFrameFunctor::Create(target, actionObjectValue);
 
+	assert(runtimeAction != nullptr && "Runtimeaction must not be null");
+
 	runtimeAction->PushFunctor(functor);
 }
 
