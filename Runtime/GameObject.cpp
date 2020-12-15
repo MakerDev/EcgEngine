@@ -12,7 +12,7 @@
 unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& value)
 {
 	auto gameObject = make_unique<GameObject>();
-
+	
 	gameObject->_name = value["Name"].GetString();
 
 	//TODO: Extract these infomation from json file.

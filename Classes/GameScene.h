@@ -46,6 +46,8 @@ public:
     Player* player;
     Sprite* cameraTarget;
 
+    vector<Sprite*> enemyList;
+
     bool collidesX;
 
     Animate* walkRight;
@@ -63,6 +65,8 @@ public:
     void updateScene(float interval);
 
     void updatePlayer(float interval);
+
+    void loadEnemies();
 
     int signum(float x);
 
