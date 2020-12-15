@@ -5,7 +5,7 @@ unique_ptr<VariableCondition> VariableCondition::CreateFromJsonValue(const rapid
 {
 	string targetObjectName = value["TargetObjectName"].GetString();
 	auto targetVariableName = value["TargetVariableName"].GetString();
-	const auto conditionType = static_cast<ConditionType>(value["ConditionType"].GetInt());
+	const auto conditionType = static_cast<ConditionType>(value["conditionType"].GetInt());
 	string valueToCompare = value["ValueToCompare"].GetString();
 
 	if (targetObjectName.empty())
@@ -14,18 +14,7 @@ unique_ptr<VariableCondition> VariableCondition::CreateFromJsonValue(const rapid
 	}
 
 	auto defaultLayer = EngineManager::GetInstance()->GetDefaultLayer();
-
-	assert(defaultLayer != nullptr && "Default layer is null");
-
-
-	if (targetObjectName.empty())
-	{
-		return make_unique<VariableCondition>(targetVariableName, conditionType, valueToCompare);
-	}
-
 	auto targetObject = defaultLayer->FindGameObject(targetObjectName);
-
-	assert(targetObject != nullptr && "Failed to find target object");
 
 	return make_unique<VariableCondition>(*targetObject, targetVariableName, conditionType, valueToCompare);
 }
@@ -50,11 +39,6 @@ bool VariableCondition::IsMatched() const
 
 	auto value = _targetVariable->GetValueAsString();
 
-	if (_targetVariable->GetType() == VariableType::typeString)
-	{
-		return value.compare(_valueToCompare) == 0;
-	}
-
 	//For number comparision
 	const double valueDouble = std::stod(value);
 	const double valueToCompareDouble = std::stod(_valueToCompare);
@@ -62,7 +46,7 @@ bool VariableCondition::IsMatched() const
 	switch (_conditionType)
 	{
 	case ConditionType::EqualTo:
-		isMatched = valueToCompareDouble == valueDouble;
+		isMatched = _valueToCompare.compare(value) == 0;
 		break;
 
 	case ConditionType::GreaterOrEqualTo:
