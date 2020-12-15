@@ -12,7 +12,7 @@
              d:Foreground="#FFFFFF"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Height="650" Width="1250" HorizontalAlignment="Left">
+    <Grid Height="650" Width="1010" HorizontalAlignment="Left">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275" />
             <ColumnDefinition Width="10" />
@@ -118,20 +118,35 @@
             </Grid>
         </StackPanel>
 
-        <TabControl 
-            Width="850"
-            Grid.Row="2" Grid.Column="2"
-            DockPanel.Dock="Right" TabStripPlacement="Bottom" Background="{x:Null}">
-            <TabItem Header="script">
-                <ContentControl 
-                    HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                    Width="800"
-                    prism:RegionManager.RegionName
-                    ="{x:Static core:RegionNames.SCRIPT_EDITOR_REGION}" />
+        <TabControl Grid.RowSpan="2" Grid.Column="2"
+                    Style="{StaticResource TabControl}">
+            <TabItem Style="{StaticResource TabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\script.png"
+                               Style="{StaticResource Icon20px}"/>
+                        <TextBlock Text="Script"
+                                   Style="{StaticResource TabItemHeaderText}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl
+                        Width="695"
+                        HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                        prism:RegionManager.RegionName
+                        ="{x:Static core:RegionNames.SCRIPT_EDITOR_REGION}" />
             </TabItem>
-            <TabItem Header="Vairables">
+            <TabItem Style="{StaticResource TabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Dev\EcgEngine\Resources\icons\variable.png"
+                               Style="{StaticResource Icon20px}"/>
+                        <TextBlock Text="Variable"
+                                   Style="{StaticResource TabItemHeaderText}"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <ContentControl 
-                    Width="850"
+                    Width="695"
+                    HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                     prism:RegionManager.RegionName
                     ="{x:Static core:RegionNames.VARIABLE_EDITOR_REGION}" />
             </TabItem>

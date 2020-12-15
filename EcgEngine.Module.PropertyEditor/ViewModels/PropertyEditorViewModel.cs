@@ -9,11 +9,11 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
     public class PropertyEditorViewModel : BindableBase, INavigationAware
     {
-        //Dummy temp var
-        private GameObject _gameObject = new GameObject();
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
 
+        //Dummy temp var
+        private GameObject _gameObject = new GameObject();
         public GameObject GameObject
         {
             get { return _gameObject; }

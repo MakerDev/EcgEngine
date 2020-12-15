@@ -36,10 +36,9 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
             set
             {
                 SetProperty(ref _selectedObject, value);
-
+                IsObjectSelected = true;
                 if (value != null)
                 {
-                    IsObjectSelected = true;
                     Variables = _selectedObject.Variables;
                 }
             }
@@ -49,10 +48,14 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
         public List<EcgVariable> Variables
         {
             get { return _variables; }
-            set
-            {
-                SetProperty(ref _variables, value);
-            }
+            set { SetProperty(ref _variables, value); }
+        }
+
+        private bool _isVariableSelected;
+        public bool IsVariableSelected
+        {
+            get { return _isVariableSelected; }
+            set { SetProperty(ref _isVariableSelected, value); }
         }
 
         private EcgVariable _selectedVariable;
@@ -66,15 +69,18 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 if (value != null)
                 {
                     IsVariableSelected = true;
+                    SelectedVariableName = value.Name;
                 }
             }
         }
-
-        private bool _isVariableSelected;
-        public bool IsVariableSelected
+        private string _selectedVariableName;
+        public string SelectedVariableName
         {
-            get { return _isVariableSelected; }
-            set { SetProperty(ref _isVariableSelected, value); }
+            get { return _selectedVariableName; }
+            set
+            {
+                SetProperty(ref _selectedVariableName, value);
+            }
         }
 
         private string _newValue;
@@ -108,9 +114,8 @@ namespace EcgEngine.Module.ActionEditors.ViewModels
                 return;
             }
 
-            //WARNING : This initialization order matters
-            SelectedObject = GameObjects.FirstOrDefault((x) => x.Name == action.Variable.ParentName);
             SelectedVariable = action.Variable;
+            SelectedObject = GameObjects.FirstOrDefault((x) => x.Name == SelectedVariable.ParentName);
             NewValue = action.NewValue;
         }
 

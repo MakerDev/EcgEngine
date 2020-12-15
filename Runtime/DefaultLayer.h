@@ -45,6 +45,9 @@ protected:
 	vector<EventKeyboard::KeyCode> _releasedKeys;
 
 private:
+	void configureCamera(const GameObject& gameObject);
+
+private:
 	Sprite* _cameraTarget = nullptr;
 	Sprite* _playerSprite = nullptr;
 	Follow* _cameraAction = nullptr;
