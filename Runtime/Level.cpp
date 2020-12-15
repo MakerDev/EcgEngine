@@ -75,7 +75,7 @@ vector<Rect> Level::getCollisionTilesY(Point point, int direction) {
 
 		if (tile != NULL) {
 			Rect tileRect = Rect();
-
+			
 			Point tmp = walls->positionAt(Point((int)point.x + b, mapheight - ((int)point.y + direction)));
 			tileRect.setRect(tmp.x * SCALE_FACTOR, tmp.y * SCALE_FACTOR, 
 				_map->getTileSize().width * SCALE_FACTOR, _map->getTileSize().height * SCALE_FACTOR);

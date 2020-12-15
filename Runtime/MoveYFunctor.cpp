@@ -20,25 +20,24 @@ void MoveYFunctor::Execute(float delta)
 	auto level = EngineManager::GetInstance()->GetDefaultLayer()->GetLevel();
 
 	tmp = level->positionToTileCoordinate(Point(player->getPositionX() + player_size.width * 0.5f,
-		player->getPositionY() + player_size.height * 0.5f + _delta));
+		player->getPositionY() + player_size.height * 0.5f ));
 
 	if (_delta > 0) {
 		tiles = level->getCollisionTilesY(tmp, 1);
 	}
 	else if (_delta < 0) {
 		tiles = level->getCollisionTilesY(tmp, -1);
+		//tiles = level->getCollisionTilesY(tmp, -1);
 	}
 
 	player_rect.setRect(
 		player->getBoundingBox().getMinX(),
-		player->getBoundingBox().getMinY()+_delta,
+		player->getBoundingBox().getMinY() + _delta +1,
 		player_size.width,
 		player_size.height
 	);
 
 	for (Rect tile : tiles) {
-
-
 		if (tile.intersectsRect(player_rect)) {
 			if (_delta > 0) {
 				player->setPositionY(player->getPositionY() - _delta);
