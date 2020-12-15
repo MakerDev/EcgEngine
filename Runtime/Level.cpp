@@ -5,7 +5,6 @@ void Level::loadMap(const char* mapname) {
 
 	_map = TMXTiledMap::create(mapname);
 	_map->retain();
-
 }
 
 TMXTiledMap* Level::getMap() {
@@ -42,17 +41,17 @@ vector<Rect> Level::getCollisionTilesX(Point point, int direction) {
 
 	TMXLayer* walls = _map->getLayer("walls");
 
-	int mapheight = (int)_map->getMapSize().height - 1;
+	const int mapheight = (int)_map->getMapSize().height - 1;
 
 	for (int b = -1; b < 2; b++) {
 
-		Sprite* tile = walls->getTileAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
+		const Sprite* tile = walls->getTileAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
 
 		if (tile != NULL) {
 
 			Rect tileRect = Rect();
 
-			Point tmp = walls->positionAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
+			const Point tmp = walls->positionAt(Point((int)point.x + direction, mapheight - ((int)point.y + b)));
 			tileRect.setRect(tmp.x * SCALE_FACTOR, tmp.y * SCALE_FACTOR, _map->getTileSize().width * SCALE_FACTOR, _map->getTileSize().height * SCALE_FACTOR);
 
 			list.push_back(tileRect);
