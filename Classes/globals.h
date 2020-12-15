@@ -18,5 +18,6 @@ const EventKeyboard::KeyCode RIGHT_ARROW = EventKeyboard::KeyCode::KEY_RIGHT_ARR
 
 const float PLAYER_MAX_VELOCITY = 5.0f;
 const float PLAYER_JUMP_VELOCITY = 10.0f;
+const float ENEMY_SCALE_FACTOR = 1.4f;
 const float DAMPING = 0.87f;
 const float GRAVITY = 0.37f;
