@@ -3,7 +3,7 @@
 #include "RuntimeActionTemplates.h"
 #include "ActionArgument.h"
 #include "RuntimeJumpBy.h"
-
+#include "runtime-core.h"
 
 unique_ptr<RuntimeJumpBy> RuntimeJumpBy::Create(float duration, int height)
 {
@@ -27,7 +27,8 @@ void RuntimeJumpBy::update(float t)
 	if (_target)
 	{
 		float frac = fmodf(t * _jumps, 1.0f);
-		float y = _height * 4 * frac * (1 - frac);
+
+		float y = (_height) * 4 * frac * (1 - frac);
 		//우리는 delta가 어차피 계속 0임
 		//y += _delta.y * t;
 

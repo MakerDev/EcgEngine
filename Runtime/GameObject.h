@@ -50,5 +50,8 @@ private:
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
 	float _scaleFactor = 1.0F;
 	string _name = "";
+
+	//HACK : dont do this
+	unique_ptr<RuntimeAction> _gravity;
 };
 

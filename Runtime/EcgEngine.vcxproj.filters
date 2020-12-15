@@ -147,6 +147,9 @@
     <ClCompile Include="ConditionalActionFunctor.cpp">
       <Filter>src\VisualScript\Actions\VariableActions</Filter>
     </ClCompile>
+    <ClCompile Include="MoveYFunctor.cpp">
+      <Filter>src\VisualScript\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="ConditionalActionFunctor.h">
       <Filter>src\VisualScript\Actions\VariableActions</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveYFunctor.h">
+      <Filter>src\VisualScript\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
