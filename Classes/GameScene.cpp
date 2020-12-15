@@ -354,6 +354,15 @@ void GameScene::updatePlayer(float delta) {
 		player->grounded = false;
 	}
 
+	for (Sprite* tile : enemyList) {
+
+		if (tile->getBoundingBox().intersectsRect(player_rect)) {
+
+			Point p = level->tileCoordinateToPosition(Point(10, 15));
+			player->setPosition(p);
+		}
+	}
+
 	player->updateState(delta);
 	player->velocity_x = 0;
 }
