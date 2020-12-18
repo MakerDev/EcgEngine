@@ -327,9 +327,8 @@ void GameScene::updatePlayer(float delta) {
 		player->getBoundingBox().getMinX(),
 		player->getBoundingBox().getMinY(),
 		player->player_size.width,
-		player->player_size.height + level->getMap()->getTileSize().height * SCALE_FACTOR + 100
+		player->player_size.height
 	);
-	
 
 	for (Rect tile : tiles) {
 

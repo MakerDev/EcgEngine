@@ -6,7 +6,6 @@
   DetourPathCorridor.cpp
   DetourPathQueue.cpp
   DetourProximityGrid.cpp
-C:\Dev\EcgEngine\cocos2d\external\recast\DetourCrowd\DetourObstacleAvoidance.cpp(334,18): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   DetourTileCache.cpp
   DetourTileCacheBuilder.cpp
   DetourAlloc.cpp
@@ -15,5 +14,5 @@ C:\Dev\EcgEngine\cocos2d\external\recast\DetourCrowd\DetourObstacleAvoidance.cpp
   DetourNavMeshBuilder.cpp
   DetourNavMeshQuery.cpp
   DetourNode.cpp
-  fastlz.c
+C:\Dev\EcgEngine\cocos2d\external\recast\DetourCrowd\DetourObstacleAvoidance.cpp(334,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   librecast.vcxproj -> C:\Dev\EcgEngine\Debug.win32\librecast.lib

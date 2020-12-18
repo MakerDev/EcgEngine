@@ -111,8 +111,10 @@ void DefaultLayer::SetInitialPositions()
 void DefaultLayer::UpdateScene(float timeDelta)
 {
 	_cameraTarget->setPositionX(_playerSprite->getPositionX());
+
 	for (auto gameObject = _gameObjects.begin(); gameObject < _gameObjects.end(); gameObject++)
 	{
+		(*gameObject)->OnUpdate(timeDelta, _heldKeys, _releasedKeys);
 		_releasedKeys.clear();
 	}
 }
