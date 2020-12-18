@@ -4,6 +4,7 @@ using EcgEngine.Models;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System.Windows.Navigation;
 
 namespace EcgEngine.Module.PropertyEditor.ViewModels
 {
@@ -23,7 +24,22 @@ namespace EcgEngine.Module.PropertyEditor.ViewModels
                 RaisePropertyChanged(nameof(Name));
                 RaisePropertyChanged(nameof(PosY));
                 RaisePropertyChanged(nameof(PosX));
+                RaisePropertyChanged(nameof(ApplyGravity));
             }
+        }
+
+        public bool ApplyGravity
+        {
+            get { return GameObject == null ? false : GameObject.ApplyGravity; }
+            set
+            {
+                GameObject.ApplyGravity = value;
+            }
+        }
+
+        public bool GravityNotApplied
+        {
+            get { return !ApplyGravity; }
         }
 
         public string Name

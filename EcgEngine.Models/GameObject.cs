@@ -19,6 +19,7 @@ namespace EcgEngine.Models
         public string SpriteName { get; set; }
         public string SpritePath { get; set; }
         public float ScaleFactor { get; set; } = 2.0F;
+        public bool ApplyGravity { get; set; } = false;
 
         public List<ScriptComponent> ScriptComponents { get; set; } = new List<ScriptComponent>();
         public List<EcgVariable> Variables { get; set; } = new List<EcgVariable>();

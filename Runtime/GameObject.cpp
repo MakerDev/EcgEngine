@@ -48,10 +48,15 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 
 	//Check if this is affcted by gravity
 	//This creates constatnt true trigger
-	gameObject->_gravity = make_unique<RuntimeAction>();
-	auto gravityFuntor = make_shared<MoveYFunctor>(gameObject.get(), -GRAVITY_FACTOR);
-	gameObject->_gravity->PushFunctor(gravityFuntor);
-	
+	bool applyGravity = value["ApplyGravity"].GetBool();
+
+	if (applyGravity)
+	{
+		gameObject->_gravity = make_unique<RuntimeAction>();
+		auto gravityFuntor = make_shared<MoveYFunctor>(gameObject.get(), -GRAVITY_FACTOR);
+		gameObject->_gravity->PushFunctor(gravityFuntor);
+	}
+
 	return std::move(gameObject);
 }
 

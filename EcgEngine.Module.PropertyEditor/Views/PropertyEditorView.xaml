@@ -103,10 +103,11 @@
                             HorizontalAlignment="Center"
                             Margin="5">
                     <RadioButton Content="On"
-                                 IsChecked="True"
+                                 IsChecked="{Binding ApplyGravity}"
                                  Margin="0 0 30 0"
                                  Foreground="White" />
                     <RadioButton Content="Off"
+                                 IsChecked="{Binding GravityNotApplied, Mode=OneTime}"
                                  Foreground="White" />
                 </StackPanel>
 
