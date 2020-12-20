@@ -6,12 +6,6 @@ using System.Text.Json;
 
 namespace EcgEngine.Services
 {
-    public class PackageUploadResult
-    {
-        public bool IsSuccess { get; set; }
-        public string ErrorMessage { get; set; }
-    }
-
     public class BlobStorageFileManager : IBlobStorageFileManager
     {
         private HttpClient _httpClient = new HttpClient();
@@ -48,7 +42,7 @@ namespace EcgEngine.Services
 
             content.Add(fileContent, "file", filename);
 
-            HttpResponseMessage response = await _httpClient.PostAsync($"upload/{packageName}", content);
+            HttpResponseMessage response = await _httpClient.PostAsync($"upload/{packageName}/false", content);
 
             if (response.IsSuccessStatusCode)
             {
