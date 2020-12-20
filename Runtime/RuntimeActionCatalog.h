@@ -3,6 +3,7 @@
 
 #include "RuntimeJumpByFunctor.h"
 #include "MoveXFunctor.h"
+#include "MoveYFunctor.h"
 #include "PlayAnimationFunctor.h"
 #include "SetSpriteFrameFunctor.h"
 #include "SetVariableValueFunctor.h"

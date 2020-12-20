@@ -169,6 +169,11 @@ float DefaultLayer::GetScaleFactor() const
 	return _scaleFactor;
 }
 
+Level* DefaultLayer::GetLevel() const
+{
+	return _level.get();
+}
+
 void DefaultLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	if (std::find(_heldKeys.begin(), _heldKeys.end(), keyCode) == _heldKeys.end()) {

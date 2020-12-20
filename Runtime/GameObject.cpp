@@ -7,6 +7,7 @@
 #include "ActionArgument.h"
 #include "JsonHelper.h"
 #include "RuntimeActionCatalog.h"
+#include "runtime-core.h"
 
 unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& value)
 {
@@ -44,6 +45,17 @@ unique_ptr<GameObject> GameObject::CreateFromJsonValue(const rapidjson::Value& v
 		//TODO orignal unique_ptr is moved due to std::move.
 		target->registerAllActionInternal(value);
 	};
+
+	//Check if this is affcted by gravity
+	//This creates constatnt true trigger
+	bool applyGravity = value["ApplyGravity"].GetBool();
+
+	if (applyGravity)
+	{
+		gameObject->_gravity = make_unique<RuntimeAction>();
+		auto gravityFuntor = make_shared<MoveYFunctor>(gameObject.get(), -GRAVITY_FACTOR);
+		gameObject->_gravity->PushFunctor(gravityFuntor);
+	}
 
 	return std::move(gameObject);
 }
@@ -114,6 +126,11 @@ void GameObject::OnUpdate(float delta, const vector<EventKeyboard::KeyCode>& hel
 				keyTriggeredAction->Execute(delta);
 			}
 		}
+	}
+
+	if (_gravity != nullptr)
+	{
+		_gravity->Execute(delta);
 	}
 }
 

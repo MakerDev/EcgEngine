@@ -19,7 +19,6 @@ void MoveXFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAction, GameObj
 {
 	const auto& arguments = JsonHelper::GetConstArray(actionObjectValue["Arguments"]);
 
-
 	//Arg1 : Direction
 	const ActionArgument arg1(arguments[0]);
 

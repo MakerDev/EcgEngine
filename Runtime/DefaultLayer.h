@@ -34,7 +34,7 @@ public:
 	GameObject* FindGameObject(const std::string& name);
 
 	float GetScaleFactor() const;
-
+	Level* GetLevel() const;
 protected:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) override;
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) override;

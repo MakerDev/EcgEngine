@@ -183,6 +183,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="MoveXFunctor.cpp" />
+    <ClCompile Include="MoveYFunctor.cpp" />
     <ClCompile Include="PlayAnimationFunctor.cpp" />
     <ClCompile Include="Runtime.cpp" />
     <ClCompile Include="RuntimeActionCatalog.cpp" />
@@ -212,6 +213,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="IncreaseVariableValueFunctor.h" />
     <ClInclude Include="JsonHelper.h" />
     <ClInclude Include="MoveXFunctor.h" />
+    <ClInclude Include="MoveYFunctor.h" />
     <ClInclude Include="PlayAnimationFunctor.h" />
     <ClInclude Include="RuntimeActionCatalog.h" />
     <ClInclude Include="EventContext.h" />

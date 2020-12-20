@@ -6,6 +6,12 @@ void RuntimeActionTemplates::MoveX(GameObject* target, float delta)
 	target->GetSprite()->setPositionX(target->GetSprite()->getPositionX() + delta);
 }
 
+void RuntimeActionTemplates::MoveY(GameObject* target, float delta)
+{
+	target->position.y -= delta;
+	target->GetSprite()->setPositionY(target->GetSprite()->getPositionY() + delta);
+}
+
 void RuntimeActionTemplates::FlipSpriteXTrue(GameObject* target)
 {
 	target->GetSprite()->setFlippedX(true);

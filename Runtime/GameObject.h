@@ -48,7 +48,10 @@ private:
 	//TODO : change to smart pointers
 	unique_ptr<VisualComponent> _visualComponent;
 	std::vector<shared_ptr<RuntimeAction>> _keyboardTriggeredActions;
-	float _scaleFactor = 1.0F;
+	float _scaleFactor = 2.0F;
 	string _name = "";
+
+	//HACK : dont do this
+	unique_ptr<RuntimeAction> _gravity;
 };
 

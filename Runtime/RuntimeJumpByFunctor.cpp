@@ -1,7 +1,7 @@
 #include "RuntimeJumpByFunctor.h"
 #include "ActionArgument.h"
 #include "JsonHelper.h"
-
+#include "runtime-core.h"
 
 shared_ptr<ActionFunctor> RuntimeJumpByFunctor::Create(GameObject* targetGameObject, const rapidjson::Value& actionValueObject)
 {
