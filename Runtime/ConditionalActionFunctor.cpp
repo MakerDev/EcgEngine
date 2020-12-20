@@ -28,7 +28,7 @@ void ConditionalActionFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAct
 	auto variableCondition = VariableCondition::CreateFromJsonValue(conditionJsonValue);
 
 	auto nestedActionFunctors = make_unique<RuntimeAction>();
-	auto& nestedActions = JsonHelper::GetConstArray(actionObjectValue["NestedActions"]);
+	const auto& nestedActions = JsonHelper::GetConstArray(actionObjectValue["NestedActions"]);
 
 	for (auto& nestedAction : nestedActions)
 	{
@@ -38,6 +38,7 @@ void ConditionalActionFunctor::RegisterToRuntimeAction(RuntimeAction* runtimeAct
 	//As we cannot use unique_ptr after moved, functor should be created at the end
 	shared_ptr<ActionFunctor> functor = make_shared<ConditionalActionFunctor>(std::move(variableCondition), std::move(nestedActionFunctors));
 
+	
 	runtimeAction->PushFunctor(functor);
 }
 
