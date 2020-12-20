@@ -22,7 +22,7 @@ namespace EcgEngine.Services
         }
 
         //TODO : Change this for filestream version
-        public async Task<PackageUploadResult> UploadPackageAsync(string packageName, Stream fileStream)
+        public async Task<PackageUploadResult> UploadPackageAsync(string packageName, Stream fileStream, bool deleteIfExists = false)
         {
             string connectionString = ConnectionString;
 
@@ -33,13 +33,18 @@ namespace EcgEngine.Services
 
             BlobClient blob = container.GetBlobClient(blobName);
 
-            if (await blob.ExistsAsync())
+            if (!deleteIfExists && await blob.ExistsAsync())
             {
                 return new PackageUploadResult
                 {
                     IsSuccess = false,
                     ErrorMessage = $"Package name, {packageName} is already taken.",
                 };
+            }
+
+            if (deleteIfExists)
+            {
+                await blob.DeleteIfExistsAsync();
             }
 
             await blob.UploadAsync(fileStream);

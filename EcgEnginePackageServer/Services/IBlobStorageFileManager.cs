@@ -5,6 +5,6 @@ namespace EcgEngine.Services
 {
     public interface IBlobStorageFileManager
     {
-        Task<PackageUploadResult> UploadPackageAsync(string packageName, Stream fileStream);
+        Task<PackageUploadResult> UploadPackageAsync(string packageName, Stream fileStream, bool deleteIfExists = false);
     }
 }

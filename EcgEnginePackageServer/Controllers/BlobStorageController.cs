@@ -20,8 +20,9 @@ namespace EcgEnginePackageServer.Controllers
             _blobStorageFileManager = blobStorageFileManager;
         }
 
-        [HttpPost("upload/{packageName}")]
-        public async Task<ActionResult<PackageUploadResult>> UploadPackageToContainerAsync(string packageName, IFormFile file)
+        //[HttpPost("upload/{packageName}")]
+        [HttpPost("upload/{packageName}/{deleteIfExists:bool}")]
+        public async Task<ActionResult<PackageUploadResult>> UploadPackageToContainerAsync(string packageName, bool deleteIfExists, IFormFile file)
         {
             using (var stream = file.OpenReadStream())
             {                
